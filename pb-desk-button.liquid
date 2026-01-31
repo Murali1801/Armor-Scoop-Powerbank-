@@ -326,8 +326,8 @@
             const v = ID_TO_VARIANT[urlId];
             window.desktopUpdateStickyVariant(v.c, v.s);
         } else {
-            // Default to Orange/10k if no Variant ID found
-            window.desktopUpdateStickyVariant('orange', '10k');
+            // Default to Orange/20k if no Variant ID found
+            window.desktopUpdateStickyVariant('orange', '20k');
         }
     })();
 
@@ -344,7 +344,7 @@
                 e.preventDefault();
                 e.stopPropagation();
 
-                const currentId = this.getAttribute('data-variant-id') || "51115715723585";
+                const currentId = this.getAttribute('data-variant-id') || "51115715756353";
                 const safeId = parseInt(currentId, 10);
 
                 console.log("Desktop Snippet: Buy Now Clicked. Variant ID:", safeId);

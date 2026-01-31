@@ -337,8 +337,8 @@
         }
         
         if (!found) {
-            // Falls back to orange 10k if no ID is found
-            window.updateProductVariant('orange', '10k', false);
+            // Falls back to orange 20k if no ID is found (User Request)
+            window.updateProductVariant('orange', '20k', false);
             document.documentElement.classList.remove('js-variant-loading');
         }
 
@@ -361,4 +361,4 @@
   "class": "global-scripts",  
   "settings": []
 }
-{% endschema %}>
+{% endschema %}

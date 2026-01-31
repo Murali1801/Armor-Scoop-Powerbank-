@@ -88,7 +88,7 @@
 
 <div class="mobile-sticky-bottom-section" id="mobileStickyBottomSection">
     <div class="mobile-stock-message">Delivers in 3-8 Days</div>
-    <button class="mobile-notify-button" data-variant-id="51115715723585">Buy Now</button>
+    <button class="mobile-notify-button" data-variant-id="51115715756353">Buy Now</button>
 </div>
 
 <script>
@@ -154,7 +154,7 @@
 
                 // Read ID directly from DOM state
                 // UPDATED: Default safety ID to 10k if attribute missing
-                const currentId = this.getAttribute('data-variant-id') || "51115715723585";
+                const currentId = this.getAttribute('data-variant-id') || "51115715756353";
            
                 const safeId = parseInt(currentId, 10); // Ensure number for API
 
@@ -224,8 +224,8 @@
             const v = ID_TO_VARIANT[urlId];
             window.mobileUpdateStickyVariant(v.c, v.s);
         } else {
-            // UPDATED: Default is now 10k to match main script
-            window.mobileUpdateStickyVariant('orange', '10k');
+            // UPDATED: Default is now 20k to match main script
+            window.mobileUpdateStickyVariant('orange', '20k');
         }
 
         // 4. Footer Collision Detection

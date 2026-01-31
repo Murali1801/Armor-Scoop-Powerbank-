@@ -351,7 +351,7 @@
         background-color: #101010; /* Black slider for mobile */
         border-radius: 18px;
         width: calc(50% - 2px); /* Half width minus gap */
-        left: 2px;
+        left: calc(50%);
         z-index: 0;
         pointer-events: none;
     }
@@ -781,9 +781,9 @@
                  setFlavor('orange', false);
                 updateToggle('10k');
             } else {
-                // Default fallback -> Orange 10k
+                // Default fallback -> Orange 20k
                 setFlavor('orange', false);
-                updateToggle('10k'); 
+                updateToggle('20k'); 
             }
             
             // Explicitly set initial styles based on state to prevent FOUC/misalignment

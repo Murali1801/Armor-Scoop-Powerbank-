@@ -106,7 +106,7 @@
         background-color: #252525;
         border-radius: calc(20 / 1440 * 100vw);
         width: calc(50% - calc(2 / 1440 * 100vw)); 
-        left: calc(2 / 1440 * 100vw);
+        left: calc(50%);
         z-index: 0;
         pointer-events: none;
     }
@@ -591,7 +591,7 @@
             gsap.config({ force3D: true, nullTargetWarn: false });
 
             // STATE & ELEMENTS
-            let selectedCapacity = '10k'; // Default safe state
+            let selectedCapacity = '20k'; // Default safe state
             let currentFlavor = 'orange'; // Default flavor
             
             const prices = {
@@ -605,8 +605,8 @@
             
             if (urlVariantId === '51120630006081') { selectedCapacity = '10k'; currentFlavor = 'blue'; } // Blue 10k
             else if (urlVariantId === '51120630038849') { selectedCapacity = '20k'; currentFlavor = 'blue'; } // Blue 20k
-            else if (urlVariantId === '51115715756353') { selectedCapacity = '20k'; currentFlavor = 'orange'; } // Orange 20k
-            else { selectedCapacity = '10k'; currentFlavor = 'orange'; } // Default Orange 10k
+            else if (urlVariantId === '51115715723585') { selectedCapacity = '10k'; currentFlavor = 'orange'; } // Orange 10k
+            else { selectedCapacity = '20k'; currentFlavor = 'orange'; } // Default Orange 20k
 
             let displayedPriceValue = prices[selectedCapacity].current;
 
