@@ -1,0 +1,202 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
+<style>
+    @font-face {
+        font-family: 'Suisse Intl';
+        src: url('https://res.cloudinary.com/dadz5dzth/raw/upload/v1765092688/fonnts.com-Suisse_Intl_Regular_b8q6gk.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .main-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        background-color: #F2F2F2;
+        aspect-ratio: 1440 / 1122;
+        
+        /* Mask Settings - Default (Updated by JS for variant specifics) */
+        -webkit-mask-image: url('https://cdn.shopify.com/s/files/1/0967/6039/8106/files/inbuilt_cables_shape_section_base.svg?v=1765134154');
+        mask-image: url('https://cdn.shopify.com/s/files/1/0967/6039/8106/files/inbuilt_cables_shape_section_base.svg?v=1765134154');
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-mode: alpha;
+        mask-mode: alpha;
+        
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        margin-top: calc(-580 / 1440 * 100vw);
+        z-index: -2;
+    }
+
+    .cable-desktop-image-section {
+        width: 65%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2.5%;
+        position: relative;
+        overflow: visible;
+    }
+
+    .cable-desktop-image-section img {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform: translate(calc(-72 / 1440 * 100vw), calc(70 / 1440 * 100vw)) scale(15);
+        z-index: 1;
+        transition: opacity 0.3s ease;
+    }
+
+    .content-section {
+        width: 35%;
+        padding: 2.2%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+    }
+
+    .headline {
+        font-family: 'Stack Sans Headline', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: calc(36 / 1440 * 100vw);
+        line-height: calc(26 / 1440 * 100vw);
+        display: flex;
+        align-items: center;
+        color: #000000;
+        margin-bottom: calc(4 / 1440 * 100vw);
+    }
+
+    .sub-headline {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(24 / 1440 * 100vw);
+        line-height: calc(38 / 1440 * 100vw);
+        color: #FC832C; /* Default Color - Updated by JS */
+        margin-bottom: calc(30 / 1440 * 100vw);
+        transition: color 0.3s ease;
+    }
+
+    .body-text {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(18 / 1440 * 100vw);
+        line-height: calc(20 / 1440 * 100vw);
+        color: #010101;
+    }
+
+    /* Tablet Styles (768px - 1024px) */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .main-container {
+            margin-top: calc(-370 / 768 * 100vw);
+        }
+
+        .cable-desktop-image-section img {
+            transform: translate(calc(-55 / 768 * 100vw), calc(60 / 768 * 100vw)) scale(18);
+        }
+
+        .content-section {
+            padding: 5%;
+            margin-top: calc(70 / 768 * 100vw);
+        }
+
+        .headline {
+            font-size: calc(24 / 768 * 100vw);
+            line-height: calc(24 / 768 * 100vw);
+            margin-bottom: calc(2 / 768 * 100vw);
+        }
+
+        .sub-headline {
+            font-size: calc(14 / 768 * 100vw);
+            line-height: calc(18 / 768 * 100vw);
+            margin-bottom: calc(26 / 768 * 100vw);
+        }
+
+        .body-text {
+            font-size: calc(10 / 768 * 100vw);
+            line-height: calc(12 / 768 * 100vw);
+        }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 767px) {
+        .cable-desktop-image-section {
+            padding: 2%;
+        }
+
+        .content-section {
+            padding: 2%;
+        }
+
+        .cable-desktop-image-section img {
+            transform: translate(calc(-30 / 1440 * 100vw), calc(50 / 1440 * 100vw)) scale(12);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .cable-desktop-image-section {
+            padding: 1.5%;
+        }
+
+        .content-section {
+            padding: 1.5%;
+        }
+
+        .cable-desktop-image-section img {
+            transform: translate(calc(-20 / 1440 * 100vw), calc(40 / 1440 * 100vw)) scale(10);
+        }
+    }
+</style>
+
+<div class="main-container">
+    <div class="cable-desktop-image-section">
+        <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Built_in_cables_orange_modded_new.webp?v=1765534719" alt="Scoop powerbank with inbuilt cables">
+    </div>
+    <div class="content-section">
+        <h1 class="headline">grab and go</h1>
+        <h2 class="sub-headline">in built cables</h2>
+        <p class="body-text">
+            With a Type-C & Lightning all your essential cables are tucked right inside Scoop, making it a perfectly self-contained charger. No loose cords, no tangles, nothing extra to carry. Just grab, plug, and power up!
+        </p>
+    </div>
+</div>
+
+<script>
+    // Note: The logic for updating images, mask shapes, and colors based on the variant
+    // is now handled by the global Main Script (pb-ajax-request.liquid).
+    console.log("Grab and Go Section Loaded");
+</script>
+
+{% schema %}
+{
+  "name": "Desk Grab and",
+  "class": "desktop-only",  
+  "settings": []
+}
+{% endschema %}

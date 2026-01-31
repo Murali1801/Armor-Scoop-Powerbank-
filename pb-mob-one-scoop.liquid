@@ -1,0 +1,253 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
+<style>
+    @font-face {
+        font-family: 'Suisse Intl';
+        src: url('https://res.cloudinary.com/dadz5dzth/raw/upload/v1765092688/fonnts.com-Suisse_Intl_Regular_b8q6gk.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    /* Renamed to rs-multiport-m-reset for clarity, but left as * for original snippet integrity. */
+    .rs-multiport-m-reset,
+    * { 
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Renamed body to a class for better isolation in a page builder context */
+    .rs-multiport-m-body-reset,
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* Added .mobile-multiport-container for Main Script integration */
+    .rs-multiport-m-main,
+    .mobile-multiport-container {
+        position: relative;
+        width: 100%;
+        max-width: 100vw;
+        min-width: 100vw;
+        background-color: #F2F2F2;
+        
+        /* Default Mask - Updated by Main Script */
+        -webkit-mask-image: url('https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Subtract_3.svg?v=1765372705');
+        mask-image: url('https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Subtract_3.svg?v=1765372705');
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        -webkit-mask-mode: alpha;
+        mask-mode: alpha;
+        
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        padding: calc(120 / 393 * 100vw) calc(20 / 393 * 100vw);
+        min-height: 0;
+        
+        /* Transition for mask change */
+        transition: -webkit-mask-image 0.3s ease, mask-image 0.3s ease;
+    }
+
+    .rs-multiport-m-text-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: calc(20 / 393 * 100vw);
+    }
+
+    .rs-multiport-m-headline {
+        font-family: 'Stack Sans Headline', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: calc(30 / 393 * 100vw);
+        line-height: calc(30 / 393 * 100vw);
+        display: flex;
+        align-items: center;
+        color: #000000;
+        margin-bottom: calc(6 / 393 * 100vw);
+    }
+
+    .rs-multiport-m-subtitle {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(14 / 393 * 100vw);
+        line-height: calc(18 / 393 * 100vw);
+        
+        /* Default Color - Updated by Main Script */
+        color: #FC832C;
+        
+        margin-bottom: calc(4 / 393 * 100vw);
+        transition: color 0.3s ease;
+    }
+
+    .rs-multiport-m-label {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 250;
+        font-size: calc(10 / 393 * 100vw);
+        line-height: calc(13 / 393 * 100vw);
+        color: #000000;
+    }
+
+    .rs-multiport-m-image-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: calc(100% + 40 / 393 * 100vw);
+        margin: calc(20 / 393 * 100vw) calc(-20 / 393 * 100vw);
+        position: relative;
+        height: calc(400 / 393 * 100vw);
+        overflow: hidden;
+    }
+
+    .rs-multiport-m-image-wrapper img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        display: block;
+        transform: scale(3) translate(calc(-25 / 393 * 100vw), calc(0 / 393 * 100vw));
+        transition: opacity 0.3s ease;
+    }
+
+    .rs-multiport-m-body-text {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(14 / 393 * 100vw);
+        line-height: calc(16 / 393 * 100vw);
+        color: #010101;
+        margin-top: calc(20 / 393 * 100vw);
+    }
+
+    /* Ensure minimum readable sizes for very small screens */
+    @media (max-width: 320px) {
+        .rs-multiport-m-headline {
+            font-size: max(calc(30 / 393 * 100vw), 24px);
+            line-height: max(calc(30 / 393 * 100vw), 24px);
+        }
+
+        .rs-multiport-m-subtitle {
+            font-size: max(calc(14 / 393 * 100vw), 12px);
+            line-height: max(calc(18 / 393 * 100vw), 16px);
+        }
+
+        .rs-multiport-m-label {
+            font-size: max(calc(10 / 393 * 100vw), 9px);
+            line-height: max(calc(13 / 393 * 100vw), 11px);
+        }
+
+        .rs-multiport-m-body-text {
+            font-size: max(calc(14 / 393 * 100vw), 12px);
+            line-height: max(calc(16 / 393 * 100vw), 14px);
+        }
+    }
+
+    /* For larger mobile screens, cap the maximum sizes */
+    @media (min-width: 480px) {
+        .rs-multiport-m-headline {
+            font-size: min(calc(30 / 393 * 100vw), 36px);
+            line-height: min(calc(30 / 393 * 100vw), 36px);
+        }
+
+        .rs-multiport-m-subtitle {
+            font-size: min(calc(14 / 393 * 100vw), 16px);
+            line-height: min(calc(18 / 393 * 100vw), 20px);
+        }
+
+        .rs-multiport-m-label {
+            font-size: min(calc(10 / 393 * 100vw), 12px);
+            line-height: min(calc(13 / 393 * 100vw), 15px);
+        }
+
+        .rs-multiport-m-body-text {
+            font-size: min(calc(14 / 393 * 100vw), 16px);
+            line-height: min(calc(16 / 393 * 100vw), 18px);
+        }
+    }
+</style>
+
+<div class="rs-multiport-m-main mobile-multiport-container">
+    <div class="rs-multiport-m-text-header">
+        <h1 class="rs-multiport-m-headline">one scoop,<br>many servings</h1>
+        <h2 class="rs-multiport-m-subtitle">multiport output</h2>
+        <p class="rs-multiport-m-label">[ USB-C | USB-A ]</p>
+    </div>
+    <div class="rs-multiport-m-image-wrapper">
+        <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_multiport_orange_png_1.webp?v=1765534720" alt="Multiport Output">
+    </div>
+    <div class="rs-multiport-m-body-text">
+        <p>Charge up to four devices at the same time — your phone, your buds, your tablet, and yes, even your friend's "always dying" phone. Scoop shares its power generously, so no one's left wanting.</p>
+    </div>
+</div>
+
+<script>
+    // Responsive mask image handling and height calculation
+    (function() {
+        const containerSelector = '.mobile-multiport-container';
+        
+        function updateContainerHeight() {
+            const container = document.querySelector(containerSelector);
+            if (!container) return;
+
+            // 1. Get the current mask image (dynamically set by Main Script or CSS)
+            const style = window.getComputedStyle(container);
+            let maskImage = container.style.webkitMaskImage || container.style.maskImage || style.webkitMaskImage || style.maskImage;
+
+            // Clean up url wrapper to get raw link
+            if (maskImage && maskImage !== 'none') {
+                const urlMatch = maskImage.match(/url\((['"]?)(.*?)\1\)/);
+                if (urlMatch && urlMatch[2]) {
+                    const maskUrl = urlMatch[2];
+                    
+                    // 2. Load image to get true dimensions
+                    const img = new Image();
+                    img.onload = function() {
+                        const maskAspectRatio = img.height / img.width;
+                        const containerWidth = container.offsetWidth;
+                        
+                        // 3. Calculate exact height
+                        const calculatedHeight = containerWidth * maskAspectRatio;
+                        container.style.height = calculatedHeight + 'px';
+                        container.style.minHeight = calculatedHeight + 'px';
+                    };
+                    img.src = maskUrl;
+                }
+            } else {
+                // Fallback safe height
+                container.style.minHeight = '100vw'; 
+            }
+        }
+        
+        // Listeners
+        window.addEventListener('resize', updateContainerHeight);
+        
+        // Recalculate when variant changes (and mask image swaps)
+        window.addEventListener('variantChange', () => {
+            setTimeout(updateContainerHeight, 50);
+        });
+
+        // Initial Load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', updateContainerHeight);
+        } else {
+            updateContainerHeight();
+        }
+    })();
+</script>
+
+
+{% schema %}
+{
+  "name": "Mobile One Scoop",
+  "class": "mobile-only",  
+  "settings": []
+}
+{% endschema %}

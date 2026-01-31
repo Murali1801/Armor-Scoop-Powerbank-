@@ -1,0 +1,232 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Added .mobile-cables-container for Main Script targeting */
+    .m-spoon-card-wrapper,
+    .mobile-cables-container {
+        position: relative;
+        width: 100%;
+        /* Default height fallback, JS will calculate exact aspect ratio */
+        min-height: 500px; 
+        
+        /* Layout Colors & Mask Configuration */
+        background-color: #F4F4F4;
+        
+        /* Default Mask (Orange) - Updated by Main Script dynamically */
+        -webkit-mask-image: url("https://cdn.shopify.com/s/files/1/0920/8800/9025/files/spoons_inside_base_shape_c95c7763-b975-4e01-a03c-248c9e99ddbe.svg?v=1765514613");
+        mask-image: url("https://cdn.shopify.com/s/files/1/0920/8800/9025/files/spoons_inside_base_shape_c95c7763-b975-4e01-a03c-248c9e99ddbe.svg?v=1765514613");
+
+        /* Masking */
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        
+        /* Flex for text content overlay */
+        display: flex;
+        flex-direction: column;
+        /* overflow: hidden is essential here to confine the background to the mask shape */
+        overflow: hidden; 
+        padding: calc(120 / 393 * 100vw) calc(20 / 393 * 100vw);
+        margin-top: -25%;
+        z-index: -1;
+        
+        /* Transition for smooth mask switching */
+        transition: -webkit-mask-image 0.3s ease, mask-image 0.3s ease;
+    }
+
+    /* THE IMAGE LAYER - FIX: Expanded to 200% height to prevent clipping */
+    .m-spoon-image-layer {
+        position: absolute;
+        top: -50%; /* Start higher */
+        left: 0;
+        width: 100%;
+        height: 200%; /* Double the height of the parent card */
+        z-index: 1; /* Behind text */
+        pointer-events: none; /* Let clicks pass through to background */
+        /* Flex centers the image inside this new 200% tall box */
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+    }
+
+    .m-spoon-image-layer img {
+        width: 100%;
+        height: auto; 
+        
+        /* DIRECT IMAGE ADJUSTMENTS: */
+        transform: scale(3.2) translate(-8px, 0px);
+        transform-origin: center center;
+        will-change: transform;
+        transition: opacity 0.3s ease; /* Fade effect for variant switch */
+    }
+
+    /* THE CONTENT LAYER */
+    .m-spoon-content-layer {
+        position: relative;
+        z-index: 2; /* On top of image */
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between; /* Pushes header top, desc bottom */
+    }
+
+    .m-spoon-text-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: calc(20 / 393 * 100vw);
+    }
+
+    .m-spoon-headline {
+        font-family: 'Stack Sans Headline', sans-serif;
+        font-weight: 700;
+        font-size: calc(30 / 393 * 100vw);
+        line-height: 1;
+        color: #000000;
+        margin-bottom: calc(6 / 393 * 100vw);
+    }
+
+    .m-spoon-subhead {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-weight: 400;
+        font-size: calc(14 / 393 * 100vw);
+        line-height: 1.3;
+        
+        /* Default Color - Updated by Main Script */
+        color: #FC832C; 
+        
+        margin-bottom: calc(4 / 393 * 100vw);
+        transition: color 0.3s ease;
+    }
+
+    .m-spoon-tagline {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-weight: 300;
+        font-size: calc(10 / 393 * 100vw);
+        line-height: 1.3;
+        color: #000000;
+        letter-spacing: 0.05em;
+    }
+
+    .m-spoon-description {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-weight: 400;
+        font-size: calc(14 / 393 * 100vw);
+        line-height: 1.4;
+        color: #010101;
+        margin-top: auto; /* Push to bottom if needed */
+        padding-top: calc(150 / 393 * 100vw); /* Spacer to clear the image */
+    }
+
+    /* Responsive Font Caps */
+    @media (min-width: 480px) {
+        .m-spoon-headline { font-size: 36px; }
+        .m-spoon-subhead { font-size: 16px; }
+        .m-spoon-tagline { font-size: 12px; }
+        .m-spoon-description { font-size: 16px; }
+        
+        .m-spoon-card-wrapper,
+        .mobile-cables-container {
+             padding: 40px 30px;
+        }
+        
+        .m-spoon-description {
+            padding-top: 100px;
+        }
+    }
+</style>
+
+<div class="m-spoon-card-wrapper mobile-cables-container">
+    <div class="m-spoon-image-layer">
+        <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Built_in_cables_orange_modded_new.webp?v=1765534719" alt="Power Bank">
+    </div>
+
+    <div class="m-spoon-content-layer">
+        <div class="m-spoon-text-header">
+            <h1 class="m-spoon-headline">grab and go</h1>
+            <h2 class="m-spoon-subhead">in built cables</h2>
+            <p class="m-spoon-tagline">[ Type C | Lighting ]</p>
+        </div>
+        
+        <div class="m-spoon-description">
+            <p>Your essential cables are tucked right inside Scoop, making it a perfectly self-contained charger. No loose cords, no tangles, nothing extra to carry.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Robust Mask Aspect Ratio Calculator
+    // This ensures the container ALWAYS matches the shape of the SVG mask,
+    // regardless of what text or images are inside.
+    (function() {
+        const containerSelector = '.mobile-cables-container';
+
+        function updateContainerHeight() {
+            const container = document.querySelector(containerSelector);
+            if (!container) return;
+
+            // 1. Get the current mask image (dynamically set by Main Script or CSS)
+            // We check inline style first (Main Script), then computed style (CSS)
+            const style = window.getComputedStyle(container);
+            let maskImage = container.style.webkitMaskImage || container.style.maskImage || style.webkitMaskImage || style.maskImage;
+
+            // Clean up url wrapper to get raw link
+            if (maskImage && maskImage !== 'none') {
+                const urlMatch = maskImage.match(/url\((['"]?)(.*?)\1\)/);
+                if (urlMatch && urlMatch[2]) {
+                    const maskUrl = urlMatch[2];
+                    
+                    // 2. Load image to get true dimensions
+                    const img = new Image();
+                    img.onload = function() {
+                        const maskAspectRatio = img.height / img.width;
+                        const containerWidth = container.offsetWidth;
+                        
+                        // 3. Calculate exact height
+                        const calculatedHeight = containerWidth * maskAspectRatio;
+                        container.style.height = calculatedHeight + 'px';
+                        container.style.minHeight = calculatedHeight + 'px';
+                    };
+                    img.src = maskUrl;
+                }
+            } else {
+                // Fallback for when mask is 'none' (e.g. if specific variant disables it)
+                // Retain a safe min-height
+                container.style.minHeight = '120vw'; 
+            }
+        }
+        
+        // Listeners
+        // 1. Resize: Recalculate on window resize
+        window.addEventListener('resize', updateContainerHeight);
+        
+        // 2. Variant Change: Recalculate when user switches colors (Main Script updates DOM)
+        window.addEventListener('variantChange', () => {
+            // Give the Main Script a moment to swap the CSS variables/styles
+            setTimeout(updateContainerHeight, 50);
+        });
+
+        // Initial Load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', updateContainerHeight);
+        } else {
+            updateContainerHeight();
+        }
+    })();
+</script>
+
+{% schema %}
+{
+  "name": "Mobile Grab and",
+  "class": "mobile-only",  
+  "settings": []
+}
+{% endschema %}

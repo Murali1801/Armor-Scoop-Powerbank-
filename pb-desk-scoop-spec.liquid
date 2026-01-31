@@ -1,0 +1,747 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+<style>
+    @font-face {
+        font-family: 'Suisse Intl';
+        src: url('https://res.cloudinary.com/dadz5dzth/raw/upload/v1765092688/fonnts.com-Suisse_Intl_Regular_b8q6gk.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'Hey Fun';
+        src: url('https://cdn.shopify.com/s/files/1/0967/6039/8106/files/Hey_Fun.ttf?v=1765177736') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden;
+        background: transparent;
+    }
+
+    .desktop-nutritional-facts-section {
+        position: relative;
+        width: 100vw;
+        max-width: 100%;
+        min-width: 100%;
+        min-height: 100vh;
+        
+        /* DYNAMIC VARIABLES */
+        --accent-color: #FC832C;
+        /* Default Initial BG (Will be updated by Main Script) */
+        --bg-url: url('https://cdn.shopify.com/s/files/1/0967/6039/8106/files/nutritional_facts_shape_base.svg?v=1765174018');
+        
+        background-image: var(--bg-url);
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        padding: 10.42vw 5%;
+        overflow: hidden;
+        margin-top: -5vw;
+        gap: 0px;
+        transition: background-image 0.3s ease;
+    }
+
+    /* Header Text - First Child Div */
+    .desktop-nutritional-header {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 86.18%;
+        text-align: left;
+        padding: 0 0px;
+        margin-bottom: 2.08vw;
+        box-sizing: border-box;
+        margin-top: 0px;
+    }
+
+    .desktop-nutritional-header h2 {
+        font-family: 'Stack Sans Headline', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(32 / 1440 * 100vw);
+        line-height: calc(40 / 1440 * 100vw);
+        letter-spacing: calc(0.369141 / 1440 * 100vw);
+        color: #FFFFFF;
+        margin-bottom: 0.56vw;
+    }
+
+    .desktop-nutritional-header p {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: calc(24 / 1440 * 100vw);
+        line-height: calc(31 / 1440 * 100vw);
+        color: #FFFFFF;
+    }
+
+    /* Main Container - Second Child Div */
+    .desktop-nutritional-container {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: auto;
+        background: #FFFFFF;
+        border: calc(1 / 1440 * 100vw) solid #D5D5D5;
+        box-shadow: 0px 1.31vw 2.5vw -1.25vw #B2B2B2;
+        border-radius: 1.94vw;
+        padding: 3.54vw 2.64vw 1.74vw;
+        box-sizing: border-box;
+        margin: 0 auto;
+    }
+
+    /* Title Section */
+    .desktop-nutritional-title {
+        margin-bottom: 1.39vw;
+    }
+
+    .desktop-nutritional-title h1 {
+        font-family: 'Hey Fun', 'Stack Sans Headline', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(36 / 1440 * 100vw);
+        line-height: calc(27 / 1440 * 100vw);
+        letter-spacing: calc(0.298828 / 1440 * 100vw);
+        
+        /* Updated to use Variable */
+        color: var(--accent-color);
+        
+        margin-bottom: 0.97vw;
+        transition: color 0.3s ease;
+    }
+
+    .desktop-nutritional-title .serving-size {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 250;
+        font-size: calc(16 / 1440 * 100vw);
+        line-height: calc(15 / 1440 * 100vw);
+        letter-spacing: calc(-0.113628 / 1440 * 100vw);
+        color: #0A0A0A;
+    }
+
+    /* Divider Line */
+    .desktop-nutritional-divider {
+        width: 100%;
+        height: 0.14vw;
+        
+        /* Updated to use Variable */
+        background: var(--accent-color);
+        
+        margin: 1.6vw 0 1.9vw;
+        transition: background 0.3s ease;
+    }
+
+    /* Content Grid */
+    .desktop-nutritional-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6.94vw;
+        margin-bottom: 0px;
+    }
+
+    /* Left Column */
+    .desktop-nutritional-left-column {
+        display: flex;
+        flex-direction: column;
+        gap: 1.04vw;
+    }
+
+    /* Right Column */
+    .desktop-nutritional-right-column {
+        display: flex;
+        flex-direction: column;
+        gap: 1.04vw;
+    }
+
+    /* Row Item */
+    .desktop-nutritional-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0.69vw 0;
+        border-bottom: 0.06vw solid #D9D9D9;
+    }
+
+    .desktop-nutritional-row:last-child {
+        border-bottom: none;
+    }
+
+    .desktop-nutritional-row-label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25vw;
+        flex: 1;
+    }
+
+    .desktop-nutritional-row-label .main-label {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: calc(18 / 1440 * 100vw);
+        line-height: calc(22 / 1440 * 100vw);
+        color: rgba(1, 1, 1, 0.8);
+        text-align: left;
+    }
+
+    .desktop-nutritional-row-label .sub-label {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: calc(10.5778 / 1440 * 100vw);
+        line-height: calc(15 / 1440 * 100vw);
+        letter-spacing: calc(-0.113628 / 1440 * 100vw);
+        color: #6A7282;
+    }
+
+    .desktop-nutritional-row-value {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.56vw;
+        text-align: right;
+    }
+
+    .desktop-nutritional-row-value .main-value {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: calc(18 / 1440 * 100vw);
+        line-height: calc(22 / 1440 * 100vw);
+        color: #010101;
+        text-align: right;
+    }
+
+    .desktop-nutritional-row-value .sub-value {
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(14 / 1440 * 100vw);
+        line-height: calc(15 / 1440 * 100vw);
+        text-align: right;
+        letter-spacing: calc(-0.113628 / 1440 * 100vw);
+        color: #99A1AF;
+    }
+
+    /* Special row for 5-Layer Protection */
+    .desktop-nutritional-row-protection {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0.69vw 0;
+        border-bottom: none;
+    }
+
+    .desktop-nutritional-row-protection .desktop-nutritional-row-label {
+        flex: 0 0 18.75vw;
+    }
+
+    .desktop-nutritional-row-protection .desktop-nutritional-row-value {
+        flex: 1;
+        max-width: 20.07vw;
+    }
+
+    .desktop-nutritional-row-protection .main-value {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: calc(16.5829 / 1440 * 100vw);
+        line-height: calc(22 / 1440 * 100vw);
+        color: #010101;
+        text-align: right;
+    }
+
+    /* Disclaimer Row - Aligned with Weight row */
+    .desktop-nutritional-row-disclaimer {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 2.43vw 0 2vw;
+        margin-top: 0;
+        min-height: 1.65vw;
+        border: none;
+    }
+
+    .desktop-nutritional-disclaimer-text {
+        text-align: left;
+        display: flex;
+        align-items: center;
+    }
+
+    .desktop-nutritional-disclaimer-text p {
+        font-family: 'Inter', sans-serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: calc(18 / 1440 * 100vw);
+        line-height: calc(22 / 1440 * 100vw);
+        color: #6A7282;
+        margin: 0;
+        text-align: left;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+        .desktop-nutritional-content {
+            grid-template-columns: 1fr;
+            gap: 2.08vw;
+        }
+
+        .desktop-nutritional-container {
+            padding: 2.78vw 2.08vw;
+        }
+    }
+
+    /* Tablet Styles (768px - 1439px) */
+    @media (min-width: 768px) and (max-width: 1439px) {
+        .desktop-nutritional-facts-section {
+            position: relative;
+            width: 100vw;
+            max-width: 100%;
+            min-width: 100%;
+            min-height: 100vh;
+            /* Default Orange URL */
+            --bg-url: url('https://cdn.shopify.com/s/files/1/0967/6039/8106/files/nutritional_facts_shape_base.svg?v=1765174018');
+            background-image: var(--bg-url);
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            padding: calc(75 / 768 * 100vw) 5%;
+            overflow: hidden;
+            margin-top: -5vw;
+            gap: 0px;
+        }
+
+        .desktop-nutritional-header {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 90%;
+            text-align: left;
+            padding: 0 0px;
+            margin-bottom: calc(10 / 768 * 100vw);
+            box-sizing: border-box;
+            margin-top: 0px;
+        }
+
+        .desktop-nutritional-header h2 {
+            font-family: 'Stack Sans Headline', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: calc(22 / 768 * 100vw);
+            line-height: calc(29 / 768 * 100vw);
+            letter-spacing: calc(0.369141 / 768 * 100vw);
+            color: #FFFFFF;
+            margin-bottom: calc(0.5 / 768 * 100vw);
+        }
+
+        .desktop-nutritional-header p {
+            font-family: 'Stack Sans Text', sans-serif;
+            font-style: normal;
+            font-weight: 300;
+            font-size: calc(18 / 768 * 100vw);
+            line-height: calc(22 / 768 * 100vw);
+            color: #FFFFFF;
+        }
+
+        .desktop-nutritional-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: auto;
+            background: #FFFFFF;
+            border: calc(1 / 768 * 100vw) solid #D5D5D5;
+            box-shadow: 0px calc(1.31 / 768 * 100vw) calc(2.5 / 768 * 100vw) calc(-1.25 / 768 * 100vw) #B2B2B2;
+            border-radius: calc(20 / 768 * 100vw);
+            padding: calc(30 / 768 * 100vw) calc(22 / 768 * 100vw) calc(20 / 768 * 100vw);
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        .desktop-nutritional-title {
+            margin-bottom: calc(1.2 / 768 * 100vw);
+        }
+
+        .desktop-nutritional-title h1 {
+            font-family: 'Hey Fun', 'Stack Sans Headline', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: calc(26 / 768 * 100vw);
+            line-height: calc(19 / 768 * 100vw);
+            letter-spacing: calc(0.298828 / 768 * 100vw);
+            
+            /* Updated to use variable */
+            color: var(--accent-color);
+            
+            margin-bottom: calc(10 / 768 * 100vw);
+        }
+
+        .desktop-nutritional-title .serving-size {
+            font-family: 'Stack Sans Text', sans-serif;
+            font-style: normal;
+            font-weight: 250;
+            font-size: calc(12 / 768 * 100vw);
+            line-height: calc(11 / 768 * 100vw);
+            letter-spacing: calc(-0.113628 / 768 * 100vw);
+            color: #0A0A0A;
+        }
+
+        .desktop-nutritional-divider {
+            width: 100%;
+            height: calc(0.12 / 768 * 100vw);
+            
+            /* Updated to use variable */
+            background: var(--accent-color);
+            
+            margin: calc(10 / 768 * 100vw) 0;
+        }
+
+        .desktop-nutritional-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: calc(35 / 768 * 100vw);
+            margin-bottom: 0px;
+        }
+
+        .desktop-nutritional-left-column {
+            display: flex;
+            flex-direction: column;
+            gap: calc(1.04 / 768 * 100vw);
+        }
+
+        .desktop-nutritional-right-column {
+            display: flex;
+            flex-direction: column;
+            gap: calc(1.04 / 768 * 100vw);
+        }
+
+        .desktop-nutritional-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: calc(8 / 768 * 100vw) 0;
+            border-bottom: calc(0.06 / 768 * 100vw) solid #D9D9D9;
+        }
+
+        .desktop-nutritional-row:last-child {
+            border-bottom: none;
+        }
+
+        .desktop-nutritional-row-label {
+            display: flex;
+            flex-direction: column;
+            gap: calc(0.25 / 768 * 100vw);
+            flex: 1;
+        }
+
+        .desktop-nutritional-row-label .main-label {
+            font-family: 'Stack Sans Text', sans-serif;
+            font-style: normal;
+            font-weight: 300;
+            font-size: calc(11 / 768 * 100vw);
+            line-height: calc(16 / 768 * 100vw);
+            color: rgba(1, 1, 1, 0.8);
+            text-align: left;
+        }
+
+        .desktop-nutritional-row-label .sub-label {
+            font-family: 'Stack Sans Text', sans-serif;
+            font-style: normal;
+            font-weight: 300;
+            font-size: calc(8 / 768 * 100vw);
+            line-height: calc(11 / 768 * 100vw);
+            letter-spacing: calc(-0.113628 / 768 * 100vw);
+            color: #6A7282;
+        }
+
+        .desktop-nutritional-row-value {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: calc(0.56 / 768 * 100vw);
+            text-align: right;
+        }
+
+        .desktop-nutritional-row-value .main-value {
+            font-family: 'Stack Sans Text', sans-serif;
+            font-style: normal;
+            font-weight: 300;
+            font-size: calc(11 / 768 * 100vw);
+            line-height: calc(16 / 768 * 100vw);
+            color: #010101;
+            text-align: right;
+        }
+
+        .desktop-nutritional-row-value .sub-value {
+            font-family: 'Inter', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: calc(10 / 768 * 100vw);
+            line-height: calc(11 / 768 * 100vw);
+            text-align: right;
+            letter-spacing: calc(-0.113628 / 768 * 100vw);
+            color: #99A1AF;
+        }
+
+        .desktop-nutritional-row-protection {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: calc(0.69 / 768 * 100vw) 0;
+            border-bottom: none;
+        }
+
+        .desktop-nutritional-row-protection .desktop-nutritional-row-label {
+            flex: 0 0 calc(18.75 / 768 * 100vw);
+        }
+
+        .desktop-nutritional-row-protection .desktop-nutritional-row-value {
+            flex: 1;
+            max-width: calc(20.07 / 768 * 100vw);
+        }
+
+        .desktop-nutritional-row-protection .main-value {
+            font-family: 'Stack Sans Text', sans-serif;
+            font-style: normal;
+            font-weight: 300;
+            font-size: calc(12 / 768 * 100vw);
+            line-height: calc(16 / 768 * 100vw);
+            color: #010101;
+            text-align: right;
+        }
+
+        .desktop-nutritional-row-disclaimer {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: calc(2.43 / 768 * 100vw) 0 calc(2 / 768 * 100vw);
+            margin-top: 0;
+            min-height: calc(1.65 / 768 * 100vw);
+            border: none;
+        }
+
+        .desktop-nutritional-disclaimer-text {
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+
+        .desktop-nutritional-disclaimer-text p {
+            font-family: 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: calc(11 / 768 * 100vw);
+            line-height: calc(13 / 768 * 100vw);
+            color: #6A7282;
+            margin: 0;
+            text-align: left;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .desktop-nutritional-facts-section {
+            padding: 4.17vw 0;
+        }
+
+        .desktop-nutritional-header {
+            padding: 0 1.39vw;
+        }
+
+        .desktop-nutritional-container {
+            padding: 2.08vw 1.39vw;
+            margin: 0 1.39vw;
+        }
+
+        .desktop-nutritional-title h1 {
+            font-size: calc(32 / 1440 * 100vw);
+        }
+    }
+</style>
+
+<div class="desktop-nutritional-facts-section nutritional-facts-section">
+    <div class="desktop-nutritional-header">
+        <h2>scoop specifications</h2>
+    </div>
+
+    <div class="desktop-nutritional-container">
+        <div class="desktop-nutritional-title">
+            <h1>Scoop</h1>
+            <p class="serving-size">Serving Size: 1 Powerbank</p>
+        </div>
+
+        <div class="desktop-nutritional-divider"></div>
+
+        <div class="desktop-nutritional-content">
+            <div class="desktop-nutritional-left-column">
+                <div class="desktop-nutritional-row">
+                    <div class="desktop-nutritional-row-label">
+                        <span class="main-label">Battery</span>
+                    </div>
+                    <div class="desktop-nutritional-row-value">
+                        <span class="main-value js-battery-value" id="spec-battery-value">Li Polymer 20,000 mAH</span>
+                    </div>
+                </div>
+
+                <div class="desktop-nutritional-row">
+                    <div class="desktop-nutritional-row-label">
+                        <span class="main-label">Fast Charge Output</span>
+                    </div>
+                    <div class="desktop-nutritional-row-value">
+                        <span class="main-value">22.5 W</span>
+                    </div>
+                </div>
+
+                <div class="desktop-nutritional-row">
+                    <div class="desktop-nutritional-row-label">
+                        <span class="main-label">Weight</span>
+                    </div>
+                    <div class="desktop-nutritional-row-value">
+                        <span class="main-value js-weight-value" id="spec-weight-value">330 g</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="desktop-nutritional-right-column">
+                <div class="desktop-nutritional-row">
+                    <div class="desktop-nutritional-row-label">
+                        <span class="main-label">No. of Ports</span>
+                    </div>
+                    <div class="desktop-nutritional-row-value">
+                        <span class="main-value">2 [ Type-C + USB-A ]</span>
+                    </div>
+                </div>
+
+                <div class="desktop-nutritional-row">
+                    <div class="desktop-nutritional-row-label">
+                        <span class="main-label">5-Layer Protection</span>
+                    </div>
+                    <div class="desktop-nutritional-row-value">
+                        <span class="main-value">Short Circuit Protection<br>Overheat Protection<br>Over Voltage Protection<br>Over Current Protection<br>Overload Protection</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desktop-nutritional-row-disclaimer">
+            <div class="desktop-nutritional-disclaimer-text">
+                <p>* Actual ice cream not included. May cause excessive charging and happiness.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function() {
+        const container = document.querySelector('.desktop-nutritional-facts-section');
+        
+        // Function to calculate and set height based on the background image's aspect ratio
+        function updateDimensions() {
+            if (!container) return;
+            let bgValue = container.style.getPropertyValue('--bg-url');
+            
+            if (!bgValue) {
+                bgValue = getComputedStyle(container).getPropertyValue('--bg-url');
+            }
+
+            if (bgValue) {
+                const cleanUrl = bgValue.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
+                
+                if (cleanUrl && cleanUrl !== 'none') {
+                    const img = new Image();
+                    img.onload = function() {
+                        const viewportWidth = window.innerWidth;
+                        const svgAspectRatio = this.height / this.width;
+                        const calculatedHeight = viewportWidth * svgAspectRatio;
+                        
+                        container.style.width = '100vw';
+                        container.style.height = calculatedHeight + 'px';
+                        container.style.minHeight = calculatedHeight + 'px';
+                    };
+                    img.src = cleanUrl;
+                }
+            }
+        }
+
+        // Listener for Variant Changes
+        window.addEventListener('variantChange', (e) => {
+            if (!e.detail || !e.detail.flavour) return;
+
+            // 1. Handle Colors
+            const flavor = e.detail.flavour;
+            const size = e.detail.size;
+            
+            const colorMap = {
+                'orange': '#FC832C',
+                'blue': '#8BBAD8'
+            };
+            const newColor = colorMap[flavor] || '#FC832C';
+            container.style.setProperty('--accent-color', newColor);
+
+            // 2. Handle Text Updates (Battery & Weight) - Fallback for local update if main script is slow
+            const batteryEl = document.getElementById('spec-battery-value');
+            const weightEl = document.getElementById('spec-weight-value');
+
+            if (size === '10k') {
+                if(batteryEl) batteryEl.textContent = 'Li Polymer 10,000 mAH';
+                if(weightEl) weightEl.textContent = '192 g';
+            } else {
+                // Default 20k
+                if(batteryEl) batteryEl.textContent = 'Li Polymer 20,000 mAH';
+                if(weightEl) weightEl.textContent = '330 g';
+            }
+
+            // 3. Handle Background Dimensions
+            setTimeout(updateDimensions, 50); 
+        });
+
+        // Initialize (URL Check)
+        const params = new URLSearchParams(window.location.search);
+        const urlVariantId = params.get('variant');
+        
+        // Default Elements
+        const batteryEl = document.getElementById('spec-battery-value');
+        const weightEl = document.getElementById('spec-weight-value');
+
+        // Logic for Blue
+        if (urlVariantId === '51120630038849' || urlVariantId === '51120630006081') {
+             container.style.setProperty('--accent-color', '#8BBAD8');
+        } else {
+             container.style.setProperty('--accent-color', '#FC832C');
+        }
+
+        // Logic for Size (10k IDs)
+        // 10k Orange: 51115715723585
+        // 10k Blue: 51120630006081
+        if (urlVariantId === '51115715723585' || urlVariantId === '51120630006081') {
+            if(batteryEl) batteryEl.textContent = 'Li Polymer 10,000 mAH';
+            if(weightEl) weightEl.textContent = '192 g';
+        } else {
+            if(batteryEl) batteryEl.textContent = 'Li Polymer 20,000 mAH';
+            if(weightEl) weightEl.textContent = '330 g';
+        }
+
+        setTimeout(updateDimensions, 100);
+        window.addEventListener('resize', updateDimensions);
+    })();
+</script>
+
+{% schema %}
+{
+  "name": "Desk Scoop Spec",
+  "class": "desktop-only",  
+  "settings": []
+}
+{% endschema %}

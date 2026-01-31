@@ -1,0 +1,817 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+
+<style>
+    /* Figma "Ditto Copy" Utility Classes - Mobile Unique */
+    .mobile-font-headline { font-family: 'Stack Sans Headline', 'Stack Sans Notch', sans-serif; }
+    .mobile-font-text { font-family: 'Stack Sans Text', sans-serif; }
+    .mobile-font-inter { font-family: 'Inter', sans-serif; }
+    .mobile-font-mono-custom { font-family: 'Space Mono', monospace; }
+
+    /* The Exact Card Shadowx from Figma - Mobile Unique */
+    .mobile-custom-card-shadow {
+        box-shadow: 
+            calc(63 / 393 * 100vw) calc(199 / 393 * 100vw) calc(84 / 393 * 100vw) rgba(255, 255, 255, 0.01), 
+            calc(36 / 393 * 100vw) calc(112 / 393 * 100vw) calc(71 / 393 * 100vw) rgba(255, 255, 255, 0.05), 
+            calc(16 / 393 * 100vw) calc(50 / 393 * 100vw) calc(52 / 393 * 100vw) rgba(255, 255, 255, 0.09), 
+            calc(4 / 393 * 100vw) calc(12 / 393 * 100vw) calc(29 / 393 * 100vw) rgba(255, 255, 255, 0.1);
+    }
+
+    /* Orange Selected Glow - updated to match exact values - Mobile Unique */
+    .mobile-orange-glow {
+        box-shadow: 
+            0px 24px 10px rgba(252, 131, 44, 0.01), 
+            0px 14px 8px rgba(252, 131, 44, 0.05), 
+            0px 6px 6px rgba(252, 131, 44, 0.09), 
+            0px 2px 3px rgba(252, 131, 44, 0.1);
+    }
+    
+    /* Grey glow for Frost Bite - Mobile Unique */
+    .mobile-grey-glow-updated {
+        box-shadow: 
+            0px 29px 12px rgba(176, 176, 176, 0.01), 
+            0px 16px 10px rgba(176, 176, 176, 0.05), 
+            0px 7px 7px rgba(176, 176, 176, 0.09), 
+            0px 2px 4px rgba(176, 176, 176, 0.1);
+    }
+
+    /* Blue glow for Frost Bite when selected - Mobile Unique */
+    .mobile-blue-glow {
+        box-shadow: 
+            0px 24px 10px rgba(139, 186, 216, 0.01), 
+            0px 14px 8px rgba(139, 186, 216, 0.05), 
+            0px 6px 6px rgba(139, 186, 216, 0.09), 
+            0px 2px 3px rgba(139, 186, 216, 0.1);
+    }
+
+    /* Coming Soon Shadow - Mobile Unique */
+    .mobile-grey-glow {
+        box-shadow: 
+            0px calc(20.86 / 393 * 100vw) calc(7.68 / 393 * 100vw) rgba(143, 143, 143, 0.01), 
+            0px calc(12.08 / 393 * 100vw) calc(6.59 / 393 * 100vw) rgba(143, 143, 143, 0.05), 
+            0px calc(5.49 / 393 * 100vw) calc(5.49 / 393 * 100vw) rgba(143, 143, 143, 0.09), 
+            0px calc(1.09 / 393 * 100vw) calc(3.29 / 393 * 100vw) rgba(143, 143, 143, 0.1);
+    }
+    
+    /* Specific text styles - Mobile Unique */
+    .mobile-text-spacing-wide { letter-spacing: calc(0.4 / 393 * 100vw); }
+    .mobile-text-spacing-tight { letter-spacing: calc(-0.06 / 393 * 100vw); }
+
+    /* Background setup - Full width SVG container - Mobile Unique */
+    .mobile-bg-orange-wave {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+    
+    .mobile-bg-orange-wave svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+    
+    /* Content container wrapper - Mobile Unique */
+    .mobile-content-wrapper {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+    }
+    
+    /* Main section container - height determined by content - Mobile Unique */
+    .mobile-main-section {
+        position: relative;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        margin-top: calc(-290 / 393 * 100vw);
+    }
+    
+    /* Ensure body/html don't constrain width */
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+    
+    * {
+        box-sizing: border-box;
+    }
+    
+
+    /* Responsive overrides for Tailwind classes */
+    .mobile-content-wrapper.pb-24 {
+        padding-bottom: calc(96 / 393 * 100vw) !important;
+    }
+
+    [class*="h-[95px]"] {
+        height: calc(95 / 393 * 100vw) !important;
+    }
+
+    [class*="px-[5%]"] {
+        padding-left: 5% !important;
+        padding-right: 5% !important;
+    }
+
+    .mobile-mb-6 {
+        margin-bottom: calc(30 / 393 * 100vw) !important;
+    }
+
+    .mobile-mb-7 {
+        margin-bottom: calc(24 / 393 * 100vw) !important;
+    }
+
+    [class*="text-[24px]"] {
+        font-size: calc(24 / 393 * 100vw) !important;
+    }
+
+    [class*="leading-[40px]"] {
+        line-height: calc(40 / 393 * 100vw) !important;
+    }
+
+    [class*="rounded-[28px]"] {
+        border-radius: calc(28 / 393 * 100vw) !important;
+    }
+
+    .mobile-p-5 {
+        padding: calc(25 / 393 * 100vw) calc(25 / 393 * 100vw) calc(25 / 393 * 100vw) calc(25 / 393 * 100vw) !important;
+    }
+
+    .mobile-mb-10 {
+        margin-bottom: calc(35 / 393 * 100vw) !important;
+    }
+
+    [class*="text-[16px]"] {
+        font-size: calc(16 / 393 * 100vw) !important;
+    }
+
+    [class*="leading-[21px]"] {
+        line-height: calc(21 / 393 * 100vw) !important;
+    }
+
+    [class*="border-[0.4px]"] {
+        border-width: calc(0.4 / 393 * 100vw) !important;
+    }
+
+    [class*="rounded-[20px]"] {
+        border-radius: calc(20 / 393 * 100vw) !important;
+    }
+
+    [class*="p-[2px]"] {
+        padding: calc(2 / 393 * 100vw) !important;
+    }
+
+    [class*="top-[2px]"] {
+        top: calc(2 / 393 * 100vw) !important;
+    }
+
+    [class*="bottom-[2px]"] {
+        bottom: calc(2 / 393 * 100vw) !important;
+    }
+
+    .mobile-px-2 {
+        padding-left: calc(8 / 393 * 100vw) !important;
+        padding-right: calc(8 / 393 * 100vw) !important;
+    }
+
+    .mobile-py-1 {
+        padding-top: calc(4 / 393 * 100vw) !important;
+        padding-bottom: calc(4 / 393 * 100vw) !important;
+    }
+
+    [class*="text-[12px]"] {
+        font-size: calc(12 / 393 * 100vw) !important;
+    }
+
+    [class*="leading-[16px]"] {
+        line-height: calc(16 / 393 * 100vw) !important;
+    }
+
+    .mobile-mb-1 {
+        margin-bottom: calc(4 / 393 * 100vw) !important;
+    }
+
+    [class*="text-[10px]"] {
+        font-size: calc(10 / 393 * 100vw) !important;
+    }
+
+    [class*="leading-[13px]"] {
+        line-height: calc(13 / 393 * 100vw) !important;
+    }
+
+    .mobile-gap-4 {
+        gap: calc(16 / 393 * 100vw) !important;
+        margin-top: calc(-10 / 393 * 100vw) !important;
+    }
+
+    [class*="w-[48px]"] {
+        width: calc(48 / 393 * 100vw) !important;
+    }
+
+    [class*="h-[48px]"] {
+        height: calc(48 / 393 * 100vw) !important;
+    }
+
+    [class*="border-[0.6px]"] {
+        border-width: calc(0.6 / 393 * 100vw) !important;
+    }
+
+    .mobile-mb-2 {
+        margin-bottom: calc(8 / 393 * 100vw) !important;
+    }
+
+    .mobile-w-6 {
+        width: calc(32.22 / 393 * 100vw) !important;
+    }
+
+    .mobile-h-6 {
+        height: calc(39.03 / 393 * 100vw) !important;
+    }
+
+    [class*="text-[8px]"] {
+        font-size: calc(8 / 393 * 100vw) !important;
+    }
+
+    [class*="leading-[7px]"] {
+        line-height: calc(7 / 393 * 100vw) !important;
+    }
+
+    [class*="text-[6px]"] {
+        font-size: calc(6 / 393 * 100vw) !important;
+    }
+
+    .mobile-w-3 {
+        width: calc(12 / 393 * 100vw) !important;
+    }
+
+    .mobile-h-3 {
+        height: calc(12 / 393 * 100vw) !important;
+    }
+
+    [class*="text-[14px]"] {
+        font-size: calc(14 / 393 * 100vw) !important;
+    }
+
+    [class*="leading-[20px]"] {
+        line-height: calc(20 / 393 * 100vw) !important;
+    }
+
+    .mobile-gap-2 {
+        gap: calc(8 / 393 * 100vw) !important;
+    }
+
+    [class*="gap-[1px]"] {
+        gap: calc(1 / 393 * 100vw) !important;
+    }
+
+    .mobile-w-16 {
+        width: calc(64 / 393 * 100vw) !important;
+    }
+
+    .mobile-h-12 {
+        height: calc(60 / 393 * 100vw) !important;
+    }
+
+    [class*="leading-[10px]"] {
+        line-height: calc(10 / 393 * 100vw) !important;
+    }
+
+    [class*="leading-[18px]"] {
+        line-height: calc(18 / 393 * 100vw) !important;
+    }
+
+    .mobile-pb-10 {
+        padding-bottom: calc(40 / 393 * 100vw) !important;
+    }
+
+    .mobile-mb-4 {
+        margin-bottom: calc(16 / 393 * 100vw) !important;
+    }
+
+    /* Ensure minimum readable sizes for very small screens */
+    @media (max-width: 320px) {
+        [class*="text-[24px]"] { font-size: max(calc(24 / 393 * 100vw), 20px) !important; }
+        [class*="leading-[40px]"] { line-height: max(calc(40 / 393 * 100vw), 32px) !important; }
+        [class*="text-[16px]"] { font-size: max(calc(16 / 393 * 100vw), 14px) !important; }
+        [class*="text-[14px]"] { font-size: max(calc(14 / 393 * 100vw), 12px) !important; }
+        [class*="text-[12px]"] { font-size: max(calc(12 / 393 * 100vw), 11px) !important; }
+        [class*="text-[10px]"] { font-size: max(calc(10 / 393 * 100vw), 9px) !important; }
+        [class*="text-[8px]"] { font-size: max(calc(8 / 393 * 100vw), 7px) !important; }
+    }
+
+    /* For larger mobile screens, cap the maximum sizes */
+    @media (min-width: 480px) {
+        [class*="text-[24px]"] { font-size: min(calc(24 / 393 * 100vw), 28px) !important; }
+        [class*="leading-[40px]"] { line-height: min(calc(40 / 393 * 100vw), 46px) !important; }
+        [class*="text-[16px]"] { font-size: min(calc(16 / 393 * 100vw), 18px) !important; }
+        [class*="text-[14px]"] { font-size: min(calc(14 / 393 * 100vw), 16px) !important; }
+        [class*="text-[12px]"] { font-size: min(calc(12 / 393 * 100vw), 14px) !important; }
+    }
+    
+    /* Price animation styles */
+    .mobile-price-currency { display: inline-block; }
+    .mobile-price-wrapper { will-change: transform; transform-origin: left center; display: inline-block; }
+    .mobile-price-value { font-variant-numeric: tabular-nums; will-change: transform, opacity, filter, color; transform: translateZ(0); backface-visibility: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; display: inline-block; }
+    .mobile-price-digit { display: inline-block; will-change: transform, opacity; transform: translateZ(0); backface-visibility: hidden; font-variant-numeric: tabular-nums; }
+    .mobile-price-comma { display: inline-block; will-change: transform, opacity; transform: translateZ(0); backface-visibility: hidden; }
+    
+    /* NEW: Toggle Styles */
+    #mobile-capacity-toggle {
+        width: calc(160 / 393 * 100vw);
+        /* Slightly wider than the original button to fit 2 options */
+        height: calc(40 / 393 * 100vw);
+        border-radius: 20px;
+    }
+
+    #mobile-toggle-slider {
+        position: absolute;
+        top: 2px;
+        bottom: 2px;
+        background-color: #101010; /* Black slider for mobile */
+        border-radius: 18px;
+        width: calc(50% - 2px); /* Half width minus gap */
+        left: 2px;
+        z-index: 0;
+        pointer-events: none;
+    }
+    
+    /* Other specific mobile styles */
+    .mobile-white-card { background: #FFFFFF; }
+    .mobile-capacity-text { font-family: 'Stack Sans Text', sans-serif; font-weight: 400; font-size: 16px; line-height: 21px; color: #010101; }
+    .mobile-flavour-heading { font-family: 'Stack Sans Text', sans-serif; font-weight: 400; font-size: 16px; line-height: 21px; color: #010101; }
+    .mobile-flavour-subtitle { font-family: 'Stack Sans Text', sans-serif; font-weight: 250; font-size: 10px; line-height: 13px; color: #010101; }
+    .mobile-current-price-text { font-family: 'Stack Sans Text', sans-serif; font-weight: 300; font-size: 16px; line-height: 21px; letter-spacing: -0.06em; color: #010101; }
+    .mobile-selected-indicator { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 6px; line-height: 7px; text-align: center; color: #CACACA; }
+    
+    /* Flavor circle - Orange selected */
+    .mobile-flavor-circle-orange { background: #FFFFFF; border: 0.5px solid rgba(252, 131, 44, 1) !important; box-shadow: 0px 24px 10px rgba(252, 131, 44, 0.01), 0px 14px 8px rgba(252, 131, 44, 0.05), 0px 6px 6px rgba(252, 131, 44, 0.09), 0px 2px 3px rgba(252, 131, 44, 0.1); width: calc(66.15 / 393 * 100vw); height: calc(66.15 / 393 * 100vw); }
+    
+    /* Flavor circle - Frost Bite (grey shadow) */
+    .mobile-flavor-circle-grey { background: #FFFFFF; border: 0.5px solid rgba(176, 176, 176, 1) !important; box-shadow: 0px 29px 12px rgba(176, 176, 176, 0.01), 0px 16px 10px rgba(176, 176, 176, 0.05), 0px 7px 7px rgba(176, 176, 176, 0.09), 0px 2px 4px rgba(176, 176, 176, 0.1); width: calc(66.15 / 393 * 100vw); height: calc(66.15 / 393 * 100vw); }
+
+    /* Flavor circle - Frost Bite (blue shadow when selected) */
+    .mobile-flavor-circle-blue { background: #FFFFFF; border: 0.5px solid rgba(139, 186, 216, 1) !important; box-shadow: 0px 24px 10px rgba(139, 186, 216, 0.01), 0px 14px 8px rgba(139, 186, 216, 0.05), 0px 6px 6px rgba(139, 186, 216, 0.09), 0px 2px 3px rgba(139, 186, 216, 0.1); width: calc(66.15 / 393 * 100vw); height: calc(66.15 / 393 * 100vw); }
+</style>
+
+<div class="mobile-main-section w-full m-0 p-0">
+    
+    <div class="mobile-bg-orange-wave">
+        <svg viewBox="0 0 391 827" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path d="M238.955 0C268.264 0.000156442 294.081 20.557 323.322 21.4854C343.467 22.1248 371.557 12.1633 391 3.99414V826.843C373.753 807.192 355.929 789.905 330.846 784.592C282.589 774.37 254.114 806.913 206.143 792.984C106.835 764.149 89.5201 712.975 0 745.233V3.66309C8.38736 2.36846 17.3087 1.56917 24.9941 2.14941C60.5199 4.83159 40.4286 32.6656 74.915 37.3789C99.8948 40.7929 116.117 27.1139 140.414 31.4268C164.861 35.7667 166.119 72.9763 183.933 67.5986C211.705 59.214 169.26 -6.30056e-06 238.955 0Z" fill="#FC832C"/>
+        </svg>
+    </div>
+    
+    <div class="mobile-content-wrapper pb-24">
+        
+        <div class="h-[95px] w-full"></div>
+
+        <div class="w-full px-[5%]">
+
+        <div class="mobile-mb-6">
+            <h2 class="mobile-font-headline font-[400] text-white text-[24px] leading-[40px] mobile-text-spacing-wide">
+                energy on the go 
+            </h2>
+        </div>
+
+        <div class="w-full mobile-white-card rounded-[28px] mobile-custom-card-shadow mobile-p-5 relative z-10 mobile-mb-10">
+            
+            <div class="flex items-center justify-between mobile-mb-6">
+                <span class="mobile-capacity-text">Capacity</span>
+                
+                <div id="mobile-capacity-toggle" class="relative bg-white border border-[#D9D9D9] flex items-center p-[2px] cursor-pointer">
+                    <div id="mobile-option-10k" class="relative z-10 flex-1 h-full flex items-center justify-center cursor-pointer select-none">
+                        <span class="mobile-font-text font-[250] transition-colors duration-300 text-[#878787] text-[12px] leading-[16px]">10K mAH</span>
+                    </div>
+                    <div id="mobile-option-20k" class="relative z-10 flex-1 h-full flex items-center justify-center cursor-pointer select-none">
+                        <span class="mobile-font-text font-[250] transition-colors duration-300 text-white text-[12px] leading-[16px]">20K mAH</span>
+                    </div>
+                    <div id="mobile-toggle-slider"></div>
+                </div>
+
+            </div>
+
+            <div class="flex justify-between mobile-mb-7">
+                <div class="flex flex-col">
+                    <span class="mobile-flavour-heading mobile-mb-1">Pick your<br>flavour</span>
+                    <span class="mobile-flavour-subtitle max-w-[100px]">Choose from our favourites</span>
+                </div>
+
+                <div class="flex mobile-gap-4 items-start">
+                    <a href="javascript:void(0)" id="mobile-flavor-orange-burst" class="flex flex-col items-center cursor-pointer">
+                        <div class="rounded-full mobile-flavor-circle-orange mobile-orange-glow flex items-center justify-center mobile-mb-2">
+                            <svg width="33" height="40" viewBox="0 0 33 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="mobile-w-6 mobile-h-6">
+                                <path d="M16.8701 37.6855C16.8664 37.6934 16.8622 37.7012 16.8584 37.709C15.9858 39.4847 13.8232 39.4717 12.9658 37.6855L4.22656 19.4902H6.44336L14.6387 36.54L14.6406 36.5459C14.7659 36.7991 15.0754 36.7956 15.1973 36.54L16.8438 33.1172L10.2949 19.4902H12.5117L17.9502 30.8096L19.876 26.8193L16.3535 19.4902H18.5684L20.9854 24.5186L23.4023 19.4902H25.6094L16.8701 37.6855Z" fill="#FE8605"/>
+                                <path d="M3.50977 6.9082C9.83457 0.50681 20.3412 4.52295 22.4219 14.1377L22.5195 14.5918C23.3551 14.6728 24.146 15.1144 24.7236 15.8223C25.6131 16.9127 25.802 18.3205 25.4395 19.4912H0.222656C0.287011 19.4473 0.35318 19.4048 0.421875 19.3652L0.324219 18.9121C-0.637773 14.4523 0.576587 9.87721 3.50977 6.9082Z" fill="#FF9D34"/>
+                                <circle cx="3.09375" cy="19.4902" r="2.84375" fill="#FF9D34"/>
+                                <circle cx="26.2637" cy="18.6426" r="3.49805" fill="#FE8605"/>
+                                <rect x="6.60938" y="20.832" width="17.4062" height="1.50195" fill="#FE8605"/>
+                                <rect x="2.71094" y="17.9883" width="15.6719" height="2.84375" fill="#FF9D34"/>
+                                <rect x="11.9688" y="17.9883" width="15.6719" height="2.84375" fill="#FE8605"/>
+                                <ellipse cx="12.7617" cy="20.2891" rx="1.30078" ry="1.29297" fill="#FE8605"/>
+                                <path d="M20.1719 0C26.8295 0 32.2266 5.39707 32.2266 12.0547C32.2266 14.8613 31.2646 17.4416 29.6562 19.4902H10.6875C9.07915 17.4416 8.11719 14.8613 8.11719 12.0547C8.11719 5.39707 13.5143 0 20.1719 0Z" fill="#FE8605"/>
+                            </svg>
+                        </div>
+                        <span class="mobile-font-inter font-[400] text-[#FC9B55] text-[8px] leading-[7px] text-center mobile-mb-1">Orange Burst</span>
+                        <span id="mobile-orange-selected" class="mobile-selected-indicator" style="visibility: visible;">● Selected</span>
+                    </a>
+
+                    <a href="javascript:void(0)" id="mobile-flavor-frost-bite" class="flex flex-col items-center cursor-pointer">
+                        <div class="rounded-full mobile-flavor-circle-grey mobile-grey-glow-updated flex items-center justify-center mobile-mb-2">
+                            <svg width="33" height="40" viewBox="0 0 33 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="mobile-w-6 mobile-h-6">
+                                <path d="M16.8701 37.6855C16.8664 37.6934 16.8622 37.7012 16.8584 37.709C15.9858 39.4847 13.8232 39.4717 12.9658 37.6855L4.22656 19.4902H6.44336L14.6387 36.54L14.6406 36.5459C14.7659 36.7991 15.0754 36.7956 15.1973 36.54L16.8438 33.1172L10.2949 19.4902H12.5117L17.9502 30.8096L19.876 26.8193L16.3535 19.4902H18.5684L20.9854 24.5186L23.4023 19.4902H25.6094L16.8701 37.6855Z" fill="#8BBAD8"/>
+                                <path d="M3.50977 6.9082C9.83457 0.506788 20.3412 4.52294 22.4219 14.1377L22.5195 14.5918C23.3551 14.6728 24.146 15.1144 24.7236 15.8223C25.6131 16.9127 25.802 18.3205 25.4395 19.4912H0.222656C0.287017 19.4473 0.353173 19.4048 0.421875 19.3652L0.324219 18.9121C-0.637776 14.4523 0.576586 9.87721 3.50977 6.9082Z" fill="#BEDEF3"/>
+                                <circle cx="3.09375" cy="19.4902" r="2.84375" fill="#BEDEF3"/>
+                                <circle cx="26.2637" cy="18.6426" r="3.49805" fill="#8BBAD8"/>
+                                <rect x="6.60938" y="20.832" width="17.4062" height="1.50195" fill="#8BBAD8"/>
+                                <rect x="2.71094" y="17.9883" width="15.6719" height="2.84375" fill="#BEDEF3"/>
+                                <rect x="11.9688" y="17.9883" width="15.6719" height="2.84375" fill="#8BBAD8"/>
+                                <ellipse cx="12.7617" cy="20.2891" rx="1.30078" ry="1.29297" fill="#8BBAD8"/>
+                                <path d="M20.1719 0C26.8295 0 32.2266 5.39707 32.2266 12.0547C32.2266 14.8613 31.2646 17.4416 29.6562 19.4902H10.6875C9.07915 17.4416 8.11719 14.8613 8.11719 12.0547C8.11719 5.39707 13.5143 0 20.1719 0Z" fill="#8BBAD8"/>
+                            </svg>
+                        </div>
+                        <span class="mobile-font-inter font-[400] text-[#87CEEB] text-[8px] leading-[7px] text-center mobile-mb-1">Frost Bite</span>
+                        <span id="mobile-frost-selected" class="mobile-selected-indicator" style="visibility: hidden;">● Selected</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex items-end justify-between">
+                <div class="flex items-baseline mobile-gap-2">
+                     <span class="mobile-current-price-text">
+                        <span class="mobile-price-currency">Rs.</span>
+                        <span id="mobile-current-price-wrapper" class="mobile-price-wrapper inline-block">
+                            <span id="mobile-current-price-value" class="mobile-price-value">2,499</span>
+                        </span>
+                    </span>
+                    </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-4 mobile-gap-2 mobile-mb-10">
+            <div class="flex flex-col items-center">
+                <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/free.svg?v=1765532197" alt="Free Shipping" class="mobile-w-16 mobile-h-12 mobile-mb-2">
+                <span class="mobile-font-text font-[300] text-white text-[8px] leading-[10px] text-center mobile-text-spacing-tight">free<br>shipping</span>
+            </div>
+            
+            <div class="flex flex-col items-center">
+                <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/express.svg?v=1765532226" alt="Express Delivery" class="mobile-w-16 mobile-h-12 mobile-mb-2">
+                <span class="mobile-font-text font-[300] text-white text-[8px] leading-[10px] text-center mobile-text-spacing-tight">express<br>delivery</span>
+             </div>
+
+            <div class="flex flex-col items-center">
+                <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/warranty.svg?v=1765532226" alt="1 yr warranty" class="mobile-w-16 mobile-h-12 mobile-mb-2">
+                <span class="mobile-font-text font-[300] text-white text-[8px] leading-[10px] text-center mobile-text-spacing-tight">1 yr<br>warranty</span>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/100_energy_1.svg?v=1765532591" alt="100% energy no sugar" class="mobile-w-16 mobile-h-12 mobile-mb-2">
+                <span class="mobile-font-text font-[300] text-white text-[8px] leading-[10px] text-center mobile-text-spacing-tight">100% energy<br>no sugar</span>
+            </div>
+        </div>
+
+        <div class="mobile-pb-10">
+            <h2 class="mobile-font-headline font-[400] text-white text-[24px] leading-[40px] mobile-text-spacing-wide mobile-mb-2">inside scoop</h2>
+            <p class="mobile-font-text font-[300] text-white text-[14px] leading-[20px]">
+                Just like your favorite ice cream, Scoop brings joy wherever you go. With built-in cables, and a design that's as fun as it is functional—it's the perfect companion for your daily adventures.
+            </p>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        function initMobileSection() {
+            // Check if GSAP is loaded
+            if (typeof gsap === 'undefined') {
+                setTimeout(initMobileSection, 100);
+                return;
+            }
+
+            // Check if Elements exist
+            const toggle = document.getElementById('mobile-capacity-toggle');
+            if (!toggle) {
+                setTimeout(initMobileSection, 100);
+                return;
+            }
+
+            console.log("Mobile Section: Initialized successfully");
+
+            // GSAP Performance Optimization
+            gsap.config({
+                force3D: true,
+                nullTargetWarn: false
+            });
+
+            // STATE & ELEMENTS
+            let selectedCapacity = '20k'; 
+            let currentFlavor = 'orange'; // Added Flavor State Tracking for Dispatch
+
+            const prices = {
+                '10k': { current: 1899, original: 1999 },
+                '20k': { current: 2499, original: 2999 }
+            };
+
+            // Grab scoped elements
+            const slider = document.getElementById('mobile-toggle-slider');
+            const option10k = document.getElementById('mobile-option-10k');
+            const option20k = document.getElementById('mobile-option-20k');
+            
+            const text10k = option10k.querySelector('span');
+            const text20k = option20k.querySelector('span');
+
+            const currentPriceValueEl = document.getElementById('mobile-current-price-value');
+            const currentPriceWrapperEl = document.getElementById('mobile-current-price-wrapper');
+            
+            // --- DISPATCHER HELPER ---
+            function dispatchVariantUpdate(flavour, size) {
+                const event = new CustomEvent('variantChange', {
+                    detail: { flavour: flavour, size: size }
+                });
+                window.dispatchEvent(event);
+            }
+
+            // --- ANIMATION HELPERS (Digits) ---
+            function createDigitElements(numberString, container) {
+                container.innerHTML = '';
+                const chars = numberString.split('');
+                const fragment = document.createDocumentFragment();
+                
+                chars.forEach((char) => {
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.className = (char === ',' || char === '.') ? 'mobile-price-comma' : 'mobile-price-digit';
+                    fragment.appendChild(span);
+                });
+                container.appendChild(fragment);
+                return container.querySelectorAll('.mobile-price-digit, .mobile-price-comma');
+            }
+
+            function updatePriceDigits(price, container, digits) {
+                const formatted = price.toLocaleString('en-IN');
+                const newChars = formatted.split('');
+                if (!digits || digits.length === 0 || formatted.length !== digits.length) {
+                    return createDigitElements(formatted, container);
+                }
+                Array.from(digits).forEach((el, i) => {
+                    if (i < newChars.length) el.textContent = newChars[i];
+                });
+                return digits;
+            }
+
+            // --- ANIMATION LOGIC ---
+            function updateToggle(capacity) {
+                if (selectedCapacity === capacity) return;
+                
+                const previousCapacity = selectedCapacity;
+                selectedCapacity = capacity; // Update Local State
+
+                // Dispatch Change to External Asset Script
+                dispatchVariantUpdate(currentFlavor, selectedCapacity);
+                const priceData = prices[capacity];
+
+                // Get current value for animation start point
+                const prevSellStr = currentPriceValueEl.innerText.replace(/,/g, '');
+                const previousSellingPrice = prevSellStr ? parseInt(prevSellStr) : prices[previousCapacity].current;
+                
+                // 1. Handle Slider Movement and Color Changes
+                if (capacity === '10k') {
+                    // Mobile specific positioning: left side is 2px
+                    gsap.to(slider, { left: '2px', duration: 0.3, ease: "power2.out" });
+                    gsap.to(text10k, { color: '#FFFFFF', duration: 0.3 });
+                    gsap.to(text20k, { color: '#878787', duration: 0.3 });
+                } else {
+                    // Mobile specific positioning: right side is 50%
+                    gsap.to(slider, { left: 'calc(50%)', duration: 0.3, ease: "power2.out" });
+                    gsap.to(text10k, { color: '#878787', duration: 0.3 });
+                    gsap.to(text20k, { color: '#FFFFFF', duration: 0.3 });
+                }
+                
+                // 2. Price Animation
+                const tl = gsap.timeline({
+                    defaults: { ease: "power3.inOut" },
+                    force3D: true,
+                    immediateRender: false
+                });
+
+                // Determine Flash Color dynamically
+                const blinkColor = (currentFlavor === 'blue') ? '#8BBAD8' : '#FC832C';
+                
+                let currentDigits;
+
+                tl.call(() => {
+                    currentDigits = createDigitElements(previousSellingPrice.toLocaleString('en-IN'), currentPriceValueEl);
+                });
+
+                // Animate selling price
+                const sellingPriceObj = { val: previousSellingPrice };
+                tl.to(sellingPriceObj, {
+                    val: priceData.current,
+                    duration: 0.4,
+                    ease: "power2.out",
+                    onUpdate: function() {
+                        const currentInt = Math.round(this.targets()[0].val);
+                        currentDigits = updatePriceDigits(currentInt, currentPriceValueEl, currentDigits);
+                    },
+                    onComplete: function() {
+                        currentDigits = updatePriceDigits(priceData.current, currentPriceValueEl, currentDigits);
+                    }
+                });
+
+                // Animate current price digits bounce effect
+                tl.call(() => {
+                    currentDigits = currentPriceValueEl.querySelectorAll('.mobile-price-digit, .mobile-price-comma');
+                });
+                tl.to(currentDigits, {
+                    opacity: 0.8,
+                    y: 3,
+                    duration: 0.15,
+                    ease: "power2.out",
+                    stagger: { amount: 0.1, from: "end" }
+                }, "-=0.15");
+                
+                tl.to(currentDigits, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.15,
+                    ease: "power2.in",
+                    stagger: { amount: 0.1, from: "end" }
+                }, "<0.05");
+
+                // Color flash with Dynamic Color
+                tl.to(currentPriceValueEl, {
+                    color: blinkColor,
+                    duration: 0.15,
+                    ease: "power2.out"
+                }, "-=0.1");
+                
+                tl.to(currentPriceValueEl, {
+                    color: "#010101",
+                    duration: 0.2,
+                    ease: "power2.in"
+                });
+                
+                tl.to(currentPriceWrapperEl, {
+                    scale: 1.0,
+                    duration: 0.3,
+                    ease: "power2.out"
+                }, "<");
+            }
+
+            // --- FLAVOR SELECTION LOGIC ---
+            function setFlavor(flavor, dispatch = true) {
+                const orangeBtn = document.getElementById('mobile-flavor-orange-burst');
+                const frostBtn = document.getElementById('mobile-flavor-frost-bite');
+                const orangeSelected = document.getElementById('mobile-orange-selected');
+                const frostSelected = document.getElementById('mobile-frost-selected');
+                
+                const orangeCircle = orangeBtn ? orangeBtn.querySelector('div') : null;
+                const frostCircle = frostBtn ? frostBtn.querySelector('div') : null;
+
+                const safeFlavor = flavor ? flavor.toLowerCase() : 'orange';
+                
+                currentFlavor = safeFlavor; // Update State
+
+                if (safeFlavor === 'orange') {
+                    if (orangeCircle) orangeCircle.className = "rounded-full mobile-flavor-circle-orange mobile-orange-glow flex items-center justify-center mobile-mb-2";
+                    if (frostCircle) frostCircle.className = "rounded-full mobile-flavor-circle-grey mobile-grey-glow-updated flex items-center justify-center mobile-mb-2";
+                    
+                    if (orangeSelected) orangeSelected.style.visibility = 'visible';
+                    if (frostSelected) frostSelected.style.visibility = 'hidden';
+                    
+                    if (dispatch) dispatchVariantUpdate('orange', selectedCapacity);
+
+                } else if (safeFlavor === 'blue') {
+                    if (orangeCircle) orangeCircle.className = "rounded-full mobile-flavor-circle-grey mobile-grey-glow-updated flex items-center justify-center mobile-mb-2";
+                    if (frostCircle) frostCircle.className = "rounded-full mobile-flavor-circle-blue mobile-blue-glow flex items-center justify-center mobile-mb-2";
+                    
+                    if (orangeSelected) orangeSelected.style.visibility = 'hidden';
+                    if (frostSelected) frostSelected.style.visibility = 'visible';
+                    
+                    if (dispatch) dispatchVariantUpdate('blue', selectedCapacity);
+                }
+            }
+
+            // --- EVENT LISTENERS ---
+            
+            // 1. Toggle Listeners
+            option10k.addEventListener('click', (e) => { 
+                e.preventDefault(); 
+                e.stopPropagation(); 
+                updateToggle('10k'); 
+            });
+            option20k.addEventListener('click', (e) => { 
+                e.preventDefault(); 
+                e.stopPropagation(); 
+                updateToggle('20k'); 
+            });
+            // 2. Flavor Listeners
+            const orangeBtn = document.getElementById('mobile-flavor-orange-burst');
+            const frostBtn = document.getElementById('mobile-flavor-frost-bite');
+
+            if (orangeBtn) {
+                orangeBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    setFlavor('orange');
+                });
+            }
+
+            if (frostBtn) {
+                frostBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    setFlavor('blue');
+                });
+            }
+
+            // 3. Global Event Listener
+            window.addEventListener('variantChange', (e) => {
+                if (e.detail) {
+                    if (e.detail.flavour && e.detail.flavour !== currentFlavor) {
+                        setFlavor(e.detail.flavour, false);
+                    }
+                    if (e.detail.size && e.detail.size !== selectedCapacity) {
+                        updateToggle(e.detail.size);
+                    }
+                }
+            });
+            // --- INITIALIZATION ---
+            
+            // Check URL for Variant
+            const params = new URLSearchParams(window.location.search);
+            const urlVariantId = params.get('variant');
+            
+            // IDs Mapping:
+            // Blue 10k: 51120630006081
+            // Blue 20k: 51120630038849
+            // Orange 10k: 51115715723585
+            // Orange 20k: 51115715756353
+
+            if (urlVariantId === '51120630006081') { // Blue 10k
+                setFlavor('blue', false);
+                updateToggle('10k');
+            } else if (urlVariantId === '51120630038849') { // Blue 20k
+                setFlavor('blue', false);
+                updateToggle('20k');
+            } else if (urlVariantId === '51115715756353') { // Orange 20k
+                setFlavor('orange', false);
+                updateToggle('20k');
+            } else if (urlVariantId === '51115715723585') { // Orange 10k
+                 setFlavor('orange', false);
+                updateToggle('10k');
+            } else {
+                // Default fallback -> Orange 10k
+                setFlavor('orange', false);
+                updateToggle('10k'); 
+            }
+            
+            // Explicitly set initial styles based on state to prevent FOUC/misalignment
+            if (selectedCapacity === '20k') {
+                slider.style.left = 'calc(50%)';
+                text20k.style.color = '#FFFFFF';
+                text10k.style.color = '#878787';
+            } else {
+                slider.style.left = '2px';
+                text20k.style.color = '#878787';
+                text10k.style.color = '#FFFFFF';
+            }
+
+            // Initialize digits with current selected price
+            createDigitElements(prices[selectedCapacity].current.toLocaleString('en-IN'), currentPriceValueEl);
+            
+            gsap.set(currentPriceWrapperEl, { transformOrigin: "left center" });
+        }
+
+        // Start polling for elements
+        initMobileSection();
+    })();
+</script>
+
+{% schema %}
+{
+  "name": "Mobile Variant",
+  "class": "mobile-only z-index-1",  
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,672 @@
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap" />
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    color: #0b0b0b;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .desktop-faq {
+    display: flex;
+    flex-direction: column;
+    gap: calc(24 / 1440 * 100vw);
+    margin: calc(30 / 1440 * 100vw) auto calc(40 / 1440 * 100vw) auto;
+    width: 100%;
+    padding: 0 5%;
+    
+    /* DEFINING THE DYNAMIC COLOR VARIABLE (Default: Orange) */
+    --accent-color: #FC832C; 
+    transition: --accent-color 0.3s ease;
+  }
+
+  .desktop-faq__title {
+    font-family: "Stack Sans Text", "Inter", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: calc(16 / 1440 * 100vw);
+    line-height: calc(31 / 1440 * 100vw);
+    color: #000000;
+  }
+
+  .desktop-faq__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(10 / 1440 * 100vw);
+    margin-bottom: calc(20 / 1440 * 100vw);
+  }
+
+  .desktop-faq__chip {
+    border: calc(0.82725 / 1440 * 100vw) solid #686868;
+    border-radius: calc(15 / 1440 * 100vw);
+    padding: calc(6 / 1440 * 100vw) calc(16 / 1440 * 100vw);
+    font-family: "Stack Sans Text", "Inter", sans-serif;
+    font-size: calc(12.4347 / 1440 * 100vw);
+    line-height: calc(16 / 1440 * 100vw);
+    color: #686868;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+
+  .desktop-faq__chip:hover {
+    border-color: #111;
+    background: #f0f0f0;
+  }
+
+  /* UPDATED TO USE VARIABLE */
+  .desktop-faq__chip.desktop-is-active {
+    background: var(--accent-color);
+    color: #ffffff;
+    border-color: var(--accent-color);
+  }
+
+  .desktop-faq__chip--all {
+    border-radius: calc(20 / 1440 * 100vw);
+  }
+
+  .desktop-faq__chip--all.desktop-is-active {
+    border: calc(1.31314 / 1440 * 100vw) solid #ffffff;
+  }
+
+  .desktop-faq__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .desktop-accordion {
+    border-bottom: calc(1 / 1440 * 100vw) solid #e3e3e3;
+    width: 100%;
+  }
+
+  .desktop-accordion:last-child {
+    border-bottom: none;
+  }
+
+  .desktop-accordion.desktop-is-hidden {
+    display: none;
+  }
+
+  .desktop-accordion__header {
+    width: 100%;
+    padding: calc(18 / 1440 * 100vw) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border: none;
+    font-family: "Stack Sans Text";
+    font-weight: 300;
+    font-size: calc(12 / 1440 * 100vw);
+    line-height: calc(20 / 1440 * 100vw);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .desktop-accordion__question {
+    flex: 1;
+    padding-right: calc(20 / 1440 * 100vw);
+  }
+
+  .desktop-accordion__icon {
+    width: calc(15 / 1440 * 100vw);
+    height: calc(8 / 1440 * 100vw);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: transform 0.3s ease; /* Animation for rotation */
+  }
+
+  .desktop-accordion.desktop-open .desktop-accordion__icon {
+    transform: rotate(180deg);
+  }
+
+  .desktop-accordion__icon-svg--lg {
+    display: none;
+  }
+
+  /* --- ANIMATION UPDATES START --- */
+  .desktop-accordion__content {
+    /* Grid Transition */
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-out;
+    overflow: hidden;
+    padding: 0; /* Move padding to inner to prevent jump */
+    
+    font-family: "Stack Sans Text";
+    font-weight: 300;
+    font-size: calc(10 / 1440 * 100vw);
+    line-height: calc(13 / 1440 * 100vw);
+  }
+
+  .desktop-accordion.desktop-open .desktop-accordion__content {
+    grid-template-rows: 1fr;
+  }
+
+  .desktop-accordion__wrapper {
+    min-height: 0;
+  }
+
+  .desktop-accordion__inner {
+    padding: 0 0 calc(18 / 1440 * 100vw);
+  }
+  /* --- ANIMATION UPDATES END --- */
+
+  /* Responsive Design */
+  @media (min-width: 1024px) {
+    .desktop-faq {
+      margin-top: calc(72 / 1440 * 100vw);
+      margin-bottom: calc(115.2 / 1440 * 100vw);
+    }
+    
+    .desktop-faq__title {
+      font-size: calc(24 / 1440 * 100vw);
+      line-height: calc(31 / 1440 * 100vw);
+      margin-bottom: calc(20 / 1440 * 100vw);
+    }
+    
+    .desktop-accordion__header {
+      font-size: calc(18 / 1440 * 100vw);
+      line-height: calc(28 / 1440 * 100vw);
+      padding: calc(20 / 1440 * 100vw) 0;
+    }
+
+    /* Padding moved to inner */
+    .desktop-accordion__inner {
+      font-size: calc(16 / 1440 * 100vw);
+      line-height: calc(28 / 1440 * 100vw);
+    }
+
+    .desktop-accordion__icon {
+      width: calc(29 / 1440 * 100vw);
+      height: calc(16 / 1440 * 100vw);
+      justify-content: flex-end;
+    }
+
+    .desktop-accordion__icon-svg--sm {
+      display: none;
+    }
+
+    .desktop-accordion__icon-svg--lg {
+      display: block;
+    }
+  }
+
+  /* Tablet Styles (768px - 1024px) - Proportional Scaling */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    /* Use 1024px as base for tablet to maintain proportional scaling */
+    .desktop-faq {
+      margin-top: calc(50 / 1024 * 100vw);
+      margin-bottom: calc(80 / 1024 * 100vw);
+      padding: 0 4%;
+      gap: calc(20 / 1024 * 100vw);
+    }
+
+    .desktop-faq__title {
+      font-size: calc(20 / 1024 * 100vw);
+      line-height: calc(28 / 1024 * 100vw);
+      margin-bottom: calc(18 / 1024 * 100vw);
+    }
+
+    .desktop-faq__chips {
+      gap: calc(8 / 1024 * 100vw);
+      margin-bottom: calc(18 / 1024 * 100vw);
+    }
+
+    .desktop-faq__chip {
+      padding: calc(5.5 / 1024 * 100vw) calc(14 / 1024 * 100vw);
+      font-size: calc(11.5 / 1024 * 100vw);
+      line-height: calc(15 / 1024 * 100vw);
+      border-radius: calc(13 / 1024 * 100vw);
+    }
+
+    .desktop-faq__chip--all {
+      border-radius: calc(18 / 1024 * 100vw);
+    }
+
+    .desktop-accordion {
+      border-bottom: calc(0.8 / 1024 * 100vw) solid #e3e3e3;
+    }
+
+    .desktop-accordion__header {
+      font-size: calc(15 / 1024 * 100vw);
+      line-height: calc(24 / 1024 * 100vw);
+      padding: calc(18 / 1024 * 100vw) 0;
+    }
+
+    .desktop-accordion__question {
+      padding-right: calc(18 / 1024 * 100vw);
+    }
+
+    /* Padding moved to inner */
+    .desktop-accordion__inner {
+      font-size: calc(14 / 1024 * 100vw);
+      line-height: calc(24 / 1024 * 100vw);
+      padding: 0 0 calc(18 / 1024 * 100vw);
+    }
+
+    .desktop-accordion__icon {
+      width: calc(24 / 1024 * 100vw);
+      height: calc(13 / 1024 * 100vw);
+    }
+
+    .desktop-accordion__icon-svg--sm {
+      display: block;
+    }
+
+    .desktop-accordion__icon-svg--lg {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .desktop-faq {
+      padding: 0 calc(16 / 1440 * 100vw);
+      gap: calc(20 / 1440 * 100vw);
+      margin: calc(20 / 1440 * 100vw) auto calc(30 / 1440 * 100vw) auto;
+    }
+
+    .desktop-faq__chips {
+      gap: calc(8 / 1440 * 100vw);
+      margin-bottom: calc(16 / 1440 * 100vw);
+    }
+
+    .desktop-faq__chip {
+      padding: calc(5 / 1440 * 100vw) calc(12 / 1440 * 100vw);
+      font-size: calc(11 / 1440 * 100vw);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .desktop-faq {
+      padding: 0 calc(12 / 1440 * 100vw);
+    }
+
+    .desktop-accordion__header {
+      padding: calc(14 / 1440 * 100vw) 0;
+    }
+
+    /* Padding moved to inner */
+    .desktop-accordion__inner {
+      padding: 0 0 calc(14 / 1440 * 100vw);
+    }
+  }
+</style>
+
+<div class="desktop-faq">
+  <div class="desktop-faq__title">[ FAQ's ]</div>
+
+  <div class="desktop-faq__chips">
+    <button class="desktop-faq__chip desktop-faq__chip--all desktop-is-active" data-category="all">all</button>
+    <button class="desktop-faq__chip" data-category="charging">charging</button>
+    <button class="desktop-faq__chip" data-category="compatibility">compatibility</button>
+    <button class="desktop-faq__chip" data-category="features">features</button>
+    <button class="desktop-faq__chip" data-category="warranty">warranty</button>
+  </div>
+
+  <div class="desktop-faq__list">
+    <article class="desktop-accordion" data-category="charging">
+      <button class="desktop-accordion__header">
+        <span class="desktop-accordion__question">How many times can the powerbank charge my smartphone and other devices?</span>
+        <span aria-hidden="true" class="desktop-accordion__icon">
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+      </button>
+      <div class="desktop-accordion__content">
+        <div class="desktop-accordion__wrapper">
+          <div class="desktop-accordion__inner">
+            ~3 charges for a 4000 mAh phone<br><br>
+            Earbuds, watches, and smaller accessories get multiple top-ups.<br><br>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="desktop-accordion" data-category="charging">
+      <button class="desktop-accordion__header">
+        <span class="desktop-accordion__question">How many devices can I charge at the same time?</span>
+        <span aria-hidden="true" class="desktop-accordion__icon">
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+      </button>
+      <div class="desktop-accordion__content">
+        <div class="desktop-accordion__wrapper">
+          <div class="desktop-accordion__inner">
+            Up to four.<br><br>
+            Yes — your phone, your buds, your tablet, and your friend's always-dying phone. Everybody eats.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="desktop-accordion" data-category="charging">
+      <button class="desktop-accordion__header">
+        <span class="desktop-accordion__question">How long does it take to fully charge Scoop?</span>
+        <span aria-hidden="true" class="desktop-accordion__icon">
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+      </button>
+      <div class="desktop-accordion__content">
+        <div class="desktop-accordion__wrapper">
+          <div class="desktop-accordion__inner">
+            10,000 mAh: ~3h 50m (± 20 mins)<br><br>
+            20,000 mAh: ~5h 10m (± 20 mins)<br><br>
+            Fast in, fast out. Just the way energy should feel.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="desktop-accordion" data-category="compatibility">
+      <button class="desktop-accordion__header">
+        <span class="desktop-accordion__question">Which devices are compatible with Scoop?</span>
+        <span aria-hidden="true" class="desktop-accordion__icon">
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+      </button>
+      <div class="desktop-accordion__content">
+        <div class="desktop-accordion__wrapper">
+          <div class="desktop-accordion__inner">
+            Pretty much anything you normally charge:<br><br>
+            phones<br>
+            tablets<br>
+            earbuds<br>
+            speakers<br>
+            handheld consoles<br><br>
+            If it charges via USB-C or USB-A, Scoop has no complaints.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="desktop-accordion" data-category="features">
+      <button class="desktop-accordion__header">
+        <span class="desktop-accordion__question">Does Scoop support fast charging?</span>
+        <span aria-hidden="true" class="desktop-accordion__icon">
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+      </button>
+      <div class="desktop-accordion__content">
+        <div class="desktop-accordion__wrapper">
+          <div class="desktop-accordion__inner">
+            Yes — up to 22.5W fast charging.<br><br>
+            You'll see the little green indicator when it kicks in.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="desktop-accordion" data-category="compatibility">
+      <button class="desktop-accordion__header">
+        <span class="desktop-accordion__question">Does it support both Apple and Android?</span>
+        <span aria-hidden="true" class="desktop-accordion__icon">
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+      </button>
+      <div class="desktop-accordion__content">
+        <div class="desktop-accordion__wrapper">
+          <div class="desktop-accordion__inner">
+            Absolutely.<br><br>
+            Scoop has USB-C + Lightning built in, so you're covered no matter what you use.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="desktop-accordion" data-category="features">
+      <button class="desktop-accordion__header">
+        <span class="desktop-accordion__question">Does Scoop support pass-through charging?</span>
+        <span aria-hidden="true" class="desktop-accordion__icon">
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+      </button>
+      <div class="desktop-accordion__content">
+        <div class="desktop-accordion__wrapper">
+          <div class="desktop-accordion__inner">
+            Yes, Scoop can charge your devices while charging itself.<br><br>
+            Multitasking — but make it efficient.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="desktop-accordion" data-category="warranty">
+      <button class="desktop-accordion__header">
+        <span class="desktop-accordion__question">What's the warranty period?</span>
+        <span aria-hidden="true" class="desktop-accordion__icon">
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+      </button>
+      <div class="desktop-accordion__content">
+        <div class="desktop-accordion__wrapper">
+          <div class="desktop-accordion__inner">
+            1 year.<br><br>
+            Consider it a year-long safety blanket.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="desktop-accordion" data-category="warranty">
+      <button class="desktop-accordion__header">
+        <span class="desktop-accordion__question">What does the warranty cover, and how do I claim service?</span>
+        <span aria-hidden="true" class="desktop-accordion__icon">
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="desktop-accordion__icon-svg desktop-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+      </button>
+      <div class="desktop-accordion__content">
+        <div class="desktop-accordion__wrapper">
+          <div class="desktop-accordion__inner">
+            It covers manufacturing and functional defects — basically anything that shouldn't happen, but might.<br><br>
+            Just reach out to our support team with your order details.<br><br>
+            We'll sort it out without the drama.
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<script>
+  (function() {
+    function initFAQ() {
+      const accordionHeaders = document.querySelectorAll(".desktop-accordion__header");
+      const faqChips = document.querySelectorAll(".desktop-faq__chip");
+      const faqItems = document.querySelectorAll(".desktop-faq__list .desktop-accordion");
+      const faqContainer = document.querySelector('.desktop-faq');
+
+      // Helper to update color
+      const updateThemeColor = (flavor) => {
+          const safeFlavor = flavor ? flavor.toLowerCase() : 'orange';
+          const colorMap = {
+              'orange': '#FC832C',
+              'blue': '#8BBAD8'
+          };
+          const newColor = colorMap[safeFlavor] || '#FC832C';
+          
+          if(faqContainer) {
+              faqContainer.style.setProperty('--accent-color', newColor);
+          }
+      };
+
+      // 1. LISTEN FOR VARIANT CHANGES (Dynamic Theme Color)
+      window.addEventListener('variantChange', (e) => {
+          if (e.detail && e.detail.flavour) {
+              updateThemeColor(e.detail.flavour);
+          }
+      });
+
+      // 2. CHECK URL ON LOAD
+      const params = new URLSearchParams(window.location.search);
+      const urlVariantId = params.get('variant');
+      
+      // Check against ALL Blue Variant IDs (10k & 20k)
+      if (urlVariantId === '51120630038849' || urlVariantId === '51120630006081') {
+          updateThemeColor('blue');
+      } else {
+          // Default is Orange (covers Orange IDs and fallback)
+          updateThemeColor('orange');
+      }
+
+      // 3. ACCORDION LOGIC
+      accordionHeaders.forEach((button) => {
+        button.addEventListener("click", () => {
+          const parent = button.closest(".desktop-accordion");
+          const isOpen = parent.classList.contains("desktop-open");
+
+          // Close all other accordions first (Exclusive Accordion Logic)
+          faqItems.forEach((item) => {
+            if (item !== parent) {
+              item.classList.remove("desktop-open");
+            }
+          });
+
+          // Toggle current
+          if (isOpen) {
+            parent.classList.remove("desktop-open");
+          } else {
+            parent.classList.add("desktop-open");
+          }
+        });
+      });
+
+      // 4. FILTER LOGIC
+      const applyFilter = (category) => {
+        faqItems.forEach((item) => {
+          if (!category || category === "all" || item.dataset.category === category) {
+            item.classList.remove("desktop-is-hidden");
+          } else {
+            item.classList.add("desktop-is-hidden");
+            // Also close the item if it's hidden to reset state
+            item.classList.remove("desktop-open"); 
+          }
+        });
+      };
+
+      const setActiveChip = (activeChip) => {
+        faqChips.forEach((chip) => {
+          chip.classList.toggle("desktop-is-active", chip === activeChip);
+        });
+      };
+
+      faqChips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const category = chip.dataset.category || "all";
+          setActiveChip(chip);
+          applyFilter(category);
+        });
+      });
+
+      const defaultChip = document.querySelector('.desktop-faq__chip[data-category="all"]');
+      if (defaultChip) {
+        setActiveChip(defaultChip);
+        applyFilter("all");
+      } else {
+        applyFilter("all");
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initFAQ);
+    } else {
+      initFAQ();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Desk FAQ",
+  "class": "desktop-only",  
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,234 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
+<style>
+    @font-face {
+        font-family: 'Suisse Intl';
+        src: url('https://res.cloudinary.com/dadz5dzth/raw/upload/v1765092688/fonnts.com-Suisse_Intl_Regular_b8q6gk.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .fastcharge-main-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        background-color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        min-height: calc(850 / 1440 * 100vw);
+        padding: 5% 2% 0% 5%;
+        gap: calc(100 / 1440 * 100vw);
+        justify-content: space-between;
+        margin-top: calc(-235 / 1440 * 100vw);
+        z-index: -3;
+    }
+
+    .fastcharge-content-section {
+        width: 26%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+        margin-top: calc(60 / 1440 * 100vw);
+    }
+
+    .fastcharge-image-section {
+        width: 55%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: calc(40 / 1440 * 100vw);
+        position: relative;
+        overflow: visible;
+    }
+
+    .fastcharge-image-section img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+        position: relative;
+        z-index: 1;
+        transform: scale(2.4) translate(calc(30 / 1440 * 100vw), calc(2 / 1440 * 100vw));
+        /* Added Transition for smooth image swap */
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .fastcharge-headline {
+        font-family: 'Stack Sans Headline', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: calc(36 / 1440 * 100vw);
+        line-height: calc(35 / 1440 * 100vw);
+        display: flex;
+        align-items: center;
+        color: #000000;
+        margin-bottom: calc(2 / 1440 * 100vw);
+    }
+
+    .fastcharge-sub-headline {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(24 / 1440 * 100vw);
+        line-height: calc(38 / 1440 * 100vw);
+        
+        /* Initial Color (Orange) - Updated by Main Script */
+        color: #FC832C;
+        
+        margin-bottom: calc(30 / 1440 * 100vw);
+        
+        /* Added Transition for color change */
+        transition: color 0.3s ease;
+    }
+
+    .fastcharge-body-text {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(18 / 1440 * 100vw);
+        line-height: calc(20 / 1440 * 100vw);
+        color: #010101;
+    }
+
+    /* Tablet Styles (768px - 1024px) */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .fastcharge-main-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            background-color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 4% 3% 0% 4%;
+            min-height: calc(600 / 768 * 100vw);
+            gap: calc(60 / 768 * 100vw);
+            justify-content: space-between;
+            margin-top: calc(-200 / 768 * 100vw);
+            z-index: -3;
+        }
+
+        .fastcharge-content-section {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .fastcharge-image-section {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: calc(30 / 768 * 100vw);
+            position: relative;
+            overflow: visible;
+        }
+
+        .fastcharge-image-section img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            position: relative;
+            z-index: 1;
+            transform: scale(2.7) translate(calc(20 / 768 * 100vw), calc(2 / 768 * 100vw));
+        }
+
+        .fastcharge-headline {
+            font-family: 'Stack Sans Headline', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: calc(24 / 768 * 100vw);
+            line-height: calc(24 / 768 * 100vw);
+            display: flex;
+            align-items: center;
+            color: #000000;
+            margin-bottom: calc(2 / 768 * 100vw);
+        }
+
+        .fastcharge-sub-headline {
+            font-family: 'Stack Sans Text', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: calc(14 / 768 * 100vw);
+            line-height: calc(18 / 768 * 100vw);
+            color: #FC832C;
+            margin-bottom: calc(26 / 768 * 100vw);
+        }
+
+        .fastcharge-body-text {
+            font-family: 'Stack Sans Text', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: calc(10 / 768 * 100vw);
+            line-height: calc(12 / 768 * 100vw);
+            color: #010101;
+        }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 767px) {
+        .fastcharge-main-container {
+            flex-direction: column;
+            padding: 5% 4%;
+            gap: calc(40 / 1440 * 100vw);
+            min-height: auto;
+        }
+
+        .fastcharge-content-section {
+            width: 100%;
+            margin-top: 0;
+        }
+
+        .fastcharge-image-section {
+            width: 100%;
+            padding: calc(20 / 1440 * 100vw);
+        }
+
+        .fastcharge-image-section img {
+            transform: scale(1.5) translate(calc(10 / 1440 * 100vw), calc(0 / 1440 * 100vw));
+        }
+    }
+</style>
+
+<div class="fastcharge-main-container">
+    <div class="fastcharge-content-section">
+        <h1 class="fastcharge-headline">instant sugar<br>rush</h1>
+        <h2 class="fastcharge-sub-headline">22.5W fast charging</h2>
+        <p class="fastcharge-body-text">
+            For devices that support it, Scoop switches to fast charging with a green indicator that makes the power boost easy to spot.
+        </p>
+    </div>
+    <div class="fastcharge-image-section">
+        <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_fast_charging_new.webp?v=1765535704" alt="Scoop fast charge powerbank">
+    </div>
+</div>
+
+<script>
+    // Logic removed: The global 'pb-ajax-request.liquid' Main Script now controls this section.
+    // It targets:
+    // 1. '.fastcharge-image-section img' -> Updates src based on variant
+    // 2. '.fastcharge-sub-headline' -> Updates color based on variant
+    console.log("Instant Sugar Section Loaded (Controlled by Main Script)");
+</script>
+
+{% schema %}
+{
+  "name": "Desk Instant Sugar",
+  "class": "desktop-only",  
+  "settings": []
+}
+{% endschema %}

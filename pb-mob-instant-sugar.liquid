@@ -1,0 +1,158 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
+<style>
+    @font-face {
+        font-family: 'Suisse Intl';
+        src: url('https://res.cloudinary.com/dadz5dzth/raw/upload/v1765092688/fonnts.com-Suisse_Intl_Regular_b8q6gk.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .mobile-only-fast-main-wrapper {
+        width: 100%;
+        max-width: 100%;
+        background-color: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        padding: calc(60 / 393 * 100vw) calc(20 / 393 * 100vw);
+        gap: calc(20 / 393 * 100vw);
+    }
+
+    .mobile-only-fast-header-block {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .mobile-only-fast-quick-serve {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(14 / 393 * 100vw);
+        line-height: calc(18 / 393 * 100vw);
+        
+        /* Default Color - Updated by Main Script */
+        color: #FC832C;
+        
+        margin-bottom: calc(8 / 393 * 100vw);
+        transition: color 0.3s ease;
+    }
+
+    .mobile-only-fast-instant-rush {
+        font-family: 'Stack Sans Headline', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: calc(30 / 393 * 100vw);
+        line-height: calc(30 / 393 * 100vw);
+        display: flex;
+        align-items: center;
+        color: #000000;
+        margin-bottom: calc(6 /393 * 100vw);
+    }
+
+    .mobile-only-fast-image-block {
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0 calc(20 / 393 * 100vw) 0;
+        margin-left: calc((100vw - 100%) / -2);
+        margin-right: calc((100vw - 100%) / -2);
+        height: calc(600 / 393 * 100vw);
+    }
+
+    .mobile-only-fast-image-block img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transform: scale(2.4) translate(0px, 10px);
+        transition: opacity 0.3s ease;
+    }
+
+    .mobile-only-fast-body-block {
+        width: 100%;
+    }
+
+    .mobile-only-fast-body-text {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(14 / 393 * 100vw);
+        line-height: calc(16 / 393 * 100vw);
+        color: #010101;
+    }
+
+    /* Ensure minimum readable sizes for very small screens */
+    @media (max-width: 320px) {
+        .mobile-only-fast-instant-rush {
+            font-size: max(calc(30 / 393 * 100vw), 24px);
+            line-height: max(calc(30 / 393 * 100vw), 24px);
+        }
+
+        .mobile-only-fast-quick-serve {
+            font-size: max(calc(14 / 393 * 100vw), 12px);
+            line-height: max(calc(18 / 393 * 100vw), 16px);
+        }
+
+        .mobile-only-fast-body-text {
+            font-size: max(calc(14 / 393 * 100vw), 12px);
+            line-height: max(calc(16 / 393 * 100vw), 14px);
+        }
+    }
+
+    /* For larger mobile screens, cap the maximum sizes */
+    @media (min-width: 480px) {
+        .mobile-only-fast-instant-rush {
+            font-size: min(calc(30 / 393 * 100vw), 36px);
+            line-height: min(calc(30 / 393 * 100vw), 36px);
+        }
+
+        .mobile-only-fast-quick-serve {
+            font-size: min(calc(14 / 393 * 100vw), 16px);
+            line-height: min(calc(18 / 393 * 100vw), 20px);
+        }
+
+        .mobile-only-fast-body-text {
+            font-size: min(calc(14 / 393 * 100vw), 16px);
+            line-height: min(calc(16 / 393 * 100vw), 18px);
+        }
+    }
+</style>
+
+<div class="mobile-only-fast-main-wrapper">
+    <div class="mobile-only-fast-header-block">
+        <p class="mobile-only-fast-instant-rush">instant sugar rush</p>
+        <p class="mobile-only-fast-quick-serve">22.5W fast charging</p>
+    </div>
+    <div class="mobile-only-fast-image-block">
+        <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20k_orange_modmod_mod.webp?v=1765558449">
+    </div>
+    <div class="mobile-only-fast-body-block">
+        <p class="mobile-only-fast-body-text">
+            For devices that support it, Scoop switches to fast charging with a green indicator that makes the power boost easy to spot.
+        </p>
+    </div>
+</div>
+
+<script>
+    // Note: The global 'pb-ajax-request.liquid' Main Script handles this section.
+    // It targets:
+    // 1. '.mobile-only-fast-image-block img' -> Updates src based on variant
+    // 2. '.mobile-only-fast-quick-serve' -> Updates text color based on variant
+    console.log("Mobile Fast Charge Section Loaded");
+</script>
+
+{% schema %}
+{
+  "name": "Mobile Instant Sugar",
+  "class": "mobile-only",  
+  "settings": []
+}
+{% endschema %}

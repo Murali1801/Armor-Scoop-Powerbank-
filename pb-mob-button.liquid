@@ -1,0 +1,260 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap"
+    rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+    /* Reset & Base Styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Sticky Bottom Section - Mobile (Always Fixed) */
+    .mobile-sticky-bottom-section {
+        position: fixed;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 32px);
+        max-width: 480px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0px 49px 20px rgba(0, 0, 0, 0.01), 0px 28px 17px rgba(0, 0, 0, 0.03), 0px 12px 12px rgba(0, 0, 0, 0.04), 0px 3px 7px rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(7.5px);
+        -webkit-backdrop-filter: blur(7.5px);
+        border-radius: 35px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 13px;
+        z-index: 9999;
+        margin: 0;
+        right: auto;
+        justify-content: space-between;
+        
+        /* Smooth transition for hiding/showing */
+        transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.4s ease;
+    }
+
+    /* Hidden State */
+    .mobile-sticky-hidden {
+        transform: translateX(-50%) translateY(150%) !important;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .mobile-stock-message {
+        font-family: 'Manrope', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        letter-spacing: -0.02em;
+        color: #878787;
+        display: flex;
+        align-items: center;
+        padding-left: 15px;
+    }
+
+    .mobile-notify-button {
+        background: #010101;
+        border: none;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 24px;
+        gap: 8px;
+        box-shadow: 50px 85px 40px rgba(0, 0, 0, 0.01), 29px 48px 33px rgba(0, 0, 0, 0.02), 13px 22px 25px rgba(0, 0, 0, 0.03), 3px 5px 14px rgba(0, 0, 0, 0.04);
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #FFFFFF;
+        cursor: pointer;
+        flex: none;
+        flex-grow: 0;
+        white-space: nowrap;
+    }
+</style>
+
+<div class="mobile-sticky-bottom-section" id="mobileStickyBottomSection">
+    <div class="mobile-stock-message">Delivers in 3-8 Days</div>
+    <button class="mobile-notify-button" data-variant-id="51115715723585">Buy Now</button>
+</div>
+
+<script>
+    // --- IMMEDIATE FUNCTION DEFINITION ---
+    (function() {
+        console.log("Mobile Snippet: Script loaded.");
+
+        // VARIANTS MAP (All 4 Combinations)
+        const VARIANT_MAP = {
+            orange: {
+                 "10k": "51115715723585",
+                "20k": "51115715756353"
+            },
+            blue: {
+                "10k": "51120630006081",
+                "20k": "51120630038849"
+            }
+        
+        };
+
+        // Store previous function to chain if necessary
+        const prevFn = window.mobileUpdateStickyVariant;
+
+        window.mobileUpdateStickyVariant = function(color, size) {
+            if (typeof prevFn === 'function') {
+                try { prevFn(color, size);
+                } catch (e) { console.error("Error in prevFn:", e); }
+            }
+
+            // Safety Checks
+            if (!color || !size) return;
+            const nColor = String(color).toLowerCase().trim().includes('blue') ? 'blue' : 'orange';
+            const nSize = String(size).toLowerCase().trim().includes('10') ? '10k' : '20k';
+            // Get Correct ID
+            const newId = VARIANT_MAP[nColor][nSize];
+            // 1. Update ID on the Button
+            const btn = document.querySelector('.mobile-notify-button');
+            if (btn && newId) {
+                btn.setAttribute('data-variant-id', newId);
+            }
+
+            // 2. Update Highlight Text Color (If mobile has highlight text)
+            const highlightText = document.querySelector('.mobile-version-highlight');
+            if (highlightText) {
+                highlightText.style.color = (nColor === 'blue') ?
+                '#8BBAD8' : '#FC832C';
+            }
+        };
+    })();
+    // --- MAIN INITIALIZATION & EVENT LISTENERS ---
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // 1. Buy Now Click Logic
+        const btn = document.querySelector('.mobile-notify-button');
+        if (btn) {
+            // Remove old listener if re-initializing
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+
+            newBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Read ID directly from DOM state
+                // UPDATED: Default safety ID to 10k if attribute missing
+                const currentId = this.getAttribute('data-variant-id') || "51115715723585";
+           
+                const safeId = parseInt(currentId, 10); // Ensure number for API
+
+                console.log("Mobile Snippet: Buy Now Clicked. Variant ID:", safeId);
+
+                // --- OPTION A: THEME FUNCTION (Preferred) ---
+                if (typeof window.onBuyNowClick === 'function') {
+                   
+                    const productObj = [{
+                        id: safeId,
+                        quantity: 1,
+                        properties: {}
+                    }];
+                    window.onBuyNowClick(this, false, productObj);
+                } 
+                // --- OPTION B: STANDARD SHOPIFY FALLBACK (Robustness) ---
+                else {
+                    console.warn("onBuyNowClick missing. Using standard Shopify fetch.");
+                    // Visual Feedback
+                    const originalText = this.textContent;
+                    this.textContent = "Adding...";
+                    
+                    const formData = {
+                        'items': [{
+                            'id': safeId,
+                            'quantity': 1
+           
+                         }]
+                    };
+                    fetch(window.Shopify.routes.root + 'cart/add.js', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                   
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        window.location.href = '/checkout';
+                    })
+         
+                    .catch((error) => {
+                        console.error('Error adding to cart:', error);
+                        this.textContent = originalText;
+                    });
+                }
+            });
+        }
+
+        // 2. Listen for Global Variant Changes
+        window.addEventListener('variantChange', (e) => {
+            if (e.detail && e.detail.flavour && e.detail.size) {
+                window.mobileUpdateStickyVariant(e.detail.flavour, e.detail.size);
+            }
+        });
+        // 3. Sync on Load (From URL)
+        const params = new URLSearchParams(window.location.search);
+        const urlId = params.get('variant');
+        
+        // Reverse Lookup Map for Init
+        const ID_TO_VARIANT = {
+            '51120630038849': {c: 'blue', s: '20k'},
+            '51120630006081': {c: 'blue', s: '10k'},
+            '51115715756353': {c: 'orange', s: '20k'},
+            '51115715723585': {c: 'orange', s: '10k'}
+        };
+        if (urlId && ID_TO_VARIANT[urlId]) {
+            const v = ID_TO_VARIANT[urlId];
+            window.mobileUpdateStickyVariant(v.c, v.s);
+        } else {
+            // UPDATED: Default is now 10k to match main script
+            window.mobileUpdateStickyVariant('orange', '10k');
+        }
+
+        // 4. Footer Collision Detection
+        const stickyContainer = document.querySelector('.mobile-sticky-bottom-section');
+        const footer = document.querySelector('footer, .site-footer, .footer, #footer, [class*="footer-section"], .shopify-section-footer');
+
+        if (stickyContainer && footer) {
+            const checkFooterCollision = () => {
+                const stickyRect = stickyContainer.getBoundingClientRect();
+                const footerRect = footer.getBoundingClientRect();
+                
+                if (footerRect.top < stickyRect.bottom) {
+                    stickyContainer.classList.add('mobile-sticky-hidden');
+                } else {
+                    stickyContainer.classList.remove('mobile-sticky-hidden');
+                }
+            };
+
+            window.addEventListener('scroll', checkFooterCollision, { passive: true });
+            window.addEventListener('resize', checkFooterCollision, { passive: true });
+            checkFooterCollision();
+        }
+    });
+</script>
+
+{% schema %}
+{
+  "name": "Mobile Button",
+  "class": "mobile-only z-index-6",  
+  "settings": []
+}
+{% endschema %}

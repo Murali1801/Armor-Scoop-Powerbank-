@@ -1,0 +1,438 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap"
+    rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+    @font-face {
+        font-family: 'Hey Fun';
+        src: url('https://cdn.shopify.com/s/files/1/0967/6039/8106/files/Hey_Fun.ttf?v=1765177736') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+    
+    /* --- ANTI-FLASH: Hide specific elements while variant loads --- */
+    html.js-variant-loading .desktop-version-highlight,
+    html.js-variant-loading .desktop-notify-button {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    /* Text Container Styles */
+    .desktop-main-wrapper .desktop-text-container {
+        padding: calc(50 / 1440 * 100vw) 0px calc(20 / 1440 * 100vw) 0px;
+        display: flex;
+        flex-direction: column;
+        gap: calc(2 / 1440 * 100vw);
+    }
+
+    .desktop-main-wrapper .desktop-category-text {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(12 / 1440 * 100vw);
+        line-height: 0px;
+        color: #000;
+        letter-spacing: calc(0.5 / 1440 * 100vw);
+    }
+
+    .desktop-main-wrapper .desktop-product-title {
+        font-family: 'Stack Sans Notch', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: calc(48 / 1440 * 100vw);
+        line-height: calc(62 / 1440 * 100vw);
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.02em;
+        color: #000000;
+        gap: calc(8 / 1440 * 100vw);
+    }
+
+    /* DEFAULT COLOR: REMOVED HARDCODING (Handled by JS or defaults to Orange if JS fails) */
+    .desktop-main-wrapper .desktop-version-highlight {
+        color: #FC832C; 
+        font-family: 'Hey Fun', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(48 / 1440 * 100vw);
+        line-height: calc(62 / 1440 * 100vw);
+        letter-spacing: -0.02em;
+        transition: color 0.1s ease; /* Faster transition for snapping */
+    }
+
+    /* Sticky Bottom Section - Default (Mobile & Global Base) */
+    .desktop-main-wrapper .desktop-sticky-bottom-section,
+    #desktopStickyBottomSection {
+        position: fixed !important;
+        /* Force fixed position always */
+        bottom: calc(8 / 1440 * 100vw);
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - calc(32 / 1440 * 100vw));
+        max-width: calc(480 / 1440 * 100vw);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0px calc(49 / 1440 * 100vw) calc(20 / 1440 * 100vw) rgba(0, 0, 0, 0.01), 0px calc(28 / 1440 * 100vw) calc(17 / 1440 * 100vw) rgba(0, 0, 0, 0.03), 0px calc(12 / 1440 * 100vw) calc(12 / 1440 * 100vw) rgba(0, 0, 0, 0.04), 0px calc(3 / 1440 * 100vw) calc(7 / 1440 * 100vw) rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(calc(7.5 / 1440 * 100vw));
+        border-radius: calc(35 / 1440 * 100vw);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: calc(13 / 1440 * 100vw);
+        z-index: 99999 !important; /* Extremely high z-index to overlap everything */
+        margin: 0;
+        right: auto;
+        justify-content: space-between;
+        opacity: 1;
+        visibility: visible;
+        
+        /* Smooth transition for hiding/showing */
+        transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.4s ease;
+    }
+
+    /* Hidden State (Slides down) */
+    .desktop-sticky-hidden {
+        transform: translateY(150%) !important;
+        opacity: 0 !important;
+        pointer-events: none;
+    }
+
+    .desktop-main-wrapper .desktop-stock-message,
+    #desktopStickyBottomSection .desktop-stock-message {
+        font-family: 'Manrope', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(16 / 1440 * 100vw);
+        line-height: calc(22 / 1440 * 100vw);
+        letter-spacing: -0.02em;
+        color: #878787;
+        display: flex;
+        align-items: center;
+        padding: 0 0 0 calc(20 / 1440 * 100vw);
+        margin-right: calc(15 / 1440 * 100vw);
+    }
+
+    .desktop-main-wrapper .desktop-notify-button,
+    #desktopStickyBottomSection .desktop-notify-button {
+        background: #010101;
+        border: none;
+        border-radius: calc(30 / 1440 * 100vw);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: calc(12 / 1440 * 100vw) calc(30 / 1440 * 100vw);
+        gap: calc(8.68 / 1440 * 100vw);
+        box-shadow: calc(50.6614 / 1440 * 100vw) calc(85.4007 / 1440 * 100vw) calc(39.8054 / 1440 * 100vw) rgba(0, 0, 0, 0.01), calc(28.9494 / 1440 * 100vw) calc(48.4902 / 1440 * 100vw) calc(33.2918 / 1440 * 100vw) rgba(0, 0, 0, 0.02), calc(13.0272 / 1440 * 100vw) calc(21.712 / 1440 * 100vw) calc(24.607 / 1440 * 100vw) rgba(0, 0, 0, 0.03), calc(2.89494 / 1440 * 100vw) calc(5.06614 / 1440 * 100vw) calc(13.751 / 1440 * 100vw) rgba(0, 0, 0, 0.04);
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(15 / 1440 * 100vw);
+        line-height: calc(18 / 1440 * 100vw);
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #FFFFFF;
+        cursor: pointer;
+        flex: none;
+        flex-grow: 0;
+        transition: background-color 0.3s;
+    }
+
+    .desktop-main-wrapper .desktop-notify-button:hover,
+    #desktopStickyBottomSection .desktop-notify-button:hover {
+        background: #333;
+    }
+
+    /* Desktop Text Container Styles */
+    @media (min-width: 768px) {
+        /* Text container - bottom left */
+        .desktop-main-wrapper .desktop-text-container {
+            grid-column: 1;
+            grid-row: 2;
+            padding: 10%;
+            align-self: start;
+            margin-top: calc(-520 / 1440 * 100vw);
+            position: relative;
+            z-index: 2;
+            gap: 0px;
+        }
+
+        .desktop-main-wrapper .desktop-category-text {
+            font-size: calc(16 / 1440 * 100vw);
+            line-height: 0px;
+            margin-bottom: calc(-16 / 1440 * 100vw);
+        }
+
+        .desktop-main-wrapper .desktop-product-title {
+            font-size: calc(66 / 1440 * 100vw);
+            line-height: calc(104 / 1440 * 100vw);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .desktop-main-wrapper .desktop-version-highlight {
+            font-size: calc(66 / 1440 * 100vw);
+            line-height: calc(104 / 1440 * 100vw);
+        }
+
+        /* Tablet Text Container Styles */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .desktop-main-wrapper .desktop-text-container {
+                padding: 8%;
+                margin-top: calc(-320 / 1024 * 100vw);
+            }
+
+            .desktop-main-wrapper .desktop-category-text {
+                font-size: calc(14 / 1024 * 100vw);
+                line-height: 0px;
+                margin-bottom: calc(-14 / 1024 * 100vw);
+            }
+
+            .desktop-main-wrapper .desktop-product-title {
+                font-size: calc(56 / 1024 * 100vw);
+                line-height: calc(88 / 1024 * 100vw);
+            }
+
+            .desktop-main-wrapper .desktop-version-highlight {
+                font-size: calc(56 / 1024 * 100vw);
+                line-height: calc(88 / 1024 * 100vw);
+            }
+        }
+    }
+
+    /* Desktop Styles */
+    @media (min-width: 768px) {
+        /* Sticky Button Base Styles - FIXED BOTTOM RIGHT */
+        .desktop-main-wrapper .desktop-sticky-bottom-section,
+        #desktopStickyBottomSection {
+            width: auto;
+            max-width: none;
+            min-width: auto;
+            margin: 0;
+            
+            /* Always fixed at bottom right */
+            position: fixed !important;
+            right: calc(20 / 1440 * 100vw) !important;
+            bottom: calc(20 / 1440 * 100vw) !important;
+            top: auto !important;
+            left: auto !important;
+            transform: none !important;
+            opacity: 1;
+            visibility: visible;
+            z-index: 99999 !important;
+        }
+
+        /* Tablet Styles (768px - 1024px) - Proportional Scaling */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .desktop-main-wrapper .desktop-sticky-bottom-section,
+            #desktopStickyBottomSection {
+                right: calc(20 / 1024 * 100vw) !important;
+                bottom: calc(20 / 1024 * 100vw) !important;
+            }
+
+            .desktop-main-wrapper .desktop-stock-message,
+            #desktopStickyBottomSection .desktop-stock-message {
+                font-size: calc(14 / 1024 * 100vw);
+                line-height: calc(20 / 1024 * 100vw);
+                padding: 0 0 0 calc(18 / 1024 * 100vw);
+                margin-right: calc(30 / 1024 * 100vw);
+            }
+
+            .desktop-main-wrapper .desktop-notify-button,
+            #desktopStickyBottomSection .desktop-notify-button {
+                padding: calc(10 / 1024 * 100vw) calc(25 / 1024 * 100vw);
+                font-size: calc(13 / 1024 * 100vw);
+                line-height: calc(16 / 1024 * 100vw);
+            }
+        }
+
+        /* Large Screen adjustment */
+        @media (min-width: 1440px) {
+            .desktop-main-wrapper .desktop-sticky-bottom-section,
+            #desktopStickyBottomSection {
+                right: calc(20 / 1440 * 100vw) !important;
+                bottom: calc(20 / 1440 * 100vw) !important;
+            }
+        }
+    }
+</style>
+
+<div class="desktop-text-container" id="desktopTargetTextContainer" style="display: none;">
+    <div class="desktop-category-text">[ powerbank ]</div>
+    <div class="desktop-product-title" id="desktopVersionTitle">
+        <span class="desktop-version-highlight">scoop</span>
+    </div>
+</div>
+
+<div class="desktop-sticky-bottom-section" id="desktopStickyBottomSection">
+    <div class="desktop-stock-message">Delivers in 3-8 Days</div>
+    <button class="desktop-notify-button" data-variant-id="">Buy Now</button>
+</div>
+
+<script>
+    // --- 1. FUNCTION DEFINITION (Immediate) ---
+    (function() {
+        console.log("Desktop Snippet: Script loaded.");
+
+        const VARIANT_MAP = {
+            orange: { "10k": "51115715723585", "20k": "51115715756353" },
+            blue: { "10k": "51120630006081", "20k": "51120630038849" }
+        };
+        
+        // Safety chain
+        const prevFn = window.desktopUpdateStickyVariant;
+        
+        window.desktopUpdateStickyVariant = function(color, size) {
+            if (typeof prevFn === 'function') {
+                try { prevFn(color, size); } catch (e) { console.error("Error in prevFn:", e); }
+            }
+
+            if (!color || !size) return;
+            const nColor = String(color).toLowerCase().trim().includes('blue') ? 'blue' : 'orange';
+            const nSize = String(size).toLowerCase().trim().includes('10') ? '10k' : '20k';
+            const newId = VARIANT_MAP[nColor][nSize];
+
+            // 1. Update ID
+            const btn = document.querySelector('.desktop-notify-button');
+            if (btn && newId) {
+                btn.setAttribute('data-variant-id', newId);
+            }
+
+            // 2. Update Highlight Text Color (Snap)
+            const highlightText = document.querySelector('.desktop-version-highlight');
+            if (highlightText) {
+                highlightText.style.color = (nColor === 'blue') ? '#8BBAD8' : '#FC832C';
+            }
+        };
+    })();
+
+    // --- 2. FAST INIT (Before DOMContentLoaded) ---
+    // This runs immediately as the browser parses the script.
+    (function() {
+        const params = new URLSearchParams(window.location.search);
+        const urlId = params.get('variant');
+        
+        const ID_TO_VARIANT = {
+            '51120630038849': {c: 'blue', s: '20k'},
+            '51120630006081': {c: 'blue', s: '10k'},
+            '51115715756353': {c: 'orange', s: '20k'},
+            '51115715723585': {c: 'orange', s: '10k'}
+        };
+
+        if (urlId && ID_TO_VARIANT[urlId]) {
+            const v = ID_TO_VARIANT[urlId];
+            window.desktopUpdateStickyVariant(v.c, v.s);
+        } else {
+            // Default to Orange/10k if no Variant ID found
+            window.desktopUpdateStickyVariant('orange', '10k');
+        }
+    })();
+
+    // --- 3. STANDARD LISTENERS (Wait for Page Load) ---
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // Buy Now Logic
+        const btn = document.querySelector('.desktop-notify-button');
+        if (btn) {
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+
+            newBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const currentId = this.getAttribute('data-variant-id') || "51115715723585";
+                const safeId = parseInt(currentId, 10);
+
+                console.log("Desktop Snippet: Buy Now Clicked. Variant ID:", safeId);
+
+                if (typeof window.onBuyNowClick === 'function') {
+                    const productObj = [{ id: safeId, quantity: 1, properties: {} }];
+                    window.onBuyNowClick(this, false, productObj);
+                } else {
+                    console.warn("onBuyNowClick missing. Using standard Shopify fetch.");
+                    const originalText = this.textContent;
+                    this.textContent = "Adding...";
+                    const formData = { 'items': [{ 'id': safeId, 'quantity': 1 }] };
+                    fetch(window.Shopify.routes.root + 'cart/add.js', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => response.json())
+                    .then(data => { window.location.href = '/checkout'; })
+                    .catch((error) => {
+                        console.error('Error adding to cart:', error);
+                        this.textContent = originalText;
+                    });
+                }
+            });
+        }
+
+        // Global Event Listener
+        window.addEventListener('variantChange', (e) => {
+            if (e.detail && e.detail.flavour && e.detail.size) {
+                window.desktopUpdateStickyVariant(e.detail.flavour, e.detail.size);
+            }
+        });
+
+        // Layout Adjustments
+        desktopInitComponentsWithRetry();
+    });
+
+    // --- HELPER FUNCTIONS ---
+    function desktopInitComponentsWithRetry() {
+        desktopPositionTextContainer();
+        const stickyContainer = document.getElementById('desktopStickyBottomSection');
+        const footer = document.querySelector('footer, .site-footer, .footer, #footer, [class*="footer-section"], .shopify-section-footer');
+        if (stickyContainer && footer) {
+            checkDesktopFooterCollision();
+            window.addEventListener('scroll', checkDesktopFooterCollision, { passive: true });
+            window.addEventListener('resize', checkDesktopFooterCollision, { passive: true });
+        }
+    }
+
+    function desktopPositionTextContainer() {
+        const textContainer = document.getElementById('desktopTargetTextContainer');
+        const firstSection = document.querySelector('.desktop-main-wrapper .desktop-primary-section');
+        
+        if (!textContainer || !firstSection) {
+            requestAnimationFrame(() => {
+                setTimeout(desktopPositionTextContainer, 100);
+            });
+            return;
+        }
+        
+        if (textContainer.parentElement !== firstSection) {
+            firstSection.appendChild(textContainer);
+            textContainer.style.display = 'flex';
+        }
+    }
+    
+    function checkDesktopFooterCollision() {
+        const stickyContainer = document.getElementById('desktopStickyBottomSection');
+        const footer = document.querySelector('footer, .site-footer, .footer, #footer, [class*="footer-section"], .shopify-section-footer');
+
+        if (stickyContainer && footer) {
+            const stickyRect = stickyContainer.getBoundingClientRect();
+            const footerRect = footer.getBoundingClientRect();
+            
+            if (footerRect.top < stickyRect.bottom) {
+                stickyContainer.classList.add('desktop-sticky-hidden');
+            } else {
+                stickyContainer.classList.remove('desktop-sticky-hidden');
+            }
+        }
+    }
+</script>
+
+{% schema %}
+{
+  "name": "Desk Button",
+  "class": "desktop-only z-index-100",  
+  "settings": []
+}
+{% endschema %}

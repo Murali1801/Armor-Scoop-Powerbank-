@@ -1,0 +1,589 @@
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap" />
+
+<style>
+  :root {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    color: #0b0b0b;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .mobile-faq {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 30px auto 40px auto;
+    max-width: 1440px;
+    
+    /* Dynamic Accent Color Variable (Default: Orange) */
+    --faq-accent-color: #FC832C; 
+    transition: --faq-accent-color 0.3s ease;
+  }
+
+  .mobile-faq__title {
+    font-family: "Stack Sans Text", "Inter", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 31px;
+    color: #000000;
+  }
+
+  .mobile-faq__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .mobile-faq__chip {
+    border: 0.82725px solid #686868;
+    border-radius: 15px;
+    padding: 6px 16px;
+    font-family: "Stack Sans Text", "Inter", sans-serif;
+    font-size: 12.4347px;
+    line-height: 16px;
+    color: #686868;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+
+  .mobile-faq__chip:hover {
+    border-color: #111;
+    background: #f0f0f0;
+  }
+
+  .mobile-faq__chip.mobile-is-active {
+    background: var(--faq-accent-color); /* Updated to use variable */
+    color: #ffffff;
+    border-color: var(--faq-accent-color); /* Updated to use variable */
+  }
+
+  .mobile-faq__chip--all {
+    border-radius: 20px;
+  }
+
+  .mobile-faq__chip--all.mobile-is-active {
+    border: 1.31314px solid #ffffff;
+  }
+
+  .mobile-faq__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .mobile-accordion {
+    border-bottom: 1px solid #e3e3e3;
+    width: 100%;
+  }
+
+  .mobile-accordion:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-accordion.mobile-is-hidden {
+    display: none;
+  }
+
+  .mobile-accordion__header {
+    width: 100%;
+    padding: 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border: none;
+    font-family: "Stack Sans Text";
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .mobile-accordion__question {
+    flex: 1;
+    padding-right: 20px;
+  }
+
+  .mobile-accordion__icon {
+    width: 15px;
+    height: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    /* Added rotation transition */
+  }
+  
+  /* Icon Rotation on Open */
+  .mobile-accordion.mobile-open .mobile-accordion__icon {
+    transform: rotate(180deg);
+  }
+
+  .mobile-accordion__icon-svg--lg {
+    display: none;
+  }
+
+  /* --- ANIMATION UPDATES START --- */
+  .mobile-accordion__content {
+    /* Changed from display: none to grid for transition */
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-out;
+    overflow: hidden;
+    padding: 0;
+    /* Padding moved to inner */
+    
+    font-family: "Stack Sans Text";
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 13px;
+  }
+
+  .mobile-accordion.mobile-open .mobile-accordion__content {
+    grid-template-rows: 1fr;
+  }
+
+  /* Wrapper to allow height transition */
+  .mobile-accordion__wrapper {
+    min-height: 0;
+  }
+
+  /* Inner container for padding */
+  .mobile-accordion__inner {
+    padding: 0 0 18px;
+  }
+  /* --- ANIMATION UPDATES END --- */
+
+  @media (min-width: 1024px) {
+    .mobile-faq {
+      margin-top: 5%;
+      margin-bottom: 8%;
+    }
+    .mobile-faq__chips {
+      margin-bottom: 20px;
+    }
+    .mobile-faq__title {
+      font-size: 24px;
+      line-height: 31px;
+      margin-bottom: 20px;
+    }
+    .mobile-accordion__header {
+      font-size: 18px;
+      line-height: 28px;
+      padding: 20px 0;
+    }
+
+    /* Target inner for font size */
+    .mobile-accordion__inner {
+      font-size: 16px;
+      line-height: 28px;
+    }
+
+    .mobile-accordion__icon {
+      width: 29px;
+      height: 16px;
+      justify-content: flex-end;
+    }
+
+    .mobile-accordion__icon-svg--sm {
+      display: none;
+    }
+
+    .mobile-accordion__icon-svg--lg {
+      display: block;
+    }
+  }
+</style>
+
+<div class="mobile-faq">
+  <div class="mobile-faq__title">[ FAQ's ]</div>
+
+  <div class="mobile-faq__chips">
+    <button class="mobile-faq__chip mobile-faq__chip--all mobile-is-active" data-category="all">all</button>
+    <button class="mobile-faq__chip" data-category="charging">charging</button>
+    <button class="mobile-faq__chip" data-category="compatibility">compatibility</button>
+    <button class="mobile-faq__chip" data-category="features">features</button>
+    <button class="mobile-faq__chip" data-category="warranty">warranty</button>
+  </div>
+
+  <div class="mobile-faq__list">
+    <article class="mobile-accordion" data-category="charging">
+      <button class="mobile-accordion__header">
+        <span class="mobile-accordion__question">How many times can the powerbank charge my smartphone and other devices?</span>
+        <span aria-hidden="true" class="mobile-accordion__icon">
+          
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" 
+              stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+      </button>
+      <div class="mobile-accordion__content">
+        <div class="mobile-accordion__wrapper">
+          <div class="mobile-accordion__inner">
+            ~3 charges for a 4000 mAh phone<br><br>
+            Earbuds, watches, and smaller 
+            accessories get multiple top-ups.<br><br>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="mobile-accordion" data-category="charging">
+      <button class="mobile-accordion__header">
+        <span class="mobile-accordion__question">How many devices can I charge at the same time?</span>
+        <span aria-hidden="true" class="mobile-accordion__icon">
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+          
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+    
+          </svg>
+        </span>
+      </button>
+      <div class="mobile-accordion__content">
+        <div class="mobile-accordion__wrapper">
+          <div class="mobile-accordion__inner">
+            Up to four.<br><br>
+            Yes — your phone, your buds, your tablet, and your friend's always-dying phone.
+            Everybody eats.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="mobile-accordion" data-category="charging">
+      <button class="mobile-accordion__header">
+        <span class="mobile-accordion__question">How long does it take to fully charge Scoop?</span>
+        <span aria-hidden="true" class="mobile-accordion__icon">
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+          
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+      
+          </span>
+      </button>
+      <div class="mobile-accordion__content">
+        <div class="mobile-accordion__wrapper">
+          <div class="mobile-accordion__inner">
+            10,000 mAh: ~3h 50m (± 20 mins)<br><br>
+            20,000 mAh: ~5h 10m (± 20 mins)<br><br>
+            Fast in, fast out.
+            Just the way energy should feel.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="mobile-accordion" data-category="compatibility">
+      <button class="mobile-accordion__header">
+        <span class="mobile-accordion__question">Which devices are compatible with Scoop?</span>
+        <span aria-hidden="true" class="mobile-accordion__icon">
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+        
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+     
+          </span>
+      </button>
+      <div class="mobile-accordion__content">
+        <div class="mobile-accordion__wrapper">
+          <div class="mobile-accordion__inner">
+            Pretty much anything you normally charge:<br><br>
+            phones<br>
+            tablets<br>
+            earbuds<br>
+           
+            speakers<br>
+            handheld consoles<br><br>
+            If it charges via USB-C or USB-A, Scoop has no complaints.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="mobile-accordion" data-category="features">
+      <button class="mobile-accordion__header">
+        <span class="mobile-accordion__question">Does Scoop support fast charging?</span>
+        <span aria-hidden="true" class="mobile-accordion__icon">
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 
+            6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+    
+        </button>
+      <div class="mobile-accordion__content">
+        <div class="mobile-accordion__wrapper">
+          <div class="mobile-accordion__inner">
+            Yes — up to 22.5W fast charging.<br><br>
+            You'll see the little green indicator when it kicks in.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    
+    <article class="mobile-accordion" data-category="compatibility">
+      <button class="mobile-accordion__header">
+        <span class="mobile-accordion__question">Does it support both Apple and Android?</span>
+        <span aria-hidden="true" class="mobile-accordion__icon">
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+      
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+      </button>
+      <div class="mobile-accordion__content">
+        <div class="mobile-accordion__wrapper">
+  
+          <div class="mobile-accordion__inner">
+            Absolutely.<br><br>
+            Scoop has USB-C + Lightning built in, so you're covered no matter what you use.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="mobile-accordion" data-category="features">
+      <button class="mobile-accordion__header">
+        <span class="mobile-accordion__question">Does Scoop support pass-through charging?</span>
+        <span aria-hidden="true" class="mobile-accordion__icon">
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 
+            6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+    
+        </button>
+      <div class="mobile-accordion__content">
+        <div class="mobile-accordion__wrapper">
+          <div class="mobile-accordion__inner">
+            Yes, Scoop can charge your devices while charging itself.<br><br>
+            Multitasking — but make it efficient.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="mobile-accordion" data-category="warranty">
+      <button class="mobile-accordion__header">
+        <span class="mobile-accordion__question">What's the warranty period?</span>
+        <span aria-hidden="true" class="mobile-accordion__icon">
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 
+            0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+        </span>
+     
+        </button>
+      <div class="mobile-accordion__content">
+        <div class="mobile-accordion__wrapper">
+          <div class="mobile-accordion__inner">
+            1 year.<br><br>
+            Consider it a year-long safety blanket.
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="mobile-accordion" data-category="warranty">
+      <button class="mobile-accordion__header">
+        <span class="mobile-accordion__question">What does the warranty cover, and how do I claim service?</span>
+        <span aria-hidden="true" class="mobile-accordion__icon">
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--sm" width="15" height="8" viewBox="0 0 15 8" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+          
+            <path d="M0.5 0.5L7.04221 6.77055L13.5844 0.5" stroke="#686868" stroke-linecap="round" />
+          </svg>
+          <svg class="mobile-accordion__icon-svg mobile-accordion__icon-svg--lg" width="29" height="16" viewBox="0 0 29 16"
+            fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.01172 1.01172L14.2541 13.7042L27.4965 1.01172" stroke="#686868" stroke-width="2.02415"
+              stroke-linecap="round" />
+          </svg>
+      
+          </span>
+      </button>
+      <div class="mobile-accordion__content">
+        <div class="mobile-accordion__wrapper">
+          <div class="mobile-accordion__inner">
+            It covers manufacturing and functional defects — basically anything that shouldn't happen, but might.<br><br>
+            Just reach out to our support team with your order details.<br><br>
+            We'll sort it out without the 
+            drama.
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<script>
+  (function() {
+    function initMobileFAQ() {
+      const accordionHeaders = document.querySelectorAll(".mobile-accordion__header");
+      const faqChips = document.querySelectorAll(".mobile-faq__chip");
+      const faqItems = document.querySelectorAll(".mobile-faq__list .mobile-accordion");
+      const faqContainer = document.querySelector('.mobile-faq');
+
+      // Helper to update color
+      const updateThemeColor = (flavor) => {
+          const safeFlavor = flavor ? flavor.toLowerCase() : 'orange';
+          const colorMap = {
+              'orange': '#FC832C',
+              'blue': '#8BBAD8'
+          };
+          const newColor = colorMap[safeFlavor] || '#FC832C';
+          
+          if(faqContainer) {
+              faqContainer.style.setProperty('--faq-accent-color', newColor);
+          }
+      };
+
+      // 1. LISTEN FOR VARIANT CHANGES (Dynamic Theme Color)
+      window.addEventListener('variantChange', (e) => {
+          if (e.detail && e.detail.flavour) {
+              updateThemeColor(e.detail.flavour);
+          }
+      });
+
+      // 2. CHECK URL ON LOAD
+      const params = new URLSearchParams(window.location.search);
+      const urlVariantId = params.get('variant');
+      
+      // Check against ALL Blue Variant IDs (10k & 20k)
+      if (urlVariantId === '51120630038849' || urlVariantId === '51120630006081') {
+          updateThemeColor('blue');
+      } else {
+          // Default is Orange (covers Orange IDs and fallback)
+          updateThemeColor('orange');
+      }
+
+      // 3. ACCORDION LOGIC
+      accordionHeaders.forEach((button) => {
+        button.addEventListener("click", () => {
+          const parent = button.closest(".mobile-accordion");
+          const isOpen = parent.classList.contains("mobile-open");
+
+          // Close all other accordions first (Exclusive Accordion Logic)
+          faqItems.forEach((item) => {
+            if (item !== parent) {
+              item.classList.remove("mobile-open");
+            }
+          });
+
+          // Toggle current
+          if (isOpen) {
+            parent.classList.remove("mobile-open");
+          } else {
+            parent.classList.add("mobile-open");
+          }
+        });
+      });
+
+      // 4. FILTER LOGIC
+      const applyFilter = (category) => {
+        faqItems.forEach((item) => {
+          if (!category || category === "all" || item.dataset.category === category) {
+            item.classList.remove("mobile-is-hidden");
+          } else {
+            item.classList.add("mobile-is-hidden");
+            // Also close the item if it's hidden to reset state
+            item.classList.remove("mobile-open"); 
+          }
+        });
+      };
+
+      const setActiveChip = (activeChip) => {
+        faqChips.forEach((chip) => {
+          chip.classList.toggle("mobile-is-active", chip === activeChip);
+        });
+      };
+
+      faqChips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          const category = chip.dataset.category || "all";
+          setActiveChip(chip);
+          applyFilter(category);
+        });
+      });
+
+      const defaultChip = document.querySelector('.mobile-faq__chip[data-category="all"]');
+      if (defaultChip) {
+        setActiveChip(defaultChip);
+        applyFilter("all");
+      } else {
+        applyFilter("all");
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initMobileFAQ);
+    } else {
+      initMobileFAQ();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Mobile Faq",
+  "class": "mobile-padding-standard mobile-only",
+  "settings": []
+}
+{% endschema %}

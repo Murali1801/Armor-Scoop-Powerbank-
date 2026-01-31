@@ -1,0 +1,437 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
+<style>
+    @font-face {
+        font-family: 'Suisse Intl';
+        src: url('https://res.cloudinary.com/dadz5dzth/raw/upload/v1765092688/fonnts.com-Suisse_Intl_Regular_b8q6gk.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    /* MAIN WRAPPER: Grid stack */
+    .mnfs-section-wrapper {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
+        background-color: transparent; 
+        margin-bottom: 10%;
+        font-family: 'Stack Sans Text', sans-serif;
+
+        /* Dynamic Accent Color (Default: Orange) */
+        --spec-accent-color: #FC832C;
+        transition: --spec-accent-color 0.3s ease;
+    }
+  
+    /* IMAGE LAYER: Height auto based on SVG aspect ratio */
+    .mnfs-bg-image {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        height: auto; 
+        min-height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        z-index: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+  
+    /* CONTENT LAYER: Controls the spacing/margins */
+    .mnfs-content-layer {
+        grid-column: 1;
+        grid-row: 1;
+        z-index: 1;
+        margin-top: 35%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0px 5% 0px 5%;
+        box-sizing: border-box;
+    }
+  
+    /* HEADINGS */
+    .mnfs-main-title {
+        width: 100%;
+        max-width: 100%; 
+        text-align: left;
+        margin-bottom: calc(32 / 393 * 100vw);
+        margin-left: 5%;
+        font-family: 'Stack Sans Headline', sans-serif;
+        font-weight: 400;
+        font-size: calc(24 / 393 * 100vw);
+        line-height: calc(26 / 393 * 100vw);
+        letter-spacing: calc(0.37 / 393 * 100vw);
+        color: #FFFFFF;
+    }
+  
+    .mnfs-subtitle {
+        width: 100%;
+        max-width: 100%;
+        text-align: left;
+        margin-bottom: calc(25 / 393 * 100vw);
+        margin-left: 5%;
+        font-family: 'Stack Sans Text', sans-serif;
+        font-weight: 400;
+        font-size: calc(14 / 393 * 100vw);
+        line-height: calc(18 / 393 * 100vw);
+        color: #FFFFFF;
+        opacity: 0.9;
+    }
+  
+    /* THE WHITE CARD */
+    .mnfs-card {
+        background: #FFFFFF;
+        border: 1px solid #D5D5D5;
+        box-shadow: 0px calc(18 / 393 * 100vw) calc(36 / 393 * 100vw) calc(-18 / 393 * 100vw) #B2B2B2;
+        border-radius: calc(28 / 393 * 100vw);
+        width: 100%;
+        max-width: 100%;
+        padding: calc(30 / 393 * 100vw) calc(23 / 393 * 100vw) calc(25 / 393 * 100vw) calc(23 / 393 * 100vw);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
+  
+    /* CARD HEADER */
+    .mnfs-card-header {
+        margin-bottom: calc(20 / 393 * 100vw);
+        border-bottom: calc(2 / 393 * 100vw) solid var(--spec-accent-color);
+        padding-bottom: calc(10 / 393 * 100vw);
+    }
+  
+    .mnfs-card-title {
+        font-family: 'Stack Sans Headline', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(22.7 / 393 * 100vw);
+        line-height: calc(27 / 393 * 100vw);
+        letter-spacing: calc(0.3 / 393 * 100vw);
+        color: var(--spec-accent-color);
+        margin: 0 0 calc(4 / 393 * 100vw) 0;
+    }
+  
+    .mnfs-serving-size {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-weight: 400;
+        font-size: calc(10.6 / 393 * 100vw);
+        line-height: calc(15 / 393 * 100vw);
+        letter-spacing: calc(-0.11 / 393 * 100vw);
+        color: #0A0A0A;
+        margin: 0;
+    }
+  
+    /* LIST ITEMS */
+    .mnfs-list-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: calc(12 / 393 * 100vw) 0;
+        border-bottom: calc(1.5 / 393 * 100vw) solid #D1D5DC;
+    }
+  
+    .mnfs-list-item:last-child {
+        border-bottom: none; 
+        padding-bottom: 0;
+    }
+  
+    /* LEFT COL */
+    .mnfs-item-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+  
+    .mnfs-label {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-weight: 400;
+        font-size: calc(12 / 393 * 100vw); 
+        line-height: calc(18 / 393 * 100vw);
+        letter-spacing: calc(-0.24 / 393 * 100vw);
+        color: #101828;
+        margin-bottom: calc(2 / 393 * 100vw);
+    }
+  
+    .mnfs-sublabel {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-weight: 400; 
+        font-size: calc(10.6 / 393 * 100vw);
+        line-height: calc(15 / 393 * 100vw);
+        letter-spacing: calc(-0.11 / 393 * 100vw);
+        color: #6A7282;
+    }
+  
+    /* RIGHT COL */
+    .mnfs-item-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
+    }
+  
+    .mnfs-value {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-weight: 400;
+        font-size: calc(12 / 393 * 100vw);
+        line-height: calc(21 / 393 * 100vw);
+        letter-spacing: calc(-0.34 / 393 * 100vw);
+        color: #010101;
+        margin-bottom: calc(2 / 393 * 100vw);
+        white-space: nowrap;
+    }
+  
+    .mnfs-subvalue {
+        font-family: 'Manrope', sans-serif;
+        font-weight: 400;
+        font-size: calc(10.6 / 393 * 100vw);
+        line-height: calc(15 / 393 * 100vw);
+        letter-spacing: calc(-0.11 / 393 * 100vw);
+        color: #99A1AF;
+    }
+  
+    .mnfs-value span {
+        display: block;
+        font-size: calc(10 / 393 * 100vw);
+        color: #99A1AF;
+        font-weight: 400;
+        font-family: 'Manrope', sans-serif;
+    }
+    
+    .mnfs-row-disclaimer {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 2.43vw 0;
+        margin-top: 0;
+        min-height: 1.65vw;
+        border: none;
+    }
+
+    .mnfs-disclaimer-text {
+        text-align: left;
+        display: flex;
+        align-items: center;
+    }
+
+    .mnfs-disclaimer-text p {
+        font-family: 'Inter', sans-serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: calc(12 / 393 * 100vw);
+        line-height: calc(18 / 393 * 100vw);
+        color: #6A7282;
+        margin: 0;
+        text-align: left;
+    }
+
+    /* Ensure minimum readable sizes for very small screens */
+    @media (max-width: 320px) {
+      .mnfs-main-title {
+        font-size: max(calc(24 / 393 * 100vw), 20px);
+        line-height: max(calc(40 / 393 * 100vw), 32px);
+      }
+
+      .mnfs-subtitle {
+        font-size: max(calc(14 / 393 * 100vw), 12px);
+        line-height: max(calc(18 / 393 * 100vw), 16px);
+      }
+
+      .mnfs-card-title {
+        font-size: max(calc(22.7 / 393 * 100vw), 20px);
+        line-height: max(calc(27 / 393 * 100vw), 24px);
+      }
+
+      .mnfs-label {
+        font-size: max(calc(12 / 393 * 100vw), 11px);
+        line-height: max(calc(18 / 393 * 100vw), 16px);
+      }
+
+      .mnfs-value {
+        font-size: max(calc(15.1 / 393 * 100vw), 14px);
+        line-height: max(calc(21 / 393 * 100vw), 19px);
+      }
+    }
+
+    /* For larger mobile screens, cap the maximum sizes */
+    @media (min-width: 480px) {
+      .mnfs-main-title {
+        font-size: min(calc(24 / 393 * 100vw), 28px);
+        line-height: min(calc(40 / 393 * 100vw), 46px);
+      }
+
+      .mnfs-subtitle {
+        font-size: min(calc(14 / 393 * 100vw), 16px);
+        line-height: min(calc(18 / 393 * 100vw), 20px);
+      }
+
+      .mnfs-card-title {
+        font-size: min(calc(22.7 / 393 * 100vw), 26px);
+        line-height: min(calc(27 / 393 * 100vw), 31px);
+      }
+
+      .mnfs-label {
+        font-size: min(calc(12 / 393 * 100vw), 14px);
+        line-height: min(calc(18 / 393 * 100vw), 20px);
+      }
+
+      .mnfs-value {
+        font-size: min(calc(15.1 / 393 * 100vw), 17px);
+        line-height: min(calc(21 / 393 * 100vw), 23px);
+      }
+    }
+</style>
+  
+<div class="mnfs-section-wrapper">
+    <img 
+      src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/nutritional_facts_tech_specs_base_shape.svg?v=1765042414" 
+      class="mnfs-bg-image" 
+      alt=""
+    >
+    
+    <div class="mnfs-content-layer">
+      <div class="mnfs-main-title">scoop<br>specifications</div>
+  
+      <div class="mnfs-card">
+        
+        <div class="mnfs-card-header">
+          <h3 class="mnfs-card-title">Scoop</h3>
+          <p class="mnfs-serving-size">Serving Size: 1 Powerbank</p>
+        </div>
+  
+        <div class="mnfs-list-item">
+          <div class="mnfs-item-left">
+            <span class="mnfs-label">Battery</span>
+          </div>
+          <div class="mnfs-item-right">
+            <span class="mnfs-value js-battery-value">Li Polymer 20,000 mAh</span>
+          </div>
+        </div>
+  
+        <div class="mnfs-list-item">
+          <div class="mnfs-item-left">
+            <span class="mnfs-label">Fast Charge Output</span>
+          </div>
+          <div class="mnfs-item-right">
+            <span class="mnfs-value">22.5 W</span>
+          </div>
+  
+        </div>
+  
+        <div class="mnfs-list-item">
+          <div class="mnfs-item-left">
+            <span class="mnfs-label">Weight</span>
+          </div>
+          <div class="mnfs-item-right">
+            <span class="mnfs-value js-weight-value">330 g</span>
+          </div>
+        </div>
+  
+        <div class="mnfs-list-item">
+          <div class="mnfs-item-left">
+            <span class="mnfs-label">No.
+            of Ports</span>
+          </div>
+          <div class="mnfs-item-right">
+            <span class="mnfs-value">2 [ Type-C + USB-A ]</span>
+          </div>
+        </div>
+  
+        <div class="mnfs-list-item">
+          <div class="mnfs-item-left">
+            <span class="mnfs-label">5-Layer Protection</span>
+          </div>
+          <div class="mnfs-item-right">
+            <span class="mnfs-value">Short Circuit Protection<br>Overheat Protection<br>Over Voltage Protection<br>Over Current Protection<br>Overload Protection </span>
+          </div>
+        </div>
+  
+        <div class="mnfs-row-disclaimer">
+          <div class="mnfs-disclaimer-text">
+              <p>* Actual ice cream not included.
+              May cause excessive charging and happiness.</p>
+          </div>
+      </div>
+  
+      </div>
+    </div>
+  </div>
+
+<script>
+    (function() {
+        const container = document.querySelector('.mnfs-section-wrapper');
+        const bgImg = document.querySelector('.mnfs-bg-image');
+        
+        if (!container || !bgImg) return;
+
+        // Function to calculate and set height based on image aspect ratio
+        function updateLayoutHeight() {
+            if (bgImg.naturalWidth > 0) {
+                const aspectRatio = bgImg.naturalHeight / bgImg.naturalWidth;
+                const containerWidth = container.offsetWidth;
+                const height = containerWidth * aspectRatio;
+                
+                if (height > 0) {
+                    container.style.minHeight = height + 'px';
+                }
+            }
+        }
+
+        // Initial Load Check
+        if (bgImg.complete) {
+            updateLayoutHeight();
+        } else {
+            bgImg.onload = updateLayoutHeight;
+        }
+
+        // Listen for resize
+        window.addEventListener('resize', updateLayoutHeight);
+
+        // Update Layout when image source changes (triggered by Main Script)
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+                    bgImg.onload = updateLayoutHeight;
+                }
+            });
+        });
+        observer.observe(bgImg, { attributes: true });
+
+        // Helper: Update Accent Color
+        function updateColor(color) {
+            if (color === 'blue') {
+                container.style.setProperty('--spec-accent-color', '#8BBAD8');
+            } else {
+                container.style.setProperty('--spec-accent-color', '#FC832C');
+            }
+        }
+
+        // --- VARIANT CHANGE LISTENER ---
+        window.addEventListener('variantChange', (e) => {
+            if (e.detail && e.detail.flavour) {
+                updateColor(e.detail.flavour.toLowerCase());
+            }
+        });
+
+        // --- INITIALIZATION ---
+        const params = new URLSearchParams(window.location.search);
+        const urlVariantId = params.get('variant');
+        
+        // Check for Blue variants
+        if (urlVariantId === '51120630038849' || urlVariantId === '51120630006081') {
+            updateColor('blue');
+        } else {
+            updateColor('orange');
+        }
+
+    })();
+</script>
+  
+{% schema %}
+{
+  "name": "Mobile Scoop Spec",
+  "class": "mobile-only",  
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,829 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap"
+    rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<style>
+    @font-face {
+        font-family: 'Hey Fun';
+        src: url('https://cdn.shopify.com/s/files/1/0967/6039/8106/files/Hey_Fun.ttf?v=1765177736') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+    
+    /* Base: 1440px viewport */
+    /* --- TYPOGRAPHY SETUP --- */
+    .font-headline { font-family: 'Stack Sans Headline', 'Stack Sans Notch', sans-serif; } 
+    .font-text { font-family: 'Stack Sans Text', sans-serif; }
+    .font-inter { font-family: 'Inter', sans-serif; }
+    .font-mono-custom { font-family: 'Space Mono', monospace; }
+     
+    /* --- FIGMA SHADOWS --- (scaled to viewport) */
+    .desktop-card-shadow {
+        box-shadow: 
+            calc(63 / 1440 * 100vw) calc(199 / 1440 * 100vw) calc(84 / 1440 * 100vw) rgba(255, 255, 255, 0.01), 
+            calc(36 / 1440 * 100vw) calc(112 / 1440 * 100vw) calc(71 / 1440 * 100vw) rgba(255, 255, 255, 0.05), 
+            calc(16 / 1440 * 100vw) calc(50 / 1440 * 100vw) calc(52 / 1440 * 100vw) rgba(255, 255, 255, 0.09), 
+            calc(4 / 1440 * 100vw) calc(12 / 1440 * 100vw) calc(29 / 1440 * 100vw) rgba(255, 255, 255, 0.1);
+    }
+
+    .orange-glow {
+        box-shadow: 
+            0px calc(38.58 / 1440 * 100vw) calc(16.07 / 1440 * 100vw) rgba(252, 131, 44, 0.01),
+            0px calc(22.50 / 1440 * 100vw) calc(12.86 / 1440 * 100vw) rgba(252, 131, 44, 0.05),
+            0px calc(9.64 / 1440 * 100vw) calc(9.64 / 1440 * 100vw) rgba(252, 131, 44, 0.09),
+            0px calc(3.21 / 1440 * 100vw) calc(4.82 / 1440 * 100vw) rgba(252, 131, 44, 0.1);
+    }
+
+    .grey-glow {
+        border: calc(0.5 / 1440 * 100vw) solid rgba(176, 176, 176, 1) !important;
+        box-shadow: 
+            0px calc(37.5208 / 1440 * 100vw) calc(15.5258 / 1440 * 100vw) rgba(176, 176, 176, 0.01),
+            0px calc(20.7011 / 1440 * 100vw) calc(12.9382 / 1440 * 100vw) rgba(176, 176, 176, 0.05),
+            0px calc(9.05674 / 1440 * 100vw) calc(9.05674 / 1440 * 100vw) rgba(176, 176, 176, 0.09),
+            0px calc(2.58764 / 1440 * 100vw) calc(5.17528 / 1440 * 100vw) rgba(176, 176, 176, 0.1);
+    }
+     
+    .orange-glow-frost {
+        border: calc(0.5 / 1440 * 100vw) solid rgba(252, 131, 44, 1) !important;
+        box-shadow: 
+            0px calc(31.0517 / 1440 * 100vw) calc(12.9382 / 1440 * 100vw) rgba(252, 131, 44, 0.01),
+            0px calc(18.1135 / 1440 * 100vw) calc(10.3506 / 1440 * 100vw) rgba(252, 131, 44, 0.05),
+            0px calc(7.76292 / 1440 * 100vw) calc(7.76292 / 1440 * 100vw) rgba(252, 131, 44, 0.09),
+            0px calc(2.58764 / 1440 * 100vw) calc(3.88146 / 1440 * 100vw) rgba(252, 131, 44, 0.1);
+    }
+
+    .blue-glow-frost {
+        border: calc(0.5 / 1440 * 100vw) solid rgba(139, 186, 216, 1) !important;
+        box-shadow: 
+            0px calc(31.0517 / 1440 * 100vw) calc(12.9382 / 1440 * 100vw) rgba(139, 186, 216, 0.01),
+            0px calc(18.1135 / 1440 * 100vw) calc(10.3506 / 1440 * 100vw) rgba(139, 186, 216, 0.05),
+            0px calc(7.76292 / 1440 * 100vw) calc(7.76292 / 1440 * 100vw) rgba(139, 186, 216, 0.09),
+            0px calc(2.58764 / 1440 * 100vw) calc(3.88146 / 1440 * 100vw) rgba(139, 186, 216, 0.1);
+    }
+
+    /* --- ANIMATION HELPERS --- */
+    .price-wrapper {
+        will-change: transform;
+        transform-origin: left center;
+        display: inline-block;
+    }
+    .price-value {
+        font-variant-numeric: tabular-nums;
+        will-change: transform, opacity, filter, color;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: inline-block;
+    }
+    .price-digit {
+        display: inline-block;
+        will-change: transform, opacity;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        font-variant-numeric: tabular-nums;
+    }
+    .price-comma {
+        display: inline-block;
+        will-change: transform, opacity;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+     
+    /* Toggle Slider Styling */
+    #dt-toggle-slider {
+        position: absolute;
+        top: calc(2 / 1440 * 100vw);
+        bottom: calc(2 / 1440 * 100vw);
+        background-color: #252525;
+        border-radius: calc(20 / 1440 * 100vw);
+        width: calc(50% - calc(2 / 1440 * 100vw)); 
+        left: calc(2 / 1440 * 100vw);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* Custom Divider Style */
+    .custom-divider {
+        width: calc(98.21 / 1440 * 100vw);
+        height: 0px;
+        border-top: calc(2.08576 / 1440 * 100vw) solid #FFFFFF;
+        transform: rotate(90deg);
+        flex: none;
+        flex-grow: 0;
+        margin: 0 calc(-48 / 1440 * 100vw);
+    }
+
+    /* Responsive Container */
+    .main-section-wrapper {
+        position: relative;
+        width: 100%;
+        overflow: visible;
+        transform: translateY(-40%);
+        z-index: 4;
+    }
+
+    .content-container {
+        top: max(10%, calc(190 / 1440 * 100vw));
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: 0 5%;
+    }
+
+    .left-column {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .right-column {
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: calc(3 / 1440 * 100vw);
+    }
+
+    /* ============================================
+       TABLET STYLES (768px - 1439px)
+       ============================================ */
+     
+    @media (min-width: 768px) and (max-width: 1439px) {
+        .main-section-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: visible;
+            z-index: 4;
+        }
+
+        .right-column > div:first-child {
+            flex-wrap: nowrap !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+
+        .main-section-wrapper > div:first-child {
+            position: relative;
+            z-index: 0;
+            width: 100%;
+        }
+
+        .main-section-wrapper > div:first-child img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .content-container {
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 0 5%;
+        }
+
+        .left-column {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: calc(-15 / 1440 * 100vw) !important;
+        }
+
+        .right-column {
+            width: 55%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: calc(19 / 1440 * 100vw) !important;
+            position: relative !important;
+            margin-top: calc(-15 / 1440 * 100vw) !important;
+        }
+
+        .left-column h1[style] {
+            font-size: calc(36 / 1440 * 100vw) !important;
+            line-height: calc(48 / 1440 * 100vw) !important;
+            letter-spacing: 0px !important;
+            margin-bottom: calc(0 / 1440 * 100vw) !important;
+        }
+
+        .left-column h2[style] {
+            font-size: calc(24 / 1440 * 100vw) !important;
+            line-height: calc(31 / 1440 * 100vw) !important;
+            margin-bottom: calc(25 / 1440 * 100vw) !important;
+            margin-top: calc(31 / 1440 * 100vw) !important;
+        }
+
+        .left-column p[style] {
+            font-size: calc(18 / 1440 * 100vw) !important;
+            line-height: calc(24 / 1440 * 100vw) !important;
+            max-width: calc(450 / 1440 * 100vw) !important;
+            margin-top: calc(100 / 1440 * 100vw) !important;
+        }
+
+        .right-column > div:first-child[style] {
+            width: 100% !important;
+            height: 100% !important;
+            gap: calc(19 / 1440 * 100vw) !important;
+            margin-bottom: 0 !important;
+            padding: calc(25 / 1440 * 100vw) calc(60 / 1440 * 100vw) calc(25 / 1440 * 100vw) calc(35 / 1440 * 100vw) !important;
+            margin-top: 0 !important;
+            border-radius: calc(28 / 1440 * 100vw) !important;
+            display: flex !important;
+            align-items: center !important;
+            position: relative !important;
+            box-sizing: border-box !important;
+        }
+
+        /* Flavor Card Overrides */
+        .right-column > div:first-child > div:first-child[style] {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            margin-right: calc(0 / 1440 * 100vw) !important;
+        }
+
+        .right-column > div:first-child > div:first-child span[style]:first-of-type {
+            font-size: calc(18 / 1440 * 100vw) !important;
+            line-height: calc(23 / 1440 * 100vw) !important;
+        }
+
+        .right-column > div:first-child > div:first-child span[style]:last-of-type {
+            font-size: calc(12 / 1440 * 100vw) !important;
+            line-height: calc(16 / 1440 * 100vw) !important;
+            width: calc(109.39 / 1440 * 100vw) !important;
+            margin-top: calc(49 / 1440 * 100vw) !important;
+        }
+
+        .right-column > div:first-child a > div[style] {
+            width: calc(84.19 / 1440 * 100vw) !important;
+            height: calc(84.19 / 1440 * 100vw) !important;
+            margin-bottom: calc(13 / 1440 * 100vw) !important;
+        }
+
+        .right-column > div:first-child a svg[style] {
+            width: calc(41.7 / 1440 * 100vw) !important;
+            height: calc(50.5 / 1440 * 100vw) !important;
+        }
+
+        .right-column > div:first-child a span[style]:first-of-type {
+            font-size: calc(12 / 1440 * 100vw) !important;
+            line-height: calc(13 / 1440 * 100vw) !important;
+            margin-bottom: calc(5 / 1440 * 100vw) !important;
+            width: calc(82.74 / 1440 * 100vw) !important;
+        }
+
+        .right-column > div:first-child a span[style]:last-of-type {
+            font-size: calc(8 / 1440 * 100vw) !important;
+            line-height: calc(9 / 1440 * 100vw) !important;
+            width: calc(43 / 1440 * 100vw) !important;
+        }
+
+        /* --- ICONS ROW OVERRIDES (CRITICAL UPDATE) --- */
+        .right-column > div:last-child[style] {
+            display: flex !important;
+            align-items: center !important;
+            gap: calc(56 / 1440 * 100vw) !important;
+            margin-top: calc(35 / 1440 * 100vw) !important;
+            width: 100% !important;
+            padding-right: calc(8 / 1440 * 100vw) !important;
+            padding-left: calc(8 / 1440 * 100vw) !important;
+            box-sizing: border-box !important;
+            overflow: visible !important;
+        }
+
+        .right-column > div:last-child > div {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-evenly !important;
+            flex-grow: 1 !important;
+            gap: calc(24 / 1440 * 100vw) !important;
+        }
+
+        /* Override Icon Image Styles */
+        .right-column > div:last-child img[style] {
+            height: calc(80 / 1440 * 100vw) !important;
+            margin-bottom: calc(8 / 1440 * 100vw) !important;
+            max-width: 100% !important;
+            object-fit: contain !important;
+        }
+
+        /* Override Icon Text Styles */
+        .right-column > div:last-child span[style] {
+            font-size: calc(10.92 / 1440 * 100vw) !important;
+            line-height: calc(15 / 1440 * 100vw) !important;
+            white-space: normal !important;
+            overflow: visible !important;
+        }
+
+        /* --- TOGGLE & PRICE OVERRIDES --- */
+        .capacity-price-controls[style] {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            justify-content: center !important;
+            flex-shrink: 0 !important;
+            min-width: 0 !important;
+            background: transparent !important;
+            border: none !important;
+            padding-left: calc(16 / 1440 * 100vw) !important;
+            gap: calc(10 / 1440 * 100vw) !important;
+        }
+
+        .capacity-price-controls > span[style] {
+            font-size: calc(18 / 1440 * 100vw) !important;
+            line-height: calc(23 / 1440 * 100vw) !important;
+            width: calc(144.96 / 1440 * 100vw) !important;
+            margin-bottom: calc(3 / 1440 * 100vw) !important;
+        }
+          
+        #dt-capacity-toggle {
+            width: calc(184.59 / 1440 * 100vw) !important;
+            height: calc(36.98 / 1440 * 100vw) !important;
+            border-radius: calc(18.4921 / 1440 * 100vw) !important;
+            border-width: calc(0.5 / 1440 * 100vw) !important;
+            padding: calc(2 / 1440 * 100vw) !important;
+        }
+          
+        #dt-capacity-toggle span {
+            font-size: calc(16 / 1440 * 100vw) !important;
+            line-height: calc(21 / 1440 * 100vw) !important;
+        }
+
+        #dt-toggle-slider {
+            top: calc(2 / 1440 * 100vw) !important;
+            bottom: calc(2 / 1440 * 100vw) !important;
+            border-radius: calc(20 / 1440 * 100vw) !important;
+            width: calc(50% - calc(2 / 1440 * 100vw)) !important;
+        }
+
+        #dt-current-price-value {
+            font-size: calc(24.6667 / 1440 * 100vw) !important;
+            line-height: calc(32 / 1440 * 100vw) !important;
+        }
+
+        /* Removed MRP container styling references */
+    }
+
+    /* Desktop Styles (1280px and above) */
+    @media (min-width: 1280px) {
+        .right-column {
+            align-items: flex-end;
+        }
+        .capacity-price-controls {
+            padding-left: 0 !important;
+        }
+    }
+</style>
+
+<div class="main-section-wrapper">
+      
+    <div class="relative z-0 w-full">
+        <img 
+            src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/general_infor_section_shape_base.png?v=1765111791" 
+            alt="Background Wave" 
+            class="w-full h-auto object-contain object-center"
+        >
+    </div>
+
+    <div class="content-container">
+
+        <div class="left-column">
+      
+            <h1 class="font-headline font-[400] text-white" style="font-size: calc(36 / 1440 * 100vw); line-height: calc(48 / 1440 * 100vw); letter-spacing: calc(0.37 / 1440 * 100vw); margin-bottom: calc(20 / 1440 * 100vw);">
+                energy on the go
+            </h1>
+            <h2 class="font-text font-[500] text-white" style="font-size: calc(24 / 1440 * 100vw); line-height: calc(31 / 1440 * 100vw); margin-bottom: calc(140 / 1440 * 100vw);">
+                 inside scoop
+            </h2>
+            <p class="font-text font-[300] text-white" style="font-size: calc(18 / 1440 * 100vw);
+            line-height: calc(24 / 1440 * 100vw); max-width: calc(450 / 1440 * 100vw);">
+                Just like your favorite ice cream, Scoop brings joy wherever you go. With built-in cables, and a design that's as fun as it is functional—it's the perfect companion for your daily adventures.
+            </p>
+        </div>
+
+        <div class="right-column">
+
+            <div 
+                class="bg-white desktop-card-shadow flex items-center relative" style="border-radius: calc(28 / 1440 * 100vw); width: 100%; height: calc(186 / 1440 * 100vw);
+                padding: calc(25 / 1440 * 100vw) calc(60 / 1440 * 100vw) calc(25 / 1440 * 100vw) calc(35 / 1440 * 100vw);
+                margin-top: calc(5 / 1440 * 100vw);">
+                  
+                <div class="flex flex-col justify-center" style="margin-right: calc(24 / 1440 * 100vw);">
+                    <span class="font-text font-[400] text-[#010101]" style="font-size: calc(18 / 1440 * 100vw);
+                    line-height: calc(23 / 1440 * 100vw);">Pick your<br>flavour</span>
+                    <span class="font-text font-[250] text-[#010101]" style="font-size: calc(12 / 1440 * 100vw);
+                    line-height: calc(16 / 1440 * 100vw); width: calc(109.39 / 1440 * 100vw);
+                    margin-top: calc(49 / 1440 * 100vw);">Choose from two of our favourites</span>
+                </div>
+
+                <div class="flex items-center" style="gap: calc(32 / 1440 * 100vw);
+                    margin-left: calc(20 / 1440 * 100vw);">
+                      
+                    <a id="dt-flavor-orange-burst" href="javascript:void(0)" class="flex flex-col items-center cursor-pointer no-underline text-inherit">
+                        <div class="rounded-full bg-white orange-glow-frost flex items-center justify-center" style="width: calc(84.19 / 1440 * 100vw);
+                            height: calc(84.19 / 1440 * 100vw); margin-bottom: calc(13 / 1440 * 100vw);">
+                            <svg width="33" height="40" viewBox="0 0 33 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: calc(41.7 / 1440 * 100vw);
+                                height: calc(50.5 / 1440 * 100vw);">
+                                <path d="M16.8701 37.6855C16.8664 37.6934 16.8622 37.7012 16.8584 37.709C15.9858 39.4847 13.8232 39.4717 12.9658 37.6855L4.22656 19.4902H6.44336L14.6387 36.54L14.6406 36.5459C14.7659 36.7991 15.0754 36.7956 15.1973 36.54L16.8438 33.1172L10.2949 19.4902H12.5117L17.9502 30.8096L19.876 26.8193L16.3535 19.4902H18.5684L20.9854 24.5186L23.4023 19.4902H25.6094L16.8701 37.6855Z" fill="#FE8605"/>
+                                <path d="M3.50977 
+                                6.9082C9.83457 0.50681 20.3412 4.52295 22.4219 14.1377L22.5195 14.5918C23.3551 14.6728 24.146 15.1144 24.7236 15.8223C25.6131 16.9127 25.802 18.3205 25.4395 19.4912H0.222656C0.287011 19.4473 0.35318 19.4048 0.421875 19.3652L0.324219 18.9121C-0.637773 14.4523 0.576587 9.87721 3.50977 6.9082Z" fill="#FF9D34"/>
+                                <circle cx="3.09375" cy="19.4902" r="2.84375" fill="#FF9D34"/>
+                                <circle cx="26.2637" cy="18.6426" r="3.49805" 
+                                fill="#FE8605"/>
+                                <rect x="6.60938" y="20.832" width="17.4062" height="1.50195" fill="#FE8605"/>
+                                <rect x="2.71094" y="17.9883" width="15.6719" height="2.84375" fill="#FF9D34"/>
+                                <rect x="11.9688" y="17.9883" width="15.6719" height="2.84375" fill="#FE8605"/>
+                                <ellipse cx="12.7617" cy="20.2891" rx="1.30078" ry="1.29297" fill="#FE8605"/>
+                                <path d="M20.1719 0C26.8295 0 32.2266 5.39707 32.2266 12.0547C32.2266 14.8613 31.2646 17.4416 29.6562 19.4902H10.6875C9.07915 17.4416 8.11719 14.8613 8.11719 12.0547C8.11719 5.39707 13.5143 
+0 20.1719 0Z" fill="#FE8605"/>
+                            </svg>
+                        </div>
+                  
+                      <span class="font-inter font-[400] text-[#FC9B55]" style="font-size: calc(12 / 1440 * 100vw);
+                        line-height: calc(13 / 1440 * 100vw); margin-bottom: calc(5 / 1440 * 100vw); width: calc(82.74 / 1440 * 100vw);
+                        text-align: center;">Orange Burst</span>
+                        <span id="dt-orange-selected" class="font-inter font-[400] text-[#CACACA]" style="font-size: calc(8 / 1440 * 100vw);
+                        line-height: calc(9 / 1440 * 100vw); width: calc(43 / 1440 * 100vw); text-align: center;
+                        visibility: visible;">● Selected</span>
+                    </a>
+
+                    <a id="dt-flavor-frost-bite" href="javascript:void(0)" class="flex flex-col items-center cursor-pointer no-underline text-inherit">
+                        <div class="rounded-full bg-white grey-glow flex items-center justify-center" style="width: calc(85.59 / 1440 * 100vw);
+                            height: calc(85.59 / 1440 * 100vw); margin-bottom: calc(13 / 1440 * 100vw);">
+                            <svg width="33" height="40" viewBox="0 0 33 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: calc(41.7 / 1440 * 100vw);
+                                height: calc(50.5 / 1440 * 100vw);">
+                                <path d="M16.8701 37.6855C16.8664 37.6934 16.8622 37.7012 16.8584 37.709C15.9858 39.4847 13.8232 39.4717 12.9658 37.6855L4.22656 19.4902H6.44336L14.6387 36.54L14.6406 36.5459C14.7659 36.7991 15.0754 36.7956 15.1973 36.54L16.8438 33.1172L10.2949 19.4902H12.5117L17.9502 30.8096L19.876 26.8193L16.3535 19.4902H18.5684L20.9854 24.5186L23.4023 19.4902H25.6094L16.8701 37.6855Z" fill="#8BBAD8"/>
+                                <path d="M3.50977 
+                                6.9082C9.83457 0.506788 20.3412 4.52294 22.4219 14.1377L22.5195 14.5918C23.3551 14.6728 24.146 15.1144 24.7236 15.8223C25.6131 16.9127 25.802 18.3205 25.4395 19.4912H0.222656C0.287017 19.4473 0.353173 19.4048 0.421875 19.3652L0.324219 18.9121C-0.637776 14.4523 0.576586 9.87721 3.50977 6.9082Z" fill="#BEDEF3"/>
+                                <circle cx="3.09375" cy="19.4902" r="2.84375" fill="#BEDEF3"/>
+                                <circle cx="26.2637" cy="18.6426" r="3.49805" 
+                                fill="#8BBAD8"/>
+                                <rect x="6.60938" y="20.832" width="17.4062" height="1.50195" fill="#8BBAD8"/>
+                                <rect x="2.71094" y="17.9883" width="15.6719" height="2.84375" fill="#BEDEF3"/>
+                                <rect x="11.9688" y="17.9883" width="15.6719" height="2.84375" fill="#8BBAD8"/>
+                                <ellipse cx="12.7617" cy="20.2891" rx="1.30078" ry="1.29297" fill="#8BBAD8"/>
+                                <path d="M20.1719 0C26.8295 0 32.2266 5.39707 32.2266 12.0547C32.2266 14.8613 31.2646 17.4416 29.6562 19.4902H10.6875C9.07915 17.4416 8.11719 14.8613 8.11719 12.0547C8.11719 5.39707 13.5143 
+0 20.1719 0Z" fill="#8BBAD8"/>
+                            </svg>
+                        </div>
+                  
+                      <span class="font-inter font-[400] text-[#8BBAD8]" style="font-size: calc(12 / 1440 * 100vw);
+                        line-height: calc(13 / 1440 * 100vw); margin-bottom: calc(5 / 1440 * 100vw); margin-top: calc(-3 / 1440 * 100vw);
+                        width: calc(82.74 / 1440 * 100vw); text-align: center;">Frost Bite</span>
+                        <span id="dt-frost-selected" class="font-inter font-[400] text-[#CACACA]" style="font-size: calc(8 / 1440 * 100vw);
+                        line-height: calc(9 / 1440 * 100vw); width: calc(43 / 1440 * 100vw); text-align: center;
+                        visibility: hidden;">● Selected</span>
+                    </a>
+                </div>
+
+                <div class="flex flex-col items-start justify-center ml-auto capacity-price-controls" style="gap: calc(10 / 1440 * 100vw);
+                    padding-left: calc(16 / 1440 * 100vw);">
+                      
+                    <span class="font-text font-[400] text-[#010101]" style="font-size: calc(18 / 1440 * 100vw);
+                    line-height: calc(23 / 1440 * 100vw); width: calc(144.96 / 1440 * 100vw);
+                    margin-bottom: calc(3 / 1440 * 100vw);">Capacity</span>
+                      
+                    <div id="dt-capacity-toggle" class="relative bg-white border border-[#D9D9D9] flex items-center p-[2px] cursor-pointer" style="width: calc(190 / 1440 * 100vw);
+                        height: calc(45 / 1440 * 100vw); border-radius: calc(24 / 1440 * 100vw);">
+                        <div id="dt-option-10k" class="relative z-10 flex-1 h-full flex items-center justify-center cursor-pointer select-none">
+                            <span class="font-text font-[250] transition-colors duration-300 text-[#878787]" style="font-size: calc(14 / 1440 * 100vw);
+                            line-height: calc(19 / 1440 * 100vw);">10K mAH</span>
+                        </div>
+                        <div id="dt-option-20k" class="relative z-10 flex-1 h-full flex items-center justify-center cursor-pointer select-none">
+                            <span class="font-text font-[250] transition-colors duration-300 text-white" style="font-size: calc(14 
+                            / 1440 * 100vw); line-height: calc(19 / 1440 * 100vw);">20K mAH</span>
+                        </div>
+                        <div id="dt-toggle-slider"></div>
+                    </div>
+
+                    <div 
+                        class="flex items-center" style="gap: calc(12 / 1440 * 100vw);">
+                        <span class="font-text font-[300] text-[#010101]" style="font-size: calc(24 / 1440 * 100vw);
+                            line-height: calc(32 / 1440 * 100vw);">
+                            Rs. <span id="dt-current-price-wrapper" class="price-wrapper"><span id="dt-current-price-value" class="price-value">2,499</span></span>
+                        </span>
+                        </div>
+
+                </div>
+  
+            </div>
+
+            <div class="flex items-center" style="gap: calc(56 / 1440 * 100vw);
+                margin-top: calc(35 / 1440 * 100vw); width: calc(719 / 1440 * 100vw);
+                padding-left: calc(8 / 1440 * 100vw);">
+                <div class="flex items-center justify-evenly flex-grow" style="gap: calc(24 / 1440 * 100vw);">
+                    <div class="flex flex-col items-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/free.svg?v=1765532197" alt="Free Shipping" class="w-auto" style="height: calc(80 / 1440 * 100vw);
+                        margin-bottom: calc(8 / 1440 * 100vw);">
+                        <span class="font-text font-[300] text-white text-center" style="font-size: calc(10.92 / 1440 * 100vw);
+                        line-height: calc(15 / 1440 * 100vw);">free<br>shipping</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/express.svg?v=1765532226" alt="Express Delivery" class="w-auto" style="height: calc(80 / 1440 * 100vw);
+                        margin-bottom: calc(8 / 1440 * 100vw);">
+                        <span class="font-text font-[300] text-white text-center" style="font-size: calc(10.92 / 1440 * 100vw);
+                        line-height: calc(15 / 1440 * 100vw);">express<br>delivery</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/warranty.svg?v=1765532226" alt="1 yr warranty" class="w-auto" style="height: calc(80 / 1440 * 100vw);
+                        margin-bottom: calc(8 / 1440 * 100vw);">
+                        <span class="font-text font-[300] text-white text-center" style="font-size: calc(10.92 / 1440 * 100vw);
+                        line-height: calc(15 / 1440 * 100vw);">1 yr<br>warranty</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="https://cdn.shopify.com/s/files/1/0920/8800/9025/files/100_energy_1.svg?v=1765532591" alt="Replaced if faulty" class="w-auto" style="height: calc(80 / 1440 * 100vw);
+                        margin-bottom: calc(8 / 1440 * 100vw);">
+                        <span class="font-text font-[300] text-white text-center" style="font-size: calc(12  / 1440 * 100vw);
+                        line-height: calc(15 / 1440 * 100vw);">100% energy<br>no sugar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Robust Initialization for Page Builders (Replo)
+        function initDesktopSection() {
+    
+            // Check if GSAP is loaded
+            if (typeof gsap === 'undefined') {
+                setTimeout(initDesktopSection, 100);
+                return;
+            }
+
+            // Check if Elements exist (Scoped IDs)
+            const toggle = document.getElementById('dt-capacity-toggle');
+            if (!toggle) {
+                setTimeout(initDesktopSection, 100);
+                return;
+            }
+              
+            console.log("Desktop Section: Initialized successfully");
+
+            // GSAP CONFIG
+            gsap.config({ force3D: true, nullTargetWarn: false });
+
+            // STATE & ELEMENTS
+            let selectedCapacity = '10k'; // Default safe state
+            let currentFlavor = 'orange'; // Default flavor
+            
+            const prices = {
+                '10k': { current: 1899, original: 1999 },
+                '20k': { current: 2499, original: 2999 }
+            };
+            
+            // --- INSTANT STATE SYNC (ANTI-FLASH) ---
+            const params = new URLSearchParams(window.location.search);
+            const urlVariantId = params.get('variant');
+            
+            if (urlVariantId === '51120630006081') { selectedCapacity = '10k'; currentFlavor = 'blue'; } // Blue 10k
+            else if (urlVariantId === '51120630038849') { selectedCapacity = '20k'; currentFlavor = 'blue'; } // Blue 20k
+            else if (urlVariantId === '51115715756353') { selectedCapacity = '20k'; currentFlavor = 'orange'; } // Orange 20k
+            else { selectedCapacity = '10k'; currentFlavor = 'orange'; } // Default Orange 10k
+
+            let displayedPriceValue = prices[selectedCapacity].current;
+
+            // Grab scoped elements
+            const slider = document.getElementById('dt-toggle-slider');
+            const option10k = document.getElementById('dt-option-10k');
+            const option20k = document.getElementById('dt-option-20k');
+              
+            const text10k = option10k.querySelector('span');
+            const text20k = option20k.querySelector('span');
+              
+            const currentPriceValueEl = document.getElementById('dt-current-price-value');
+            const currentPriceWrapperEl = document.getElementById('dt-current-price-wrapper');
+
+            // --- INSTANT UI SET (Before Animation) ---
+            if (selectedCapacity === '20k') {
+                slider.style.left = 'calc(50%)'; // Snap slider
+                text20k.style.color = '#FFFFFF';
+                text10k.style.color = '#878787';
+            } else {
+                slider.style.left = 'calc(2 / 1440 * 100vw)'; // Snap slider
+                text20k.style.color = '#878787';
+                text10k.style.color = '#FFFFFF';
+            }
+
+            // --- DISPATCHER HELPER ---
+            function dispatchVariantUpdate(flavour, size) {
+                console.log(`UI Dispatching: ${flavour} - ${size}`);
+                const event = new CustomEvent('variantChange', {
+                    detail: { flavour: flavour, size: size }
+                });
+                window.dispatchEvent(event);
+            }
+
+            // --- ANIMATION HELPERS (Digits) ---
+            function createDigitElements(numberString, container) {
+                container.innerHTML = '';
+                const chars = numberString.split('');
+                chars.forEach(char => {
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.className = (char === ',' || char === '.') ? 'price-comma' : 'price-digit';
+                    container.appendChild(span);
+                });
+                return container.querySelectorAll('.price-digit, .price-comma');
+            }
+
+            function updatePriceDigits(price, container, digits) {
+                const formatted = price.toLocaleString('en-IN');
+                const newChars = formatted.split('');
+                if (!digits || digits.length === 0 || formatted.length !== digits.length) {
+                    return createDigitElements(formatted, container);
+                }
+                Array.from(digits).forEach((el, i) => {
+                    if (i < newChars.length) el.textContent = newChars[i];
+                });
+                return digits;
+            }
+
+            // --- ANIMATION LOGIC ---
+            function updateToggle(capacity) {
+                if (selectedCapacity === capacity) return;
+                
+                const previousCapacity = selectedCapacity;
+                selectedCapacity = capacity; // Update Local State
+                
+                // Dispatch Change to External Asset Script
+                dispatchVariantUpdate(currentFlavor, selectedCapacity);
+                const priceData = prices[capacity];
+                const previousSellingPrice = displayedPriceValue;
+
+                // 1. Handle Slider Movement and Color Changes
+                if (capacity === '10k') {
+                    gsap.to(slider, { left: 'calc(2 / 1440 * 100vw)', duration: 0.3, ease: "power2.out" });
+                    gsap.to(text10k, { color: '#FFFFFF', duration: 0.3 });
+                    gsap.to(text20k, { color: '#878787', duration: 0.3 });
+                } else {
+                    gsap.to(slider, { left: 'calc(50%)', duration: 0.3, ease: "power2.out" });
+                    gsap.to(text10k, { color: '#878787', duration: 0.3 });
+                    gsap.to(text20k, { color: '#FFFFFF', duration: 0.3 });
+                }
+                  
+                // 2. Price Animation
+                const tl = gsap.timeline({
+                    defaults: { ease: "power3.inOut" },
+                    force3D: true,
+                    immediateRender: false
+                });
+
+                // Determine Flash Color dynamically based on flavor
+                const blinkColor = (currentFlavor === 'blue') ? '#8BBAD8' : '#FC832C';
+
+                let currentDigits;
+                
+                tl.call(() => {
+                    currentDigits = createDigitElements(previousSellingPrice.toLocaleString('en-IN'), currentPriceValueEl);
+                });
+
+                const sellingPriceObj = { val: previousSellingPrice };
+                tl.to(sellingPriceObj, {
+                    val: priceData.current,
+                    duration: 0.4,
+                    ease: "power2.out",
+                    onUpdate: function() {
+                        const currentInt = Math.round(this.targets()[0].val);
+                        currentDigits = updatePriceDigits(currentInt, currentPriceValueEl, currentDigits);
+                    },
+                    onComplete: function() {
+                        currentDigits = updatePriceDigits(priceData.current, currentPriceValueEl, currentDigits);
+                    }
+                });
+
+                tl.call(() => {
+                    currentDigits = currentPriceValueEl.querySelectorAll('.price-digit, .price-comma');
+                });
+                
+                tl.to(currentDigits, {
+                    opacity: 0.8, y: 3, duration: 0.15, ease: "power2.out", stagger: { amount: 0.1, from: "end" }
+                }, "-=0.15");
+
+                tl.to(currentDigits, {
+                    opacity: 1, y: 0, duration: 0.15, ease: "power2.in", stagger: { amount: 0.1, from: "end" }
+                }, "<0.05");
+
+                tl.to(currentPriceValueEl, {
+                    color: blinkColor, duration: 0.15, ease: "power2.out"
+                }, "-=0.1");
+
+                tl.to(currentPriceValueEl, {
+                    color: "#010101", duration: 0.2, ease: "power2.in"
+                });
+
+                tl.call(() => {
+                    displayedPriceValue = priceData.current;
+                });
+            }
+
+            // --- FLAVOR SELECTION LOGIC ---
+            
+            // Elements
+            const orangeBtn = document.getElementById('dt-flavor-orange-burst');
+            const frostBtn = document.getElementById('dt-flavor-frost-bite');
+            const orangeSelected = document.getElementById('dt-orange-selected');
+            const frostSelected = document.getElementById('dt-frost-selected');
+            // Inner circle containers for glow classes
+            const orangeCircle = orangeBtn ? orangeBtn.querySelector('div') : null;
+            const frostCircle = frostBtn ? frostBtn.querySelector('div') : null;
+            
+            // UI Update Handler
+            function setFlavor(flavor, dispatch = true) {
+                currentFlavor = flavor;
+                if (flavor === 'orange') {
+                    if(orangeCircle) orangeCircle.className = "rounded-full bg-white orange-glow-frost flex items-center justify-center";
+                    if(frostCircle) frostCircle.className = "rounded-full bg-white grey-glow flex items-center justify-center";
+                    if(orangeSelected) orangeSelected.style.visibility = 'visible';
+                    if(frostSelected) frostSelected.style.visibility = 'hidden';
+                    if(dispatch) dispatchVariantUpdate('orange', selectedCapacity);
+                } else if (flavor === 'blue') {
+                    if(orangeCircle) orangeCircle.className = "rounded-full bg-white grey-glow flex items-center justify-center";
+                    if(frostCircle) frostCircle.className = "rounded-full bg-white blue-glow-frost flex items-center justify-center";
+                    if(orangeSelected) orangeSelected.style.visibility = 'hidden';
+                    if(frostSelected) frostSelected.style.visibility = 'visible';
+                    if(dispatch) dispatchVariantUpdate('blue', selectedCapacity);
+                }
+            }
+
+            // --- EVENT LISTENERS ---
+            
+            option10k.addEventListener('click', (e) => { 
+                e.preventDefault(); e.stopPropagation(); updateToggle('10k'); 
+            });
+            option20k.addEventListener('click', (e) => { 
+                e.preventDefault(); e.stopPropagation(); updateToggle('20k'); 
+            });
+            
+            if (orangeBtn) {
+                orangeBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); setFlavor('orange');
+                });
+            }
+
+            if (frostBtn) {
+                frostBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); setFlavor('blue');
+                });
+            }
+
+            // --- LISTEN FOR GLOBAL VARIANT CHANGES ---
+            window.addEventListener('variantChange', (e) => {
+               if (e.detail) {
+                     if (e.detail.flavour && e.detail.flavour !== currentFlavor) {
+                         setFlavor(e.detail.flavour, false); 
+                    }
+                     if (e.detail.size && e.detail.size !== selectedCapacity) {
+                         updateToggle(e.detail.size);
+                     }
+                }
+           });
+            
+            // --- INITIAL RENDER ---
+            // Set flavor instantly based on URL check performed at start
+            setFlavor(currentFlavor, false);
+            
+            // Init price digits
+            createDigitElements(prices[selectedCapacity].current.toLocaleString('en-IN'), currentPriceValueEl);
+            gsap.set(currentPriceWrapperEl, { transformOrigin: "left center" });
+        }
+
+        // Start polling for elements
+        initDesktopSection();
+    })();
+</script>
+
+{% schema %}
+{
+  "name": "Desk Variant",
+  "class": "desktop-only z-index-6",  
+  "settings": []
+}
+{% endschema %}

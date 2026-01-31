@@ -1,0 +1,364 @@
+<script>
+    // --- 0. INSTANT CSS VARIABLE & SYNCHRONIZED HIDING ---
+    // This runs before the body is fully parsed.
+    (function() {
+        const params = new URLSearchParams(window.location.search);
+        const urlId = params.get('variant');
+        
+        // Define IDs
+        const blueIds = ["51120630006081", "51120630038849"];
+        const orangeIds = ["51115715723585", "51115715756353"];
+        
+        const isBlue = urlId && blueIds.includes(urlId);
+        
+        const root = document.documentElement;
+
+        // 1. SET CSS VARIABLES INSTANTLY
+        if (isBlue) {
+            root.style.setProperty('--dynamic-wave-color', '#8BBAD8'); // Blue
+            root.style.setProperty('--dynamic-text-color', '#8BBAD8'); // Blue
+        } else {
+            // Default to Orange (for orange IDs or no ID)
+            root.style.setProperty('--dynamic-wave-color', '#FC832C'); // Orange
+            root.style.setProperty('--dynamic-text-color', '#FC832C'); // Orange
+        }
+
+        // 2. TRIGGER LOADING STATE
+        if (urlId) {
+            root.classList.add('js-variant-loading');
+            // Safety Valve: Force reveal after 2.5s
+            setTimeout(() => {
+                root.classList.remove('js-variant-loading');
+            }, 2500);
+        }
+    })();
+</script>
+
+<style>
+    /* --- 1. USE THE VARIABLE FOR BACKGROUNDS --- */
+    .mobile-bg-orange-wave svg path,
+    .desktop-version-highlight, 
+    .mobile-version-highlight,
+    .sub-headline,
+    .fastcharge-sub-headline,
+    .mobile-only-fast-quick-serve,
+    .rs-multiport-m-subtitle,
+    .multiport-sub-headline,
+    .led-display-sub-headline,
+    .m-led-subheadline,
+    .m-spoon-subhead {
+        fill: var(--dynamic-wave-color) !important;
+        color: var(--dynamic-text-color) !important;
+        transition: color 0.3s ease, fill 0.3s ease !important;
+    }
+
+    /* --- 2. SMOOTH REVEAL TRANSITIONS --- */
+    /* This ensures elements fade in instead of blinking when the loading class is removed */
+    .mobile-video-container,
+    .first-section .video-container,
+    .mobile-bg-orange-wave,
+    .mnfs-bg-image {
+        transition: opacity 0.4s ease !important;
+        opacity: 1;
+    }
+
+    /* --- 3. SYNCHRONIZED HIDING (Backgrounds + Media) --- */
+    
+    html.js-variant-loading video,
+    
+    /* HIDE VIDEO CONTAINERS TO PREVENT FLASH */
+    html.js-variant-loading .mobile-video-container,
+    html.js-variant-loading .first-section .video-container,
+
+    html.js-variant-loading .cable-desktop-image-section img,
+    html.js-variant-loading .led-display-image-section img,
+    html.js-variant-loading .multiport-image-section img,
+    html.js-variant-loading .fastcharge-image-section img,
+    html.js-variant-loading .mobile-only-fast-image-block img,
+    html.js-variant-loading .rs-multiport-m-image-wrapper img,
+    html.js-variant-loading .m-led-image-wrapper img,
+    html.js-variant-loading .m-spoon-image-layer img,
+  
+    html.js-variant-loading .mobile-wave-image,
+    html.js-variant-loading img[alt="Background Wave"],
+    
+    /* Hide Background Waves & Text to prevent "Color Blink" */
+    html.js-variant-loading .mobile-bg-orange-wave,
+    html.js-variant-loading .mnfs-bg-image,
+    html.js-variant-loading .desktop-nutritional-facts-section, 
+    html.js-variant-loading .mobile-version-highlight,
+    html.js-variant-loading .desktop-version-highlight {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transition: none !important;
+    }
+    
+    /* Keep Body Visible */
+    body {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+</style>
+
+<script>
+    // --- 1. ASSET DICTIONARY ---
+    // (Defining this object does NOT trigger downloads. It is just text data.)
+    const assetMap = {
+        orange: {
+            hex: "#FC832C",
+            "10k": {
+                desktopVideoPoster: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10kmahorange.webp?v=1768205350", 
+                mobileVideoPoster: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10kmahorangeburstm.webp?v=1768206019",
+                desktopVideo: "https://cdn.shopify.com/videos/c/o/v/6983473dd6924113b0f0017f06bd28a7.mp4",
+                mobileVideo: "https://cdn.shopify.com/videos/c/o/v/3cd6ed480bfb4354bd9b2b52af0a40c4.mp4",
+                desktopWaveUrl: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/general_infor_section_shape_base.png?v=1765111791",
+                mobileWaveUrl: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/general_infor_section_shape_base.png?v=1765111791",
+                desktopNutriBg: "https://cdn.shopify.com/s/files/1/0967/6039/8106/files/nutritional_facts_shape_base.svg?v=1765174018",
+                mobileNutriBg: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/nutritional_facts_tech_specs_base_shape.svg?v=1765042414",
+                desktopCables: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Built_in_cables_Orange_phone_version.webp?v=1767892752",
+                desktopCablesMask: "https://cdn.shopify.com/s/files/1/0967/6039/8106/files/inbuilt_cables_shape_section_base.svg?v=1765134154",
+                mobileCables: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Built_in_cables_Orange_phone_version.webp?v=1767892752",
+                mobileCablesMask: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/spoons_inside_base_shape_c95c7763-b975-4e01-a03c-248c9e99ddbe.svg?v=1765514613",
+                desktopLed: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10K_Orange_png_1.webp?v=1767892751",
+                mobileLed: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10K_Orange_png_1.webp?v=1767892751",
+                desktopMultiport: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10K_multiport_orange_png_2_1.webp?v=1767892752",
+                desktopMultiportMask: "https://cdn.shopify.com/s/files/1/0967/6039/8106/files/multiport_section_shape_base.svg?v=1765170857",
+                mobileMultiport: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10K_multiport_orange_png_2_1.webp?v=1767892752",
+                mobileMultiportMask: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Subtract_3.svg?v=1765372705",
+                desktopFastCharge: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10K_Orange.webp?v=1767892753",
+                mobileFastCharge: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10K_orange_phone_version_1.webp?v=1767892752"
+            },
+            "20k": {
+                desktopVideoPoster: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20kmahorangeburst.webp?v=1768205659", 
+                mobileVideoPoster: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20kmahorangeburstm.webp?v=1768206019",
+                desktopVideo: "https://cdn.shopify.com/videos/c/o/v/c3267b899c17409ca05b9117e3a55fc7.mp4",
+                mobileVideo: "https://cdn.shopify.com/videos/c/o/v/f829b7cfe6e6479a80b78dc8cf77f2bf.mp4",
+                desktopWaveUrl: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/general_infor_section_shape_base.png?v=1765111791",
+                mobileWaveUrl: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/general_infor_section_shape_base.png?v=1765111791",
+                desktopNutriBg: "https://cdn.shopify.com/s/files/1/0967/6039/8106/files/nutritional_facts_shape_base.svg?v=1765174018",
+                mobileNutriBg: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/nutritional_facts_tech_specs_base_shape.svg?v=1765042414",
+                desktopCables: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Built_in_cables_orange_modded_new.webp?v=1765534719",
+                desktopCablesMask: "https://cdn.shopify.com/s/files/1/0967/6039/8106/files/inbuilt_cables_shape_section_base.svg?v=1765134154",
+                mobileCables: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Built_in_cables_orange_modded_new.webp?v=1765534719",
+                mobileCablesMask: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/spoons_inside_base_shape_c95c7763-b975-4e01-a03c-248c9e99ddbe.svg?v=1765514613",
+                desktopLed: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_Orange_png.webp?v=1765534718",
+                mobileLed: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_Orange_png.webp?v=1765534718",
+                desktopMultiport: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_multiport_orange_png_1.webp?v=1765534720",
+                desktopMultiportMask: "https://cdn.shopify.com/s/files/1/0967/6039/8106/files/multiport_section_shape_base.svg?v=1765170857",
+                mobileMultiport: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_multiport_orange_png_1.webp?v=1765534720",
+                mobileMultiportMask: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Subtract_3.svg?v=1765372705",
+                desktopFastCharge: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_fast_charging_new.webp?v=1765535704",
+                mobileFastCharge: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20k_orange_modmod_mod.webp?v=1765558449"
+            }
+        },
+        blue: {
+            hex: "#8BBAD8",
+            "10k": {
+                desktopVideoPoster: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10kmahfrostbite.webp?v=1768205659", 
+                mobileVideoPoster: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10kmahfrostbitem.webp?v=1768206019",
+                desktopVideo: "https://cdn.shopify.com/videos/c/o/v/43a67d1308fa4b3d9a399abba47d0e19.mp4",
+                mobileVideo: "https://cdn.shopify.com/videos/c/o/v/168265426a2a417c867a593b11b676ce.mp4",
+                desktopWaveUrl: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/blue_general_section_desktop.png?v=1765535803",
+                mobileWaveUrl: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/blue_general_section_desktop.png?v=1765535803",
+                desktopNutriBg: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/blue_nutrional_desktop.png?v=1765535803",
+                mobileNutriBg: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/blue_nutritional_mobile.png?v=1765535803",
+                desktopCables: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/built_in_cables_10K_desktop.webp?v=1767978230",
+                desktopCablesMask: "https://cdn.shopify.com/s/files/1/0967/6039/8106/files/inbuilt_cables_shape_section_base.svg?v=1765134154",
+                mobileCables: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/built_in_cables_10K_desktop.webp?v=1767978230",
+                mobileCablesMask: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/spoons_inside_base_shape_c95c7763-b975-4e01-a03c-248c9e99ddbe.svg?v=1765514613",
+                desktopLed: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/LED_display_new.webp?v=1767978230",
+                mobileLed: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/LED_display_new.webp?v=1767978230",
+                desktopMultiport: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10K_multiport_blue_buffer.webp?v=1768234594",
+                desktopMultiportMask: "https://cdn.shopify.com/s/files/1/0967/6039/8106/files/multiport_section_shape_base.svg?v=1765170857",
+                mobileMultiport: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10K_multiport_blue_buffer.webp?v=1768234594",
+                mobileMultiportMask: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Subtract_2.svg?v=1765476961",
+                desktopFastCharge: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10K_Blue_1.webp?v=1767978231",
+                mobileFastCharge: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/10K_Blue_phone_version_1.webp?v=1767978231"
+            },
+            "20k": {
+                desktopVideoPoster: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20kmahfrostbite.webp?v=1768205658", 
+                mobileVideoPoster: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20kmahfrostbitem.webp?v=1768206019",
+                desktopVideo: "https://cdn.shopify.com/videos/c/o/v/7e71289609a445e3900a9b7e3bd9ae00.mp4",
+                mobileVideo: "https://cdn.shopify.com/videos/c/o/v/b86389de48844790af3c088781acad0c.mp4",
+                desktopWaveUrl: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/blue_general_section_desktop.png?v=1765535803",
+                mobileWaveUrl: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/blue_general_section_desktop.png?v=1765535803",
+                desktopNutriBg: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/blue_nutrional_desktop.png?v=1765535803",
+                mobileNutriBg: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/blue_nutritional_mobile.png?v=1765535803",
+                desktopCables: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_Blue_2_built_in_cable_mobile_modded.webp?v=1765534737",
+                desktopCablesMask: "https://cdn.shopify.com/s/files/1/0967/6039/8106/files/inbuilt_cables_shape_section_base.svg?v=1765134154",
+                mobileCables: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_Blue_2_built_in_cable_mobile_modded.webp?v=1765534737",
+                mobileCablesMask: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/spoons_inside_base_shape_c95c7763-b975-4e01-a03c-248c9e99ddbe.svg?v=1765514613",
+                desktopLed: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_LED_Display.webp?v=1765534735",
+                mobileLed: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_LED_Display.webp?v=1765534735",
+                desktopMultiport: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_multiport_blue_png_1.webp?v=1765534736",
+                desktopMultiportMask: "https://cdn.shopify.com/s/files/1/0967/6039/8106/files/multiport_section_shape_base.svg?v=1765170857",
+                mobileMultiport: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_multiport_blue_png_1.webp?v=1765534736",
+                mobileMultiportMask: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/Subtract_2.svg?v=1765476961",
+                desktopFastCharge: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_Blue.webp?v=1765534737",
+                mobileFastCharge: "https://cdn.shopify.com/s/files/1/0920/8800/9025/files/20K_Blue_1_phone_a61a5014-1a54-4c48-bbf1-a921a64d7160.webp?v=1767900945"
+            }
+        }
+    };
+    const variantIds = {
+        orange: { "10k": "51115715723585", "20k": "51115715756353" },
+        blue: { "10k": "51120630006081", "20k": "51120630038849" }
+    };
+    window.currentVariantRequest = null;
+    let userHasInteracted = false; 
+
+    // --- TRACK INTERACTION ---
+    document.addEventListener('click', () => { userHasInteracted = true; }, { once: true });
+    document.addEventListener('touchstart', () => { userHasInteracted = true; }, { once: true });
+    
+    // --- MAIN UPDATE FUNCTION ---
+    window.updateProductVariant = async function(flavour, size, updateUrl = true) {
+        if (!assetMap[flavour] || !assetMap[flavour][size]) return;
+        const data = assetMap[flavour][size];
+        const colorData = assetMap[flavour];
+        
+        window.currentVariantRequest = `${flavour}-${size}-${Date.now()}`;
+        const getAsset = (key) => data[key] || colorData[key];
+        
+        // --- EXECUTE UPDATES ---
+        requestAnimationFrame(() => {
+            
+            // A. UPDATE CSS VARIABLES FOR GLOBAL TEXT/WAVE COLOR
+            document.documentElement.style.setProperty('--dynamic-text-color', colorData.hex);
+            document.documentElement.style.setProperty('--dynamic-wave-color', colorData.hex);
+
+            // B. SVG Fills (Explicit Update)
+            const mobileWavePath = document.querySelector('.mobile-bg-orange-wave svg path');
+            if (mobileWavePath && colorData.hex) mobileWavePath.setAttribute('fill', colorData.hex);
+
+            // C. Update IMAGES
+            const updateImg = (sel, urlKey) => {
+                const el = document.querySelector(sel);
+                const url = getAsset(urlKey);
+                if (el && url) el.src = url;
+            };
+            updateImg('img[alt="Background Wave"]', 'desktopWaveUrl');
+            updateImg('.mobile-wave-image', 'mobileWaveUrl');
+            updateImg('.cable-desktop-image-section img', 'desktopCables');
+            updateImg('.m-spoon-image-layer img', 'mobileCables');
+            updateImg('.led-display-image-section img', 'desktopLed');
+            updateImg('.m-led-image-wrapper .m-led-image', 'mobileLed');
+            updateImg('.multiport-image-section img', 'desktopMultiport');
+            updateImg('.rs-multiport-m-image-wrapper img', 'mobileMultiport');
+            updateImg('.fastcharge-image-section img', 'desktopFastCharge');
+            updateImg('.mobile-only-fast-image-block img', 'mobileFastCharge');
+            updateImg('.mnfs-bg-image', 'mobileNutriBg');
+
+            // D. Masks
+            const updateMask = (sel, maskUrl) => {
+                const el = document.querySelector(sel);
+                if (el) {
+                    const val = (!maskUrl || maskUrl === 'none') ?
+                        'none' : `url('${maskUrl}')`;
+                    el.style.webkitMaskImage = val;
+                    el.style.maskImage = val;
+                }
+            };
+            updateMask('.main-container', data.desktopCablesMask);
+            updateMask('.mobile-cables-container', data.mobileCablesMask);
+            updateMask('.multiport-main-container', data.desktopMultiportMask);
+            updateMask('.mobile-multiport-container', data.mobileMultiportMask);
+
+            // E. Video
+            const updateVideo = (sel, url, posterUrl) => {
+                const vid = document.querySelector(sel);
+                if (vid && url) {
+                    if(vid.parentElement) {
+                        vid.parentElement.style.transition = 'none';
+                    }
+                    if (posterUrl) vid.poster = posterUrl;
+                    if (vid.currentSrc !== url && vid.src !== url) {
+                        vid.src = url; // <--- The download only happens HERE
+                        vid.load();
+                        vid.play().catch(() => {});
+                    }
+                }
+            };
+            updateVideo('.first-section .video-container video', getAsset('desktopVideo'), getAsset('desktopVideoPoster'));
+            updateVideo('.mobile-video-container video', getAsset('mobileVideo'), getAsset('mobileVideoPoster'));
+
+            // F. Background Images
+            const nutriBgUrl = getAsset('desktopNutriBg');
+            const desktopNutriSection = document.querySelector('.desktop-nutritional-facts-section');
+            if (desktopNutriSection && nutriBgUrl) desktopNutriSection.style.setProperty('--bg-url', `url('${nutriBgUrl}')`);
+            
+            // G. Text Content
+            const batteryText = (size === '10k') ?
+                'Li Polymer 10,000 mAH' : 'Li Polymer 20,000 mAH';
+            const weightText = (size === '10k') ?
+                '192 g' : '330 g';
+            document.querySelectorAll('.js-battery-value').forEach(el => el.textContent = batteryText);
+            document.querySelectorAll('.js-weight-value').forEach(el => el.textContent = weightText);
+            
+            // --- REVEAL PAGE NOW ---
+            document.documentElement.classList.remove('js-variant-loading');
+            
+            // H. URL Update
+            if (updateUrl && userHasInteracted) {
+                const vId = variantIds[flavour] && variantIds[flavour][size];
+                if (vId) {
+                    const newUrl = new URL(window.location);
+                    newUrl.searchParams.set('variant', vId);
+                    window.history.replaceState({}, '', newUrl);
+                }
+            }
+        });
+    };
+
+    window.addEventListener('variantChange', (e) => {
+        if (e.detail?.flavour && e.detail?.size) {
+            window.updateProductVariant(e.detail.flavour, e.detail.size, true);
+        }
+    });
+
+    // --- 3. INIT LOGIC ---
+    const initVariantLogic = () => {
+        if (window.hasInitVariant) return;
+        window.hasInitVariant = true;
+
+        const params = new URLSearchParams(window.location.search);
+        const urlId = params.get('variant');
+        let found = false;
+        if (urlId) {
+            for (const f in variantIds) {
+                for (const s in variantIds[f]) {
+                    if (variantIds[f][s] === urlId) {
+                        window.updateProductVariant(f, s, false);
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+        }
+        
+        if (!found) {
+            // Falls back to orange 10k if no ID is found
+            window.updateProductVariant('orange', '10k', false);
+            document.documentElement.classList.remove('js-variant-loading');
+        }
+
+        // --- PRELOADER REMOVED ---
+        // The aggressive caching logic that was here (lines 61-65 in original) 
+        // has been deleted. Now, assets only load when `updateProductVariant` 
+        // is called for a specific variant.
+    };
+
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        initVariantLogic();
+    } else {
+        document.addEventListener('DOMContentLoaded', initVariantLogic);
+    }
+</script>
+
+{% schema %}
+{
+  "name": "Global Variant Scripts",
+  "class": "global-scripts",  
+  "settings": []
+}
+{% endschema %}>

@@ -1,0 +1,337 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link
+    href="https://fonts.googleapis.com/css2?family=Stack+Sans+Notch:wght@200..700&family=Stack+Sans+Text:wght@200..700&display=swap"
+    rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+    @font-face {
+        font-family: 'Hey Fun';
+        src: url('https://cdn.shopify.com/s/files/1/0967/6039/8106/files/Hey_Fun.ttf?v=1765177736') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+    }
+    
+    /* --- ANTI-FLASH: Hide Video & Highlight initially --- */
+    html.js-variant-loading .mobile-video-container video,
+    html.js-variant-loading .mobile-version-highlight {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    /* Reset & Base Styles - Mobile Unique */
+    .mobile-replos-snippet-container * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .mobile-replos-snippet-container {
+        width: 100%;
+        max-width: 100%;
+        background-color: #fff;
+        overflow-x: hidden;
+        /* Ensure positioning context for absolute children */
+        position: relative;
+        margin-top: calc(-250 / 393 * 100vw);
+    }
+
+    /* First Div - Video and Text Section - Mobile Unique */
+    .mobile-replos-snippet-container .mobile-first-section {
+        width: 100%;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    /* Video Container - Mobile Unique */
+    .mobile-replos-snippet-container .mobile-video-container {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        display: block;
+        background-color: #f0f0f0;
+
+        /* THE FIX: This is the natural ratio (2160/3500) adapted for the 1.8x zoom. */
+        aspect-ratio: 2160 / 6300; 
+    }
+
+    .mobile-replos-snippet-container .mobile-video-container video {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        /* This automatically zooms the video to fill our new tall container */
+        object-fit: cover; 
+        object-position: center;
+        margin: 0;
+        padding: 0;
+        display: block;
+        
+        transition: opacity 0.3s ease; /* Smooth reveal */
+    }
+
+    /* Text Container - Mobile Unique */
+    .mobile-replos-snippet-container .mobile-text-container {
+        padding: 0 5% calc(80 / 393 * 100vw);
+        display: flex;
+        flex-direction: column;
+        gap: calc(2 / 393 * 100vw);
+        z-index: 1;
+        position: absolute;
+        bottom: calc(230 / 393 * 100vw);
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
+    .mobile-replos-snippet-container .mobile-category-text {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(12 / 393 * 100vw);
+        line-height: calc(16 / 393 * 100vw);
+        color: #010101;
+    }
+
+    .mobile-replos-snippet-container .mobile-product-title {
+        font-family: 'Stack Sans Notch', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: calc(48 / 393 * 100vw);
+        line-height: calc(62 / 393 * 100vw);
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.02em;
+        color: #000000;
+        gap: calc(8 / 393 * 100vw);
+    }
+
+    .mobile-replos-snippet-container .mobile-version-highlight {
+        font-family: 'Hey Fun', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(64 / 393 * 100vw);
+        line-height: calc(77 / 393 * 100vw);
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.02em;
+        
+        /* Updated: Use transition for color change */
+        color: #FC832C;
+        transition: color 0.3s ease;
+    }
+
+    /* Second Div - Content Section - Mobile Unique */
+    .mobile-replos-snippet-container .mobile-second-section {
+        width: 100%;
+        padding: calc(10 / 393 * 100vw) 0px calc(10 / 393 * 100vw) 0px;
+        display: flex;
+        flex-direction: column;
+        gap: calc(20 / 393 * 100vw);
+        overflow-x: hidden;
+    }
+
+    /* Description Text - Mobile Unique */
+    .mobile-replos-snippet-container .mobile-description-container {
+        width: 100%;
+    }
+
+    .mobile-replos-snippet-container .mobile-description-text {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-style: normal;
+        font-weight: 300;
+        font-size: calc(12 / 393 * 100vw);
+        line-height: calc(16 / 393 * 100vw);
+        letter-spacing: -0.02em;
+        color: #9F9F9F;
+        text-align: left;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    /* Rating Container - Mobile Unique */
+    .mobile-replos-snippet-container .mobile-rating-container {
+        display: flex;
+        align-items: center;
+        gap: calc(17 / 393 * 100vw);
+    }
+
+    .mobile-replos-snippet-container .mobile-rating-text {
+        font-family: 'Space Mono', monospace;
+        font-style: normal;
+        font-weight: 400;
+        font-size: calc(16 / 393 * 100vw);
+        line-height: calc(24 / 393 * 100vw);
+        letter-spacing: -0.15em;
+        color: #878787;
+    }
+
+    .mobile-replos-snippet-container .mobile-stars {
+        display: flex;
+        gap: calc(2 / 393 * 100vw);
+    }
+
+    .mobile-replos-snippet-container .mobile-star-icon {
+        width: calc(13 / 393 * 100vw);
+        height: calc(12 / 393 * 100vw);
+    }
+
+    .mobile-replos-snippet-container .mobile-star-icon path {
+        fill: #ACADAC;
+    }
+
+    .mobile-replos-snippet-container .mobile-star-icon.mobile-muted path {
+        fill: #E0E0E0;
+    }
+
+    /* Features Grid - Mobile Unique */
+    .mobile-replos-snippet-container .mobile-features-container {
+        width: 100%;
+    }
+
+    .mobile-replos-snippet-container .mobile-features-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: calc(10 / 393 * 100vw);
+        margin-top: calc(5 / 393 * 100vw);
+    }
+
+    .mobile-replos-snippet-container .mobile-feature-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: calc(8 / 393 * 100vw);
+    }
+
+    .mobile-replos-snippet-container .mobile-feature-icon {
+        width: calc(60 / 393 * 100vw);
+        height: calc(60 / 393 * 100vw);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mobile-replos-snippet-container .mobile-feature-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .mobile-replos-snippet-container .mobile-feature-text {
+        font-family: 'Stack Sans Text', sans-serif;
+        font-size: calc(10 / 393 * 100vw);
+        color: #666;
+        line-height: 1.2;
+    }
+
+    .mobile-replos-snippet-container .mobile-rating-review {
+        display: none;
+    }
+
+    .mobile-replos-snippet-container .desktop-rating {
+        display: none;
+    }
+
+    .mobile-replos-snippet-container .mobile-rating {
+        display: inline;
+    }
+
+    /* Vertical Line Separator - Hidden on Mobile */
+    .mobile-replos-snippet-container .mobile-vertical-line {
+        display: none;
+    }
+
+    /* Desktop Styles */
+    @media (min-width: 768px) {
+        /* IMPORTANT: Hide mobile-specific container/styles on desktop */
+        .mobile-replos-snippet-container {
+            display: none !important;
+        }
+    }
+</style>
+
+<div class="mobile-replos-snippet-container">
+    <div class="mobile-first-section">
+        <div class="mobile-video-container">
+            <video 
+                autoplay 
+                loop 
+                muted 
+                playsinline 
+                preload="auto" 
+                webkit-playsinline
+                poster="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            >
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="mobile-text-container" id="mobileTargetTextContainer">
+            <div class="mobile-category-text">[ power bank ]</div>
+            <div class="mobile-product-title" id="mobileVersionTitle">
+                <span class="mobile-version-highlight">scoop</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // --- TEXT COLOR UPDATE LOGIC (Local) ---
+        function updateHeroColor(flavor) {
+            const highlight = document.querySelector('.mobile-version-highlight');
+            if (highlight) {
+                const safeFlavor = flavor ? flavor.toLowerCase() : 'orange';
+                if (safeFlavor === 'blue') {
+                    highlight.style.color = '#8BBAD8'; // Blue
+                } else {
+                    highlight.style.color = '#FC832C'; // Orange
+                }
+            }
+        }
+
+        // --- 1. INSTANT CHECK (Runs Immediately) ---
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const urlVariantId = params.get('variant');
+            
+            // Check for Blue Variant IDs instantly
+            if (urlVariantId === '51120630038849' || urlVariantId === '51120630006081') {
+                updateHeroColor('blue');
+            } else {
+                updateHeroColor('orange');
+            }
+        })();
+
+        // 2. Listen for Variant Changes (from main script)
+        window.addEventListener('variantChange', (e) => {
+            if (e.detail && e.detail.flavour) {
+                updateHeroColor(e.detail.flavour);
+            }
+        });
+
+        // 3. Fallback on Load (in case DOM wasn't ready during first IIFE)
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const urlVariantId = params.get('variant');
+            if (urlVariantId === '51120630038849' || urlVariantId === '51120630006081') {
+                updateHeroColor('blue');
+            } else {
+                updateHeroColor('orange');
+            }
+        });
+    })();
+</script>
+
+{% schema %}
+{
+  "name": "Mobile Hero",
+  "class": "mobile-only",  
+  "settings": []
+}
+{% endschema %}
